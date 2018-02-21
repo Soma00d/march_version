@@ -285,6 +285,11 @@
     position:relative;
     margin-top:40px;
     min-height: 710px;
+    .separator_title{
+        text-align: center;
+        border-bottom: 1px solid grey;
+        font-weight:bold;
+    }
     .legend_inge{
         position: absolute;
         top: -122px;
@@ -979,6 +984,26 @@
             &.separate{
                  margin-bottom: 25px;
             }
+            &.master_switch{
+                border: 1px solid black;
+                background: none;
+                color: black;
+                font-weight: bold;
+                margin-top: 25px;
+                cursor: default;
+                .switch_mast{
+                    display: inline-block;
+                    vertical-align: middle;
+                    cursor: pointer;
+                    font-style: normal;
+                    img{
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-left: 15px;
+                        width: 32px;
+                    }
+                }
+            }
         }
         .bloc_container_zone{
             width:100%;
@@ -1055,7 +1080,7 @@
                 }
             }
         }
-        .hw_signals_container{
+        .hw_signals_container, .hw_values_container{
             .line_signal{
                 &:nth-child(odd){background: #eeeeeec1;}
                 height: 26px;
@@ -1076,6 +1101,30 @@
                     }
                 }
             }
+        }
+        .hw_signal_command_container, .bt_diag_mode{
+            .line_cmd{
+                &:nth-child(odd){background: #eeeeeec1;}
+                height: 26px;
+                margin-bottom: 2px;
+            }
+            .name{
+                display: inline-block;
+                vertical-align: middle;
+                width: 250px;
+            }
+            .switch_hw, .switch_diag_mod{
+                font-weight:bold;
+                display: inline-block;
+                vertical-align: middle;
+                cursor: pointer;
+                img{
+                    width: 32px;
+                    height: auto;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }            
         }
     }
     

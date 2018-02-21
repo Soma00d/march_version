@@ -54,6 +54,10 @@ $(document).ready(function (){
     var globTableCtn = $("#content_toolbox .globTable");
     var FRTLlatGantryCtn = $("#content_toolbox .FRTLlatGantry");
     var latSwitch2Ctn = $("#content_toolbox .latSwitch2");
+    var tsuiSupplyCtn = $("#content_toolbox .tsuiSupply");
+    var FRTLgantryCtn = $("#content_toolbox .FRTLgantry");
+    var unreg5Ctn = $("#content_toolbox .unreg5");
+    var unreg12Ctn = $("#content_toolbox .unreg12");
 
     //génération des joysticks
     var joystickContainerNew = $(".joystick_container_new");
@@ -2129,12 +2133,24 @@ $(document).ready(function (){
                         var tsuiVoltage = message.tsuiv;
                         var outCtStop = message.outCtStop;
                         
+                        var globv = message.globv;
+                        var tsuiSupply = message.tsuiSupply;
+                        var FRTLgantry = message.FRTLgantry;
+                        var unreg5 = message.unreg5;
+                        var unreg12 = message.unreg12;
+                        
                         latSwitch = convertHexaPic(latSwitch) / 51 / 0.138;
                         autoposDR = convertHexaPic(autoposDR) / 51 / 0.138;
                         globGantry = convertHexaPic(globGantry) / 51 / 0.138;
                         sciFRTL = convertHexaPic(sciFRTL) / 51 / 0.138;
                         sciLAT = convertHexaPic(sciLAT) / 51 / 0.138;
                         tsuiVoltage = (convertHexaPic(tsuiVoltage)+3) / 51 / 0.1375;
+                        
+                        globv = convertHexaPic(globv) / 51 / 0.138;
+                        tsuiSupply = convertHexaPic(tsuiSupply) / 51 / 0.138;
+                        FRTLgantry = convertHexaPic(FRTLgantry) / 51 / 0.138;
+                        unreg5 = convertHexaPic(unreg5) / 51 / 0.37;
+                        unreg12 = convertHexaPic(unreg12) / 51 / 0.175;
                         
                         supplyContainer.html(tsuiVoltage.toFixed(2) + " V");
                         
@@ -2148,7 +2164,12 @@ $(document).ready(function (){
                         sciFRTLCtn.find(".value").html(sciFRTL.toFixed(2)+ " V");
                         if(sciFRTL > seuil){sciFRTLCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{sciFRTLCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
                         sciLATCtn.find(".value").html(sciLAT.toFixed(2)+ " V");
-                        if(sciLAT > seuil){sciLATCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{sciLATCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};                        
+                        if(sciLAT > seuil){sciLATCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{sciLATCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};  
+                        
+                        tsuiSupplyCtn.find(".value").html(tsuiSupply.toFixed(2)+ " V");
+                        FRTLgantryCtn.find(".value").html(FRTLgantry.toFixed(2)+ " V");
+                        unreg5Ctn.find(".value").html(unreg5.toFixed(2)+ " V");
+                        unreg12Ctn.find(".value").html(unreg12.toFixed(2)+ " V");
 
                     
                     }else if(message.typeMsg == "S"){  
@@ -2162,6 +2183,11 @@ $(document).ready(function (){
                         var FRTLlatGantry = message.FRTLlatGantry;
                         var latSwitch2 = message.latSwitch2;
                         var tsuiVoltage = message.tsuiv;
+                        var globv = message.globv;
+                        var tsuiSupply = message.tsuiSupply;
+                        var FRTLgantry = message.FRTLgantry;
+                        var unreg5 = message.unreg5;
+                        var unreg12 = message.unreg12;
                         
                         longEnable = convertHexaPic(longEnable) / 51 / 0.138;
                         TBLtopPan = convertHexaPic(TBLtopPan) / 51 / 0.138;
@@ -2172,6 +2198,12 @@ $(document).ready(function (){
                         FRTLlatGantry = convertHexaPic(FRTLlatGantry) / 51 / 0.138;
                         latSwitch2 = convertHexaPic(latSwitch2) / 51 / 0.138;
                         tsuiVoltage = (convertHexaPic(tsuiVoltage)+3) / 51 / 0.1375;
+                        
+                        globv = convertHexaPic(globv) / 51 / 0.138;
+                        tsuiSupply = convertHexaPic(tsuiSupply) / 51 / 0.138;
+                        FRTLgantry = convertHexaPic(FRTLgantry) / 51 / 0.138;
+                        unreg5 = convertHexaPic(unreg5) / 51 / 0.37;
+                        unreg12 = convertHexaPic(unreg12) / 51 / 0.175;
                         
                         supplyContainer.html(tsuiVoltage.toFixed(2) + " V");
                         
@@ -2198,6 +2230,11 @@ $(document).ready(function (){
                         
                         latSwitch2Ctn.find(".value").html(latSwitch2.toFixed(2)+ " V");
                         if(latSwitch2 > seuil){latSwitch2Ctn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{latSwitch2Ctn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        
+                        tsuiSupplyCtn.find(".value").html(tsuiSupply.toFixed(2)+ " V");
+                        FRTLgantryCtn.find(".value").html(FRTLgantry.toFixed(2)+ " V");
+                        unreg5Ctn.find(".value").html(unreg5.toFixed(2)+ " V");
+                        unreg12Ctn.find(".value").html(unreg12.toFixed(2)+ " V");
                         
                     }
                     
@@ -2769,9 +2806,13 @@ $(document).ready(function (){
         $(".display_container").addClass("hidden");
         $(".safety_container").addClass("hidden");
         $(".enable_container").addClass("hidden");        
-        $(".emergency_container").addClass("hidden");  
+        $(".supply_container").addClass("hidden");        
+        $(".emergency_container").addClass("hidden"); 
+        $(".hw_values_container").addClass("hidden");
         $(".hw_signals_container.tssc").addClass("hidden"); 
         $(".hw_signals_container.sbsh").addClass("hidden"); 
+        $(".hw_signal_command_container.sbsh").addClass("hidden"); 
+        $(".hw_signal_command_container.tssc").addClass("hidden"); 
         $(".nodeid_container").addClass("hidden");
         $(".bt_diag_mode").addClass("hidden");   
         
@@ -2788,6 +2829,7 @@ $(document).ready(function (){
         $(".start_elegance_bt").addClass("hidden");  
         $(".start_agila_bt").addClass("hidden"); 
         $(".tsui_restart_bt").addClass("hidden");         
+        $(".master_switch").addClass("hidden");         
         $(".switch_calibration").addClass("hidden");     
         $(".bad_calibration").addClass("hidden");     
         
@@ -2813,9 +2855,11 @@ $(document).ready(function (){
             $(this).removeClass("hidden");
         })
         $(".legend_inge .nodeIDleg").removeClass("hidden");
+        $(".legend_inge .dimleg").removeClass("hidden");
         
         if (globalName == "OMEGA") {       
             $(".legend_inge .nodeIDleg").addClass("hidden");
+            $(".legend_inge .dimleg").addClass("hidden");
             
             $(".bt_diag_mode").removeClass("hidden");
             $(".enable_container .state").addClass("hidden");
@@ -2825,15 +2869,16 @@ $(document).ready(function (){
             $(".switch.dim").each(function(){
                 $(this).addClass("hidden");
             })
-            
+            $(".hw_values_container").removeClass("hidden");
             if(modelName == "TSSC" ){
                 $(".safety_container .name_container").html("EMERGENCY FUNCTIONS");
                 $(".buzzer_container").removeClass("hidden");
                 $(".display_container").removeClass("hidden");  
                 $(".safety_container").removeClass("hidden");
                 $(".enable_container").removeClass("hidden"); 
-                $(".emergency_container").removeClass("hidden"); 
                 $(".hw_signals_container.tssc").removeClass("hidden");
+                $(".hw_signal_command_container.tssc").removeClass("hidden"); 
+                $(".master_switch").removeClass("hidden");     
                 
                 $(".display_all_bt").removeClass("hidden");
                 $(".stop_all_bt").removeClass("hidden");
@@ -2841,17 +2886,17 @@ $(document).ready(function (){
                 
             }else{
                 
-                $(".switch_calibration").removeClass("hidden");
-                                
+                $(".switch_calibration").removeClass("hidden");                                
                 $(".enable_container").removeClass("hidden"); 
-                $(".emergency_container").removeClass("hidden"); 
                 $(".hw_signals_container.sbsh").removeClass("hidden");
+                $(".hw_signal_command_container.sbsh").removeClass("hidden"); 
                 
                 $(".display_all_bt").removeClass("hidden");
                 $(".stop_all_bt").removeClass("hidden");
                 $(".tsui_restart_bt").removeClass("hidden");                 
             }
-        }else if(globalName == "ELEGANCE"){            
+        }else if(globalName == "ELEGANCE"){    
+            $(".supply_container").removeClass("hidden");        
             if(modelName == "TSSC" ){
                 //left
                 $(".buzzer_container").removeClass("hidden");
@@ -6264,25 +6309,6 @@ $(document).ready(function (){
     $(".start_elegance_bt").on('click', function () {
         sendSignal("002400806d68d7551407f09b861e3aad000549a844080000" + cobID2 + "2F01300102000000");
     });
-    $(".bt_diag_mode .diag_mod_on").on('click', function(){
-        if(modelName == "TSSC"){
-            sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c0226100000000000000000");
-            sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c6226100000000000000000");
-
-       }else{
-           sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c0426100000000000000000");
-            sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c6426100000000000000000");
-       }
-    });
-    $(".bt_diag_mode .diag_mod_off").on('click', function(){
-        if(modelName == "TSSC"){
-            sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2226100000000000000000");
-            setTimeout(function(){sendSignal(startSlaveTSSC);},9000);            
-       }else{
-            sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
-            setTimeout(function(){sendSignal(startSlaveSBSH);sendSignal(startSlaveSBSH2);},9000); 
-       }
-    });
     
     $(".change_nodeid").on('click', function () {
         var value = $("#value_nodeid").html().trim();
@@ -6340,21 +6366,54 @@ $(document).ready(function (){
             $(this).removeClass('activated');
             $(this).find('img').attr('src','images/switch_off.png');
         })
+        $(".switch_hw").each(function(){
+            $(this).removeClass('activated');
+            $(this).find('img').attr('src','images/switch_off.png');
+        })
         $("#content_toolbox .diag_inge .joystick_show").fadeOut(300);
         $("#content_toolbox .diag_inge .led_show").fadeOut(300);
         setTimeout(function () {
             $("#content_toolbox .diag_inge .button_show").fadeIn(300);
         }, 300);
         if(globalName == "OMEGA" && modelName =="TSSC"){
-            sendSignalPic("7");
+            sendSignalPic("7");            
+            sendSignalPic("DP");
+            if($(".bt_diag_mode .switch_diag_mod").hasClass("activated")){
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2226100000000000000000");
+                setTimeout(function(){
+                    sendSignal(startSlaveTSSC);
+                },9000); 
+                $(".bt_diag_mode .switch_diag_mod").removeClass("activated");
+                $(".bt_diag_mode .switch_diag_mod").find("img").attr("src", "images/switch_off.png");
+            }               
         }else if(globalName == "OMEGA" && modelName =="SMARTBOX"){
             sendSignalPic("9");        
+            sendSignalPic("D`");
+            sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
+            setTimeout(function(){
+                sendSignal(startSlaveSBSH);
+                sendSignal(startSlaveSBSH2);
+            },9000); 
+            $(".bt_diag_mode .switch_diag_mod").removeClass("activated");
+           $(".bt_diag_mode .switch_diag_mod").find("img").attr("src", "images/switch_off.png");
         }else if(globalName == "OMEGA" && modelName =="SMARTHANDLE"){
             sendSignalPic("9");
+            sendSignalPic("DP");
+            if($(".bt_diag_mode .switch_diag_mod").hasClass("activated")){
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
+                setTimeout(function(){
+                    sendSignal(startSlaveSBSH);
+                    sendSignal(startSlaveSBSH2);
+                },9000);                
+                $(".bt_diag_mode .switch_diag_mod").find("img").attr("src", "images/switch_off.png");
+                $(".bt_diag_mode .switch_diag_mod").removeClass("activated");
+            }
+            
         }
         else{
             sendSignalPic("2");
         }
+        
     });
     $("#content_toolbox .show_led").on('click', function () {
         $("#content_toolbox .diag_inge .joystick_show").fadeOut(300);
@@ -6365,6 +6424,7 @@ $(document).ready(function (){
         
         if(globalName == "OMEGA" && modelName =="TSSC"){
             sendSignalPic("6");
+            
         }else if(globalName == "OMEGA" && modelName =="SMARTBOX"){
             sendSignalPic("8");        
         }else if(globalName == "OMEGA" && modelName =="SMARTHANDLE"){
@@ -6374,6 +6434,7 @@ $(document).ready(function (){
             sendSignalPic("1");
         }
     });
+
     $("#content_toolbox .get_conf_inge").on('click', function () {
         setTimeout(function () {
             _MODE = "TOOLBOX";
@@ -6510,6 +6571,59 @@ $(document).ready(function (){
         _MODE = "START";
         if($(this).hasClass("repair_mode") || $(this).hasClass("manufacturing_mode")){
             resetDisplayCalibration(hasServiceBt, switchPosNumber);
+        }else if($(this).hasClass("inge_mode")){            
+            stopAllLED(globalName, modelName, typeChoice);
+            $(".switch").each(function(){
+                $(this).removeClass('activated');
+                $(this).find('img').attr('src','images/switch_off.png');
+            })
+            $(".switch_hw").each(function(){
+                $(this).removeClass('activated');
+                $(this).find('img').attr('src','images/switch_off.png');
+            })
+            $("#content_toolbox .diag_inge .joystick_show").fadeOut(300);
+            $("#content_toolbox .diag_inge .led_show").fadeOut(300);
+            setTimeout(function () {
+                $("#content_toolbox .diag_inge .button_show").fadeIn(300);
+            }, 300);
+            if(globalName == "OMEGA" && modelName =="TSSC"){
+                sendSignalPic("7");            
+                sendSignalPic("DP");
+                if($(".bt_diag_mode .switch_diag_mod").hasClass("activated")){
+                    sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2226100000000000000000");
+                    setTimeout(function(){
+                        sendSignal(startSlaveTSSC);
+                    },9000); 
+                    $(".bt_diag_mode .switch_diag_mod").removeClass("activated");
+                    $(".bt_diag_mode .switch_diag_mod").find("img").attr("src", "images/switch_off.png");
+                }               
+            }else if(globalName == "OMEGA" && modelName =="SMARTBOX"){
+                sendSignalPic("9");        
+                sendSignalPic("D`");
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
+                setTimeout(function(){
+                    sendSignal(startSlaveSBSH);
+                    sendSignal(startSlaveSBSH2);
+                },9000); 
+                $(".bt_diag_mode .switch_diag_mod").removeClass("activated");
+               $(".bt_diag_mode .switch_diag_mod").find("img").attr("src", "images/switch_off.png");
+            }else if(globalName == "OMEGA" && modelName =="SMARTHANDLE"){
+                sendSignalPic("9");
+                sendSignalPic("DP");
+                if($(".bt_diag_mode .switch_diag_mod").hasClass("activated")){
+                    sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
+                    setTimeout(function(){
+                        sendSignal(startSlaveSBSH);
+                        sendSignal(startSlaveSBSH2);
+                    },9000);                
+                    $(".bt_diag_mode .switch_diag_mod").find("img").attr("src", "images/switch_off.png");
+                    $(".bt_diag_mode .switch_diag_mod").removeClass("activated");
+                }
+
+            }
+            else{
+                sendSignalPic("2");
+            }
         }
     });
     $(".exit_role").on('click', function(){
@@ -6524,6 +6638,65 @@ $(document).ready(function (){
     $(".bt_section.history").on('click', function(){
         $(".content_history_table").empty();
         modeManufacturing = 0;
+    });
+    
+    $(".hw_signal_command_container .switch_hw").on('click', function(){
+        var on_signal = $(this).data('on');
+        var off_signal = $(this).data('off');
+        
+        if($(this).hasClass('activated')){
+            $(this).removeClass("activated");
+            $(this).find("img").attr('src', 'images/switch_off.png');
+            sendSignalPic(off_signal);
+        }else{
+            $(".switch_hw").each(function(){
+                $(this).removeClass('activated');
+                $(this).find('img').attr('src','images/switch_off.png');
+            })
+            $(this).addClass("activated");
+            $(this).find("img").attr('src', 'images/switch_on.png');
+            sendSignalPic(on_signal);
+        }
+    });
+    $(".master_switch .switch_mast").on('click', function(){
+        var on_signal = "DA";        
+        var off_signal = "D@";
+        
+        if($(this).hasClass('activated')){
+            $(this).removeClass("activated");
+            $(this).find("img").attr('src', 'images/switch_off.png');
+            sendSignalPic(off_signal);
+            sendSignal("002400806d68d7551407f09b861e3aad000549a8440800001fc20f000e00000000000000");
+        }else{           
+            $(this).addClass("activated");
+            $(this).find("img").attr('src', 'images/switch_on.png');
+            sendSignalPic(on_signal);
+            sendSignal("002400806d68d7551407f09b861e3aad000549a8440800001fc22f000e00000000000000");
+        }
+    });
+    $(".bt_diag_mode .switch_diag_mod").on('click', function(){        
+        if($(this).hasClass('activated')){
+            $(this).removeClass("activated");
+            $(this).find("img").attr('src', 'images/switch_off.png');            
+            if(modelName == "TSSC"){
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2226100000000000000000");
+                setTimeout(function(){sendSignal(startSlaveTSSC);},9000);            
+            }else{
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
+                setTimeout(function(){sendSignal(startSlaveSBSH);sendSignal(startSlaveSBSH2);},9000); 
+            }
+        }else{            
+            $(this).addClass("activated");
+            $(this).find("img").attr('src', 'images/switch_on.png');
+            if(modelName == "TSSC"){
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c0226100000000000000000");
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c6226100000000000000000");
+
+            }else{
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c0426100000000000000000");
+                sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c6426100000000000000000");
+            }
+        }
     });
     
     function stopAllLED(globalName, modelName, typeChoice){
@@ -6553,6 +6726,8 @@ $(document).ready(function (){
             }
         }
     }
+    
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////// SEND SIGNAL TO DRIVER ////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    

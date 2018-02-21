@@ -27,9 +27,9 @@
     <div class="diag_inge panels">
         <div class="legend_inge">            
             <div class="content_question">
-                <span class="nodeIDleg"><b>Node ID</b> : <span class="actual_node_id"></span></span><br>
+                <span class="nodeIDleg"><b>Node ID</b> : <span class="actual_node_id"></span><br></span>
                 <b>O</b> : On/off led signal<br>
-                <b>D</b> : Dim/off led signal<br>
+                <span class="dimleg"><b>D</b> : Dim/off led signal<br></span>
                 <b>F</b> : Flash/off led signal
             </div>
         </div>
@@ -134,19 +134,31 @@
                         <option>7</option>
                     </select>
                     <div id="value_nodeid" class="hidden">0</div>
-                    <button class="change_nodeid">Change Node ID</button>
-                    
+                    <button class="change_nodeid">Change Node ID</button>                    
+                </div>
+                                
+                <div class="hw_values_container bloc_container_zone hidden">
+                    <div class="name_container"><span class='name_signal'>POWER SUPPLY</span></div>
+                    <div class="line_signal tsuiSupply"><span class='name_signal'>+24 TBL</span> <span class="value"></span></div>
+                    <div class="line_signal FRTLgantry"><span class='name_signal'>F/L Gantry EN REF</span> <span class="value"></span></div>
+                    <div class="line_signal unreg5"><span class='name_signal'>UNREG_5V</span> <span class="value"></span></div>
+                    <div class="line_signal unreg12"><span class='name_signal'>UNREG_12V</span> <span class="value"></span></div>
                 </div>
                 <div class="tssc hw_signals_container bloc_container_zone hidden">
-                    <div class="name_container"><span class='name_signal'>TSSC HARDWARE SIGNALS</span></div>
+                    <div class="name_container"><span class='name_signal'>TSSC HARDWARE SIGNALS (MASTER ONLY)</span></div>
                     <div class="line_signal latSwitch"><span class='name_signal'>LATERAL_SW1</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal autoposDR"><span class='name_signal'>AUTO_POS_DR_REQ</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal globGantry"><span class='name_signal'>GLOBAL_GANTRY_ENABLE1</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal sciFRTL"><span class='name_signal'>SCI_FRTL_DR_REQ</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal sciLAT"><span class='name_signal'>SCI_LAT_DR_REQ</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal tt_lat_lock"><span class='name_signal'>TT_LAT_LOCK</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal tt_long_lock"><span class='name_signal'>TT_LONG_LOCK</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal tt_rotation_lock"><span class='name_signal'>TT_ROTATION_LOCK</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal room_light"><span class='name_signal'>ROOM_LIGHT</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                 </div>
                 <div class="sbsh hw_signals_container bloc_container_zone hidden">
                     <div class="name_container"><span class='name_signal'>SB/SH HARDWARE SIGNALS</span></div>
+                    <div class="separator_title">Enables</div>
                     <div class="line_signal longEnable"><span class='name_signal '>LONG_ENABLE</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal TBLtopPan"><span class='name_signal'>TBL_TOP_PAN</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal sc1LatDR"><span class='name_signal'>SC1_LAT_DR_REQ</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
@@ -155,10 +167,19 @@
                     <div class="line_signal globTable"><span class='name_signal'>GLOBAL_TABLE_EN</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal FRTLlatGantry"><span class='name_signal'>FRTL_LAT_GANTRY_EN</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                     <div class="line_signal latSwitch2"><span class='name_signal'>LATERAL_SWA2</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="separator_title">Logical Outputs</div>
+                    <div class="line_signal l_arm_1"><span class='name_signal'>L_ARM1</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal l_arm_2"><span class='name_signal'>L_ARM2</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal handle_config_switch"><span class='name_signal'>HANDLE_CONFIG_SWITCH</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal machine_swa"><span class='name_signal'>MACHINE_SWA</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal frontal_swa"><span class='name_signal'>FRONTAL_SWA</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal pivot_motion_enable"><span class='name_signal'>PIVOT_MOTION_ENABLE</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal tbl_drive_down"><span class='name_signal'>TBL_DRIVE_DOWN</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
+                    <div class="line_signal tbl_drive_up"><span class='name_signal'>TBL_DRIVE_UP</span> <span class="value"></span><span class="voyant"><img src="images/voyant_off.png"></span></div>
                 </div>
                 <div class="bt_diag_mode bloc_container_zone hidden" >
                     <div class="name_container">BUTTON DIAGNOSTIC MODE</div>
-                    <div class="bt_mode"><button class="diag_mod_on">ON</button><button class="diag_mod_off">OFF</button></div>
+                    <div class="line_cmd"><span class="name">DIAGNOSTIC MODE</span><span class="switch_diag_mod" data-on="DT" data-off="DP">On/Off: <img src="images/switch_off.png"></span></div>
                 </div>
             </div>
             
@@ -180,6 +201,7 @@
                 <div class="start_agila_bt btn_function_panel hidden">START AGILA CONF.</div>
                 <div class="start_elegance_bt btn_function_panel separate hidden">START ELEGANCE CONF.</div>
                 <div class="tsui_restart_bt btn_function_panel">TSUI RESTART</div>
+                <div class="master_switch btn_function_panel hidden"><div class='name'>MASTER MODE</div><span class="switch_mast">On/off: <img src="images/switch_off.png"></span></div>
             </div>
             
             <div class="col_right">
@@ -195,6 +217,19 @@
                         <div class="frequency">Frequency (Hz) : <span class="enable_freq_val"></span></div>
                         <div class="voltage">Amplitude (V) : <span class="enable_volt_val"></span></div>
                     </div>
+                </div>
+                <div class="tssc hw_signal_command_container bloc_container_zone hidden">
+                    <div class="name_container">TSSC HARDWARE SIGNALS COMMAND</div>
+                    <div class="line_cmd"><span class="name">LAT_LOCK_ON</span><span class="switch_hw" data-on="DT" data-off="DP">On/Off: <img src="images/switch_off.png"></span></div>
+                    <div class="line_cmd"><span class="name">LONG_LOCK_ON</span><span class="switch_hw" data-on="DR" data-off="DP">On/Off: <img src="images/switch_off.png"></span></div>
+                    <div class="line_cmd"><span class="name">ROTATION_LOCK_ON</span><span class="switch_hw" data-on="DQ" data-off="DP">On/Off: <img src="images/switch_off.png"></span></div>
+                </div>
+                <div class="sbsh hw_signal_command_container bloc_container_zone hidden">
+                    <div class="name_container">SB/SH HARDWARE SIGNALS COMMAND</div>
+                    <div class="line_cmd"><span class="name">FRONTAL_LAMP</span><span class="switch_hw" data-on="Dh" data-off="D`">On/Off: <img src="images/switch_off.png"></span></div>
+                    <div class="line_cmd"><span class="name">MACHINE_LAMP</span><span class="switch_hw" data-on="Dd" data-off="D`">On/Off: <img src="images/switch_off.png"></span></div>
+                    <div class="line_cmd"><span class="name">LATERAL_LAMP</span><span class="switch_hw" data-on="Db" data-off="D`">On/Off: <img src="images/switch_off.png"></span></div>
+                    <div class="line_cmd"><span class="name">EXTERNAL_MOTION_ENABLE</span><span class="switch_hw" data-on="Da" data-off="D`">On/Off: <img src="images/switch_off.png"></span></div>
                 </div>
             </div>
                         
