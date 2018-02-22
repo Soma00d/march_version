@@ -58,7 +58,23 @@ $(document).ready(function (){
     var FRTLgantryCtn = $("#content_toolbox .FRTLgantry");
     var unreg5Ctn = $("#content_toolbox .unreg5");
     var unreg12Ctn = $("#content_toolbox .unreg12");
+    
+    var latLockCtn = $("#content_toolbox .tt_lat_lock");
+    var longLockCtn = $("#content_toolbox .tt_long_lock");
+    var rotationLockCtn = $("#content_toolbox .tt_rotation_lock");
+    var roomLightCtn = $("#content_toolbox .room_light");
+        
+    var arm1Ctn = $("#content_toolbox .l_arm_1");
+    var handleConfSwitchCtn = $("#content_toolbox .handle_config_switch");
+    var arm2Ctn = $("#content_toolbox .l_arm_2");
+    var machineSwaCtn = $("#content_toolbox .machine_swa");
+    var frontalSwaCtn = $("#content_toolbox .frontal_swa");
+    var pivotMotionEnableCtn = $("#content_toolbox .pivot_motion_enable");
+    var tblDriveDownCtn = $("#content_toolbox .tbl_drive_down");
+    var tblDriveUpCtn = $("#content_toolbox .tbl_drive_up");
 
+                        
+                        
     //génération des joysticks
     var joystickContainerNew = $(".joystick_container_new");
     var joystickCalibrationContainer = $(".calibration_zone_container");
@@ -2139,6 +2155,16 @@ $(document).ready(function (){
                         var unreg5 = message.unreg5;
                         var unreg12 = message.unreg12;
                         
+                        var latLock = message.latLock;
+                        var longLock = message.longLock;
+                        var rotationLock = message.rotationLock;
+                        var roomLight = message.roomLight;
+                        
+                        if(latLock > 0){latLockCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{latLockCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(longLock > 0){longLockCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{longLockCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(rotationLock > 0){rotationLockCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{rotationLockCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(roomLight > 0){roomLightCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{roomLightCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        
                         latSwitch = convertHexaPic(latSwitch) / 51 / 0.138;
                         autoposDR = convertHexaPic(autoposDR) / 51 / 0.138;
                         globGantry = convertHexaPic(globGantry) / 51 / 0.138;
@@ -2189,6 +2215,24 @@ $(document).ready(function (){
                         var unreg5 = message.unreg5;
                         var unreg12 = message.unreg12;
                         
+                        var arm1 = message.arm1;
+                        var handleConfSwitch = message.handleConfSwitch;
+                        var arm2 = message.arm2;
+                        var machineSwa = message.machineSwa;
+                        var frontalSwa = message.frontalSwa;
+                        var pivotMotionEnable = message.pivotMotionEnable;
+                        var tblDriveDown = message.tblDriveDown;
+                        var tblDriveUp = message.tblDriveUp;
+                        
+                        if(arm1 > 0){arm1Ctn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{arm1Ctn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(handleConfSwitch > 0){handleConfSwitchCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{handleConfSwitchCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(arm2 > 0){arm2Ctn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{arm2Ctn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(machineSwa > 0){machineSwaCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{machineSwaCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(frontalSwa > 0){frontalSwaCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{frontalSwaCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(pivotMotionEnable > 0){pivotMotionEnableCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{pivotMotionEnableCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(tblDriveDown > 0){tblDriveDownCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{tblDriveDownCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        if(tblDriveUp > 0){tblDriveUpCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{tblDriveUpCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
+                        
                         longEnable = convertHexaPic(longEnable) / 51 / 0.138;
                         TBLtopPan = convertHexaPic(TBLtopPan) / 51 / 0.138;
                         sc1LatDR = convertHexaPic(sc1LatDR) / 51 / 0.138;
@@ -2235,6 +2279,8 @@ $(document).ready(function (){
                         FRTLgantryCtn.find(".value").html(FRTLgantry.toFixed(2)+ " V");
                         unreg5Ctn.find(".value").html(unreg5.toFixed(2)+ " V");
                         unreg12Ctn.find(".value").html(unreg12.toFixed(2)+ " V");
+                        
+                        
                         
                     }
                     
