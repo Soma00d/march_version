@@ -103,9 +103,17 @@ wss.on('connection', function (ws) {
                 var sciFRTL = dataStr.substring(7, 9);
                 var sciLAT = dataStr.substring(9, 11);
 				var outCtStop = dataStr.substring(11, 13);
-				var tsuiv = dataStr.substring(13, 15);
+				var globv = dataStr.substring(13, 15);
+				var tsuiSupply = dataStr.substring(15, 17);
+				var FRTLgantry = dataStr.substring(17, 19);
+				var unreg5 = dataStr.substring(19, 21);
+				var unreg12 = dataStr.substring(21, 23);
+				var latLock = dataStr.substring(23, 24);
+				var longLock = dataStr.substring(24, 25);
+				var rotationLock = dataStr.substring(25, 26);
+				var roomLight = dataStr.substring(26, 27);
 				
-                var jsonData = '{"type":"from_pic", "typeMsg":"' + typeMsg + '", "latSwitch":"' + latSwitch + '", "autoposDR":"' + autoposDR + '", "globGantry":"' + globGantry + '", "sciFRTL":"' + sciFRTL + '", "sciLAT":"' + sciLAT + '", "outCtStop":"' + outCtStop + '", "tsuiV":"' + tsuiv + '"}';
+                var jsonData = '{"type":"from_pic", "typeMsg":"' + typeMsg + '", "latSwitch":"' + latSwitch + '", "autoposDR":"' + autoposDR + '", "globGantry":"' + globGantry + '", "sciFRTL":"' + sciFRTL + '", "sciLAT":"' + sciLAT + '", "outCtStop":"' + outCtStop + '", "globV":"' + globv + '", "tsuiSupply":"' + tsuiSupply + '", "FRTLgantry":"' + FRTLgantry + '", "unreg5":"' + unreg5 + '", "unreg12":"' + unreg12 + '", "latLock":"' + latLock + '", "longLock":"' + longLock + '", "rotationLock":"' + rotationLock + '", "roomLight":"' + roomLight + '"}';
 
             } else if (typeMsg == "S") {
                 var longEnable = dataStr.substring(1, 3);
@@ -116,9 +124,21 @@ wss.on('connection', function (ws) {
                 var globTable = dataStr.substring(11, 13);
                 var FRTLlatGantry = dataStr.substring(13, 15);
                 var latSwitch2 = dataStr.substring(15, 17);
-				var tsuiv = dataStr.substring(17, 19);
+				var globv = dataStr.substring(17, 19);
+				var tsuiSupply = dataStr.substring(19, 21);
+				var FRTLgantry = dataStr.substring(21, 23);
+				var unreg5 = dataStr.substring(23, 25);
+				var unreg12 = dataStr.substring(25, 27);
+				var arm1 = dataStr.substring(27, 28);
+				var handleConfSwitch = dataStr.substring(28, 29);
+				var arm2 = dataStr.substring(29, 30);
+				var machineSwa = dataStr.substring(30, 31);
+				var frontalSwa = dataStr.substring(31, 32);
+				var pivotMotionEnable = dataStr.substring(32, 33);
+				var tblDriveDown = dataStr.substring(33, 34);
+				var tblDriveUp = dataStr.substring(34, 35);
 
-                var jsonData = '{"type":"from_pic", "typeMsg":"' + typeMsg + '", "longEnable":"' + longEnable + '", "TBLtopPan":"' + TBLtopPan + '", "sc1LatDR":"' + sc1LatDR + '", "TBLtopUpDown":"' + TBLtopUpDown + '", "globGantry2":"' + globGantry2 + '","globTable":"' + globTable + '", "FRTLlatGantry":"' + FRTLlatGantry + '", "latSwitch2":"' + latSwitch2 + '", "tsuiV":"' + tsuiv + '"}';
+                var jsonData = '{"type":"from_pic", "typeMsg":"' + typeMsg + '", "longEnable":"' + longEnable + '", "TBLtopPan":"' + TBLtopPan + '", "sc1LatDR":"' + sc1LatDR + '", "TBLtopUpDown":"' + TBLtopUpDown + '", "globGantry2":"' + globGantry2 + '","globTable":"' + globTable + '", "FRTLlatGantry":"' + FRTLlatGantry + '", "latSwitch2":"' + latSwitch2 + '", "globV":"' + globv + '", "tsuiSupply":"' + tsuiSupply + '", "FRTLgantry":"' + FRTLgantry + '", "unreg5":"' + unreg5 + '", "unreg12":"' + unreg12 + '", "arm1":"' + arm1 + '", "handleConfSwitch":"' + handleConfSwitch + '", "arm2":"' + arm2 + '", "machineSwa":"' + machineSwa + '", "frontalSwa":"' + frontalSwa + '", "pivotMotionEnable":"' + pivotMotionEnable + '", "tblDriveDown":"' + tblDriveDown + '", "tblDriveUp":"' + tblDriveUp + '"}';
             }
 
             console.log(jsonData);
