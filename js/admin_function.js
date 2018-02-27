@@ -821,6 +821,7 @@ $(document).ready(function () {
             var threshold_min_axis = $("."+id).data("thresholdminaxis");
             var threshold_min_zero = $("."+id).data("thresholdminzero");
             var timer = $("."+id).data("timer");
+            var type_t = $("."+id).data("type");
             var value = $("."+id).data("value");
             var x_pos = $("."+id).data("xpos");
             var y_pos = $("."+id).data("ypos");
@@ -834,7 +835,7 @@ $(document).ready(function () {
                 on_signal:on_signal, off_signal:off_signal, flash_signal:flash_signal, dim_signal:dim_signal,
                 x_pos:x_pos,y_pos:y_pos,threshold_max_axis:threshold_max_axis, threshold_max_zero:threshold_max_zero,
                 threshold_min_axis:threshold_min_axis,threshold_min_zero:threshold_min_zero,
-                calib_subindex_x:calib_subindex_x, calib_subindex_y:calib_subindex_y
+                calib_subindex_x:calib_subindex_x, calib_subindex_y:calib_subindex_y, type:type_t
             };
             if(type == "button"){
                 updateFormButton(id, lineArray);
@@ -846,9 +847,11 @@ $(document).ready(function () {
             }
         }
         
-        function updateFormButton(id, lineArray){
-            
+        function updateFormButton(id, lineArray){            
             var formBtCtn = $(".dico_main_container .formulaire_update_button");
+            
+            formBtCtn.find(".update_bt").off();
+            formBtCtn.find(".cancel_bt").off();
             
             formBtCtn.find(".cancel_bt").on('click', function(){
                 $(".dico_step2").fadeIn(200);            
@@ -906,9 +909,16 @@ $(document).ready(function () {
                 if($(this).val() == lineArray.is_final){$(this).attr('selected', 'selected')};
             });
             
+            formBtCtn.find(".zone option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.zone){$(this).attr('selected', 'selected')};
+            });
+            
             $(".dico_step2").fadeOut(200);            
             $(".overlay_form").removeClass("hidden");
             formBtCtn.fadeIn("200");
+            
+            
             
             formBtCtn.find(".update_bt").on('click', function(){
                 
@@ -945,6 +955,9 @@ $(document).ready(function () {
         function updateFormJoystick(id, lineArray){
             
             var formBtCtn = $(".dico_main_container .formulaire_update_joystick");
+            formBtCtn.find(".update_bt").off();
+            formBtCtn.find(".cancel_bt").off();
+            
             
             formBtCtn.find(".cancel_bt").on('click', function(){
                 $(".dico_step2").fadeIn(200);            
@@ -1026,12 +1039,92 @@ $(document).ready(function () {
                     threshold_min_axis:formBtCtn.find(".threshold_min_axis").val(),
                     threshold_min_zero:formBtCtn.find(".threshold_min_zero").val(),
                     calib_subindex_x:formBtCtn.find(".calib_subindex_x").val(),
-                    calib_subindex_y:formBtCtn.find(".calib_subindex_y").val()
+                    calib_subindex_y:formBtCtn.find(".calib_subindex_y").val(),
+                    type:formBtCtn.find(".type option:selected").val()
                 }
                 
                 $(".dico_step2").fadeIn(200);            
                 $(".overlay_form").addClass("hidden");
                 formBtCtn.fadeOut("200");
+                
+                updateLineNewInfo(id, newLineArrayBt)
+            });
+        }
+        
+        function updateFormDisplay(id, lineArray){
+            
+            var formDispCtn = $(".dico_main_container .formulaire_update_display");
+            
+            formDispCtn.find(".update_bt").off();
+            formDispCtn.find(".cancel_bt").off();
+            
+            formDispCtn.find(".cancel_bt").on('click', function(){
+                $(".dico_step2").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
+            });
+            
+            formDispCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+            
+            console.log(lineArray);
+            formDispCtn.find(".title").html("Update Display/Buzzer <b>"+lineArray.symbol_name+"</b> <img src='../images/"+lineArray.photo_link+"'>");
+            formDispCtn.find(".symbol_name").val(lineArray.symbol_name);
+            formDispCtn.find(".photo_link").val(lineArray.photo_link);
+            formDispCtn.find(".standard_name").val(lineArray.standard_name);
+            formDispCtn.find(".timer").val(lineArray.timer);
+            formDispCtn.find(".description").val(lineArray.description);
+            formDispCtn.find(".on_signal").val(lineArray.on_signal);
+            formDispCtn.find(".off_signal").val(lineArray.off_signal);
+            formDispCtn.find(".dim_signal").val(lineArray.dim_signal);
+            formDispCtn.find(".flash_signal").val(lineArray.flash_signal);
+            
+            
+            formDispCtn.find(".is_cdrh option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_cdrh){$(this).attr('selected', 'selected')};
+            });
+            
+            formDispCtn.find(".is_final option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_final){$(this).attr('selected', 'selected')};
+            }); 
+            
+            formDispCtn.find(".type option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.type){$(this).attr('selected', 'selected')};
+            });      
+            
+            $(".dico_step2").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formDispCtn.fadeIn("200");
+            
+            formDispCtn.find(".update_bt").on('click', function(){
+                
+                var newLineArrayBt = {
+                    type_array:"disp",
+                    symbol_name:formDispCtn.find(".symbol_name").val(),
+                    standard_name: formDispCtn.find(".standard_name").val(), 
+                    description:formDispCtn.find(".description").val(),                                         
+                    is_cdrh:formDispCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formDispCtn.find(".is_final option:selected").val(),
+                    timer:formDispCtn.find(".timer").val(),
+                    photo_link:formDispCtn.find(".photo_link").val(),          
+                    on_signal:formDispCtn.find(".on_signal").val(),
+                    off_signal:formDispCtn.find(".off_signal").val(),
+                    flash_signal:formDispCtn.find(".flash_signal").val(),
+                    dim_signal:formDispCtn.find(".dim_signal").val(),
+                    type:formDispCtn.find(".type option:selected").val()
+                }
+                
+                $(".dico_step2").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
                 
                 updateLineNewInfo(id, newLineArrayBt)
             });
@@ -1101,6 +1194,7 @@ $(document).ready(function () {
                 $(".dictionary_type_listing").find("."+id).data('timer', newLineArrayBt.timer);
                 $(".dictionary_type_listing").find("."+id).data('photolink', newLineArrayBt.photo_link);
                 $(".dictionary_type_listing").find("."+id).data('canid', newLineArrayBt.can_id);
+                $(".dictionary_type_listing").find("."+id).data('type', newLineArrayBt.type);
                 
                 $(".dictionary_type_listing").find("."+id).data('xpos', newLineArrayBt.x_pos);
                 $(".dictionary_type_listing").find("."+id).data('ypos', newLineArrayBt.y_pos);
@@ -1124,6 +1218,41 @@ $(document).ready(function () {
                 formBtCtn.find(".update_bt").off();
                 formBtCtn.find(".cancel_bt").off();
                 
+            }else if(newLineArrayBt.type_array == "disp"){
+                var formBtCtn = $(".dico_main_container .formulaire_update_button");
+                
+                if(newLineArrayBt.is_safety == 1){var isSafety = "<img src='../images/check_admin.png' title='This component is safety.'>"}else{var isSafety = "-"}
+                if(newLineArrayBt.is_enable == 1){var isEnable = "<img src='../images/check_admin.png' title='This component is enable.'>"}else{var isEnable = "-"}
+                if(newLineArrayBt.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                if(newLineArrayBt.is_led == 1 || newLineArrayBt.is_led == 2){var isLED = "<img src='../images/check_admin.png' title='This component is LED.'>"}else{var isLED = "-"}
+                if(newLineArrayBt.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}                
+                
+                $(".dictionary_type_listing").find("."+id).data('symbolname', newLineArrayBt.symbol_name);
+                $(".dictionary_type_listing").find("."+id).data('standardname', newLineArrayBt.standard_name);
+                $(".dictionary_type_listing").find("."+id).data('description', newLineArrayBt.description);
+                $(".dictionary_type_listing").find("."+id).data('iscdrh', newLineArrayBt.is_cdrh);
+                $(".dictionary_type_listing").find("."+id).data('isfinal', newLineArrayBt.is_final);
+                $(".dictionary_type_listing").find("."+id).data('timer', newLineArrayBt.timer);
+                $(".dictionary_type_listing").find("."+id).data('photolink', newLineArrayBt.photo_link);
+                $(".dictionary_type_listing").find("."+id).data('canid', newLineArrayBt.can_id);
+                $(".dictionary_type_listing").find("."+id).data('onsignal', newLineArrayBt.on_signal);
+                $(".dictionary_type_listing").find("."+id).data('offsignal', newLineArrayBt.off_signal);
+                $(".dictionary_type_listing").find("."+id).data('flashsignal', newLineArrayBt.flash_signal);
+                $(".dictionary_type_listing").find("."+id).data('dimsignal', newLineArrayBt.dim_signal);
+                $(".dictionary_type_listing").find("."+id).data('type', newLineArrayBt.type);
+                
+                $(".dictionary_type_listing").find("."+id+" .symbol_name").html(newLineArrayBt.symbol_name);
+                $(".dictionary_type_listing").find("."+id+" .standard_name").html(newLineArrayBt.standard_name);
+                $(".dictionary_type_listing").find("."+id+" .description").html(newLineArrayBt.description);
+                $(".dictionary_type_listing").find("."+id+" .photo_link").html("<img src='../images/"+newLineArrayBt.photo_link+"'>");
+                
+                $(".dictionary_type_listing").find("."+id+" .can_info").attr('title', "CAN ID : "+newLineArrayBt.can_id+"\nCAN Data Press : "+newLineArrayBt.pressed_val+"\nCAN Data Release : "+newLineArrayBt.released_val);
+                
+                $(".dictionary_type_listing").find("."+id+" .is_cdrh").html(isCDRH);
+                $(".dictionary_type_listing").find("."+id+" .is_final").html(isFinal);
+                
+                formBtCtn.find(".update_bt").off();
+                formBtCtn.find(".cancel_bt").off();
             }
             
             $(".dictionary_type_listing").find("."+id).addClass("updated_state");
@@ -1227,15 +1356,22 @@ $(document).ready(function () {
                 formBtCtn.fadeOut("200");
                 
             });
+        
+            formBtCtn.find(".cancel_bt").on('click', function(){
+                $(".dico_step2").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formBtCtn.fadeOut("200");
+            });
+        
         }
         
         function createNewJoystick(){
             var formJoyCtn = $(".dico_main_container .formulaire_create_joystick");
-            
+            formJoyCtn.find(".create_bt").off();
             $(".dico_step2").fadeOut(200);            
             $(".overlay_form").removeClass("hidden");
             formJoyCtn.fadeIn("200");
-            
+            formJoyCtn.find("input").val("");
             formJoyCtn.find(".create_button").off();
             formJoyCtn.find(".tooltip_form").hover(
                 function() {
@@ -1254,6 +1390,7 @@ $(document).ready(function () {
                     description:formJoyCtn.find(".description").val(),
                     is_cdrh:formJoyCtn.find(".is_cdrh option:selected").val(), 
                     is_final:formJoyCtn.find(".is_final option:selected").val(),
+                    type:formJoyCtn.find(".type option:selected").val(),
                     timer:formJoyCtn.find(".timer").val(),
                     photo_link:formJoyCtn.find(".photo_link").val(),
                     can_id:formJoyCtn.find(".can_id").val(),
@@ -1271,8 +1408,7 @@ $(document).ready(function () {
                 if(newLineArrayJoy.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
                 
                 var count = ($(".dictionary_type_listing.joystick-type .line_new_dico").length)+1;;
-                
-                       
+                                       
                 var newEntry = "<div class='line_new_dico joy_"+count+" created_state' data-index='joy_"+count+"' data-calibsubindexx='"+newLineArrayJoy.calib_subindex_x+"' data-calibsubindexy='"+newLineArrayJoy.calib_subindex_y+"' data-canid='"+newLineArrayJoy.can_id+"' data-description='"+newLineArrayJoy.description+"' data-dimsignal='' data-familyid='' data-flashsignal='' data-id='' data-iscdrh='"+newLineArrayJoy.is_cdrh+"' data-isenable='0' data-isfinal='"+newLineArrayJoy.is_final+"' data-isled='0' data-issafety='0' data-offsignal='' data-onsignal='' data-photolink='"+newLineArrayJoy.photo_link+"' data-pressedval='' data-releasedval='' data-standardname='"+newLineArrayJoy.standard_name+"' data-symbolname='"+newLineArrayJoy.symbol_name+"' data-thresholdmaxaxis='"+newLineArrayJoy.threshold_max_axis+"' data-threshold_max_zero='"+newLineArrayJoy.threshold_max_zero+"' data-thresholdminaxis='"+newLineArrayJoy.threshold_min_axis+"' data-thresholdminzero='"+newLineArrayJoy.threshold_min_zero+"' data-timer='"+newLineArrayJoy.timer+"' data-type='"+newLineArrayJoy.type+"' data-value='' data-xpos='"+newLineArrayJoy.x_pos+"' data-ypos='"+newLineArrayJoy.y_pos+"' data-zone='50'>"
                     +"<div class='td_dico symbol_name'>"+newLineArrayJoy.symbol_name+"</div>"
                     +"<div class='td_dico standard_name'>"+newLineArrayJoy.standard_name+"</div>"
@@ -1284,8 +1420,7 @@ $(document).ready(function () {
                 +"</div>";
         
                 $(".dictionary_type_listing.joystick-type .content_new_dico").append(newEntry);
-                
-                
+                                
                 $(".joy_"+count+" .delete_line").on('click', function(){
                         var name = $(this).parents(".line_new_dico").data('standard_name');
                         if (confirm('Confirm the deletion of entry '+name+'. This action is irreversible.')) {
@@ -1297,15 +1432,204 @@ $(document).ready(function () {
                     var id = $(this).parents(".line_new_dico").data('index');
                     var type = $(this).parents(".line_new_dico").data('type');
                     updateDictionaryLine(id, type); 
-                });
-                
+                });                
                 
                 $(".dico_step2").fadeIn(200);            
                 $(".overlay_form").addClass("hidden");
                 formJoyCtn.fadeOut("200");
                 
             });
+            
+            formJoyCtn.find(".cancel_bt").on('click', function(){
+                $(".dico_step2").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formJoyCtn.fadeOut("200");
+            });
         }
+        
+        function createNewDisplay(){
+            var formDispCtn = $(".dico_main_container .formulaire_create_display");
+            formDispCtn.find(".title").html("Create new Display/Buzzer");
+            
+            $(".dico_step2").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formDispCtn.fadeIn("200");
+            
+            formDispCtn.find(".create_button").off();
+            formDispCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+    
+            formDispCtn.find(".create_bt").on('click', function(){
+                
+                var newLineArrayDisp = {
+                    type_array: "bt",
+                    symbol_name:formDispCtn.find(".symbol_name").val(),
+                    standard_name: formDispCtn.find(".standard_name").val(), 
+                    description:formDispCtn.find(".description").val(),
+                    is_cdrh:formDispCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formDispCtn.find(".is_final option:selected").val(), 
+                    timer:formDispCtn.find(".timer").val(),
+                    photo_link:formDispCtn.find(".photo_link").val(),
+                    on_signal:formDispCtn.find(".on_signal").val(),
+                    off_signal:formDispCtn.find(".off_signal").val(),
+                    flash_signal:formDispCtn.find(".flash_signal").val(),
+                    dim_signal:formDispCtn.find(".dim_signal").val(),
+                    type:formDispCtn.find(".type option:selected").val()
+                }
+                
+                if(newLineArrayDisp.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                if(newLineArrayDisp.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
+                
+                var count = ($(".dictionary_type_listing.display-type .line_new_dico").length)+1;
+                
+                var newEntry = "<div class='line_new_dico disp_"+count+" created_state'data-index='disp_"+count+"' data-calibsubindexx='' data-calibsubindexy='' data-canid='' data-description='"+newLineArrayDisp.description+"' data-dimsignal='"+newLineArrayDisp.dim_signal+"' data-familyid='' data-flashsignal='"+newLineArrayDisp.flash_signal+"' data-id='' data-iscdrh='"+newLineArrayDisp.is_cdrh+"' data-isenable='0' data-isfinal='"+newLineArrayDisp.is_final+"' data-isled='0' data-issafety='0' data-offsignal='"+newLineArrayDisp.off_signal+"' data-onsignal='"+newLineArrayDisp.on_signal+"' data-photolink='"+newLineArrayDisp.photo_link+"' data-pressedval='' data-releasedval='' data-standardname='"+newLineArrayDisp.standard_name+"' data-symbolname='"+newLineArrayDisp.symbol_name+"' data-thresholdmaxaxis='' data-threshold_max_zero='' data-thresholdminaxis='' data-thresholdminzero='' data-timer='"+newLineArrayDisp.timer+"' data-type='"+newLineArrayDisp.type+"' data-value='' data-xpos='' data-ypos='' data-zone='50'>"
+                    +"<div class='td_dico symbol_name'>"+newLineArrayDisp.symbol_name+"</div>"
+                    +"<div class='td_dico standard_name'>"+newLineArrayDisp.standard_name+"</div>"
+                    +"<div class='td_dico description'>"+newLineArrayDisp.description+"</div>"
+                    +"<div class='td_dico photo_link'><img src='../images/"+newLineArrayDisp.photo_link+"'></div>"
+                    +"<div class='td_dico is_cdrh'>"+isCDRH+"</div>"   
+                    +"<div class='td_dico is_final'>"+isFinal+"</div>"
+                    +"<div class='td_dico action'><img class='update_line' src='../images/update_admin.png' title='Modify this entry.' style='margin-right: 17px;'><img class='delete_line' src='../images/delete.png' title='Delete this entry.'></div>"
+                +"</div>";
+                
+        
+                $(".dictionary_type_listing.display-type .content_new_dico").append(newEntry);
+                
+                
+                $(".disp_"+count+" .delete_line").on('click', function(){
+                        var name = $(this).parents(".line_new_dico").data('standard_name');
+                        if (confirm('Confirm the deletion of entry '+name+'. This action is irreversible.')) {
+                            $(this).parents(".line_new_dico").remove();
+                        }                        
+                });
+
+                $(".disp_"+count+" .update_line").on('click', function(){
+                    var id = $(this).parents(".line_new_dico").data('index');
+                    var type = $(this).parents(".line_new_dico").data('type');
+                    updateDictionaryLine(id, type); 
+                });
+                
+                
+                $(".dico_step2").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
+                
+            });
+            
+            formDispCtn.find(".cancel_bt").on('click', function(){
+                $(".dico_step2").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
+            });
+        }
+        
+        $(".create_new_dico").on('click', function(){
+            saveDictionaryInDatabase(newID, description, refID, refFamily, refModel, refType);
+        });
+        
+    }
+    
+    function saveDictionaryInDatabase(newID, description, refID, refFamily, refModel, refType){
+        
+        var newDictionaryData = [];
+        
+        $(".dictionary_type_listing .line_new_dico").each(function(){
+            
+            var calib_subindex_x = $(this).data("calibsubindexx");
+            var calib_subindex_y = $(this).data("calibsubindexy");
+            var can_id =  $(this).data("canid");
+            var description = $(this).data("description");
+            var dim_signal = $(this).data("dimsignal");
+            var family_id = newID;
+            var flash_signal = $(this).data("flashsignal");
+            var is_cdrh = $(this).data("iscdrh");
+            var is_enable = $(this).data("isenable");
+            var is_final = $(this).data("isfinal");
+            var is_led = $(this).data("isled");
+            var is_safety = $(this).data("issafety");
+            var off_signal = $(this).data("offsignal");
+            var on_signal = $(this).data("onsignal");
+            var photo_link = $(this).data("photolink");
+            var pressed_val = $(this).data("pressedval");
+            var released_val = $(this).data("releasedval");
+            var standard_name = $(this).data("standardname");
+            var symbol_name = $(this).data("symbolname");
+            var threshold_max_axis = $(this).data("thresholdmaxaxis");
+            var threshold_max_zero = $(this).data("threshold_max_zero");
+            var threshold_min_axis = $(this).data("thresholdminaxis");
+            var threshold_min_zero = $(this).data("thresholdminzero");
+            var timer = $(this).data("timer");
+            var type_t = $(this).data("type");
+            var value = $(this).data("value");
+            var x_pos = $(this).data("xpos");
+            var y_pos = $(this).data("ypos");
+            var zone = $(this).data("zone");
+            
+            newDictionaryData.push({
+                calib_subindex_x:calib_subindex_x,
+                calib_subindex_y:calib_subindex_y,
+                can_id:can_id,
+                description:description,
+                dim_signal:dim_signal,
+                family_id:family_id,
+                flash_signal:flash_signal,
+                is_cdrh:is_cdrh,
+                is_enable:is_enable,
+                is_final:is_final,
+                is_led:is_led,
+                is_safety:is_safety,
+                off_signal:off_signal,
+                on_signal:on_signal,
+                photo_link:photo_link,
+                pressed_val:pressed_val,
+                released_val:released_val,
+                standard_name:standard_name,
+                symbol_name:symbol_name,
+                threshold_max_axis:threshold_max_axis,
+                threshold_max_zero:threshold_max_zero,
+                threshold_min_axis:threshold_min_axis,
+                threshold_min_zero:threshold_min_zero,
+                timer:timer,
+                type:type_t,
+                value:value,
+                x_pos:x_pos,
+                y_pos:y_pos,
+                zone:zone
+            });
+                        
+        });
+        
+        var newDictionaryJson = JSON.stringify(newDictionaryData);
+        
+         if (confirm('Confirm creation of dictionary ID '+ newID+". This action will add this dictionary in database.")) {
+            $.ajax({
+                url: '../php/api.php?function=save_new_dictionary',
+                type: 'POST',
+                dataType: 'JSON',
+                data:{
+                    newID:newID,
+                    description:description,
+                    refID:refID,
+                    refFamily:refFamily,
+                    refModel:refModel,
+                    refType:refType,
+                    jsonDico:newDictionaryJson
+                },
+                success: function (data, statut) {
+                    
+                }
+            });
+            setTimeout(function(){
+                $(".dico_step2").fadeOut(200); 
+                $(".dico_step3 .title").html("Congratulation, new dictionary ID "+newID+" - "+description+" - is now created and available.");
+                $(".dico_step3").fadeIn("200");
+            },500);
+        }        
         
     }
 

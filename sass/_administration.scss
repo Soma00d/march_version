@@ -574,6 +574,7 @@
                 }
             }
         }
+        .dico_step3{display:none;}
         .overlay_form{
             position: absolute;
             top: 0;
@@ -581,7 +582,7 @@
             width: 100%;
             background: #000000ab;
         }
-        .formulaire_update_button, .formulaire_create_button, .formulaire_update_joystick{
+        .formulaire_update_button, .formulaire_create_button, .formulaire_update_joystick, .formulaire_create_joystick, .formulaire_update_display, .formulaire_create_display{
             background: #d6e4f5fa;
             border: 2px solid black;
             border-radius: 5px;
