@@ -398,3 +398,395 @@
   width: 100px;
   height: 20px;
 }
+
+/* line 362, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container {
+  position: relative;
+}
+/* line 365, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form {
+  padding: 15px;
+  background: white;
+  border: 2px solid #3b73b9;
+  border-radius: 5px;
+  width: 426px;
+}
+/* line 371, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form.error {
+  border: 2px solid red;
+}
+/* line 374, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form .error_form_text {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: -10px;
+}
+/* line 381, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form .line_dico_form {
+  margin-bottom: 10px;
+}
+/* line 383, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form .line_dico_form span {
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 15px;
+  width: 150px;
+}
+/* line 390, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form .bt_send_dico_form {
+  text-align: center;
+  width: 180px;
+  background: #3b73b9;
+  color: white;
+  padding: 2px;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 403, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form select {
+  width: 226px;
+  height: 22px;
+  margin-left: -4px;
+}
+/* line 408, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step1 .dico_form input {
+  width: 226px;
+  height: 22px;
+}
+/* line 414, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 {
+  display: none;
+}
+/* line 417, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .subtitle {
+  background: #3b73b929;
+  padding: 10px;
+  font-size: 14px;
+  font-style: italic;
+}
+/* line 423, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .create_new_dico {
+  text-align: center;
+  width: 180px;
+  background: #3bb985;
+  color: white;
+  padding: 2px;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 436, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .cancel_new_dico {
+  text-align: center;
+  width: 180px;
+  background: #b93b3bb5;
+  color: white;
+  padding: 2px;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 449, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .presentation {
+  background: #3bb95040;
+  padding: 10px;
+  color: black;
+  margin-top: 25px;
+  font-size: 18px;
+}
+/* line 457, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dico_type_selector .type-entry {
+  display: inline-block;
+  vertical-align: top;
+  width: 175px;
+  text-align: center;
+  margin: 7px;
+  padding: 5px;
+  cursor: pointer;
+  background: #cecece;
+  margin-bottom: 0px;
+}
+/* line 467, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dico_type_selector .type-entry:first-child {
+  margin-left: 0;
+}
+/* line 470, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dico_type_selector .type-entry.selected {
+  background: #3b73b9d9;
+  color: white;
+}
+/* line 476, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing {
+  display: none;
+  border: 2px solid #3b73b9d9;
+  padding: 10px;
+}
+/* line 481, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .header_new_dico .td_head {
+  background: #5b6f88;
+  display: inline-block;
+  vertical-align: top;
+  width: 90px;
+  text-align: center;
+  border-right: 1px solid white;
+  color: white;
+  padding: 1px;
+  margin-right: -3px;
+  font-size: 14px;
+}
+/* line 492, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .header_new_dico .td_head.description {
+  width: 220px;
+}
+/* line 498, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico {
+  width: 1131px;
+  height: 36px;
+  overflow: hidden;
+}
+/* line 503, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico:nth-child(even) {
+  background-color: #cde1f0;
+}
+/* line 506, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico.updated_state {
+  background: #fff70040;
+}
+/* line 509, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico.created_state {
+  background: #52fd5269;
+}
+/* line 512, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico .td_dico {
+  display: inline-block;
+  vertical-align: top;
+  width: 90px;
+  text-align: center;
+  border-right: 1px solid white;
+  padding: 1px;
+  margin-right: 1px;
+  font-size: 14px;
+  padding-top: 8px;
+}
+/* line 522, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico .td_dico img {
+  width: 22px;
+  margin-top: -3px;
+}
+/* line 526, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico .td_dico.description {
+  width: 220px;
+}
+/* line 529, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico .td_dico.photo_link {
+  padding-top: 4px;
+}
+/* line 531, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico .td_dico.photo_link img {
+  width: 50px;
+}
+/* line 535, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico .td_dico.can_info {
+  cursor: help;
+}
+/* line 538, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .content_new_dico .line_new_dico .td_dico.action {
+  cursor: pointer;
+}
+/* line 546, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing.joystick-type .content_new_dico .line_new_dico, #adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing.display-type .content_new_dico .line_new_dico {
+  width: 767px;
+}
+/* line 551, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .add_new_entry {
+  text-align: center;
+  width: 180px;
+  background: #3bb985;
+  color: white;
+  padding: 2px;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 564, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .add_new_entry.disp, #adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .add_new_entry.joy {
+  width: 250px;
+}
+/* line 567, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .dico_step2 .dictionary_type_listing .add_new_entry img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 17px;
+  margin-left: 12px;
+  margin-top: -3px;
+}
+/* line 577, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .overlay_form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000000ab;
+}
+/* line 584, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button, #adm_content_dictionaries .dico_main_container .formulaire_create_button, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick {
+  background: #d6e4f5fa;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 15px;
+  width: 900px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 18px;
+  display: none;
+}
+/* line 595, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .title, #adm_content_dictionaries .dico_main_container .formulaire_create_button .title, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .title {
+  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+/* line 600, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .title img, #adm_content_dictionaries .dico_main_container .formulaire_create_button .title img, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .title img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50px;
+  border: 2px solid white;
+}
+/* line 607, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_create_button .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .tooltip_form {
+  position: relative;
+}
+/* line 609, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_create_button .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .tooltip_form .text_explain {
+  position: absolute;
+  background: white;
+  width: 200px;
+  left: 35px;
+  border: 2px solid #91dfab;
+  border-radius: 5px;
+  padding: 5px;
+  z-index: 9999;
+  left: 30px;
+  top: -59px;
+  font-style: italic;
+  font-size: 14px;
+}
+/* line 625, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info {
+  background: #ffffff94;
+  position: relative;
+  padding: 20px;
+  border-top: 2px solid #3b73b9;
+  margin-top: 30px;
+}
+/* line 631, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .title_b, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .title_b {
+  position: absolute;
+  top: -24px;
+  font-style: italic;
+  color: #3b73b9;
+  font-weight: bold;
+  font-size: 19px;
+  left: 0;
+}
+/* line 640, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .left, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .left, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .left, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .left, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .left, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .left, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .left, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .left, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .left {
+  width: 48%;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 646, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .right, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .right, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .right, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .right, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .right, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .right, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .right, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .right, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .right {
+  width: 48%;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 651, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .line_form, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .line_form {
+  margin-bottom: 15px;
+}
+/* line 653, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .line_form .text, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .line_form .text {
+  display: inline-block;
+  vertical-align: top;
+  width: 130px;
+  font-weight: bold;
+}
+/* line 659, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .line_form input, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .line_form input {
+  width: 200px;
+  height: 22px;
+}
+/* line 663, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .line_form .select_large, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .line_form .select_large {
+  width: 200px;
+  height: 22px;
+}
+/* line 667, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .line_form .tooltip_form, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .line_form .tooltip_form {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
+}
+/* line 671, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .line_form .tooltip_form img, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .line_form .tooltip_form img {
+  width: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: -8px;
+}
+/* line 677, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .global_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .can_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_update_button .form_ctn .led_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .global_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .can_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_create_button .form_ctn .led_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .global_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .can_info .line_form .tooltip_form .text_explain, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .form_ctn .led_info .line_form .tooltip_form .text_explain {
+  display: none;
+}
+/* line 684, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .button_ctn, #adm_content_dictionaries .dico_main_container .formulaire_create_button .button_ctn, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .button_ctn {
+  margin-top: 15px;
+  text-align: center;
+}
+/* line 688, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .update_bt, #adm_content_dictionaries .dico_main_container .formulaire_update_button .create_bt, #adm_content_dictionaries .dico_main_container .formulaire_create_button .update_bt, #adm_content_dictionaries .dico_main_container .formulaire_create_button .create_bt, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .update_bt, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .create_bt {
+  display: inline-block;
+  vertical-align: top;
+  width: 150px;
+  background: #209420a6;
+  color: white;
+  text-align: center;
+  border: 5px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px black;
+  padding: 5px;
+  margin-right: 15px;
+}
+/* line 701, ../sass/_administration.scss */
+#adm_content_dictionaries .dico_main_container .formulaire_update_button .cancel_bt, #adm_content_dictionaries .dico_main_container .formulaire_create_button .cancel_bt, #adm_content_dictionaries .dico_main_container .formulaire_update_joystick .cancel_bt {
+  display: inline-block;
+  vertical-align: top;
+  width: 150px;
+  background: #942020a6;
+  color: white;
+  text-align: center;
+  border: 5px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px black;
+  padding: 5px;
+}

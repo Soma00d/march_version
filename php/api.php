@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////////////////////
 $VALEUR_hote = 'localhost';
 $VALEUR_port = '';
-$VALEUR_nom_bd = 'testbench';
+$VALEUR_nom_bd = 'testbench_admin';
 $VALEUR_user = 'root';
 $VALEUR_mot_de_passe = '';
 
@@ -319,6 +319,18 @@ $getAllUser = function ($connexion) {
     return json_encode($result);
 };
 
+//check if id exist in database
+$checkNewID = function ($connexion) {
+    
+    $newID = $_POST['newID'];
+    
+    $resultats = $connexion->query("SELECT * FROM admin_dictionary WHERE family_id = '$newID' ");
+    $resultats->execute();
+    $result = $resultats->fetchAll();
+    
+    return json_encode($result);
+};
+
 ///////////////////////////////////////////////////////////////////
 //Routeur des fonctions appelées en ajax via des param get en url//
 ///////////////////////////////////////////////////////////////////
@@ -371,6 +383,9 @@ if (isset($_GET["function"])) {
             break;
         case "get_all_user":
             echo $getAllUser($connexion);
+            break;
+        case "check_new_id":
+            echo $checkNewID($connexion);
             break;
         default:
             echo "no param";

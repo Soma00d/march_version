@@ -41,7 +41,7 @@
                       </div>
                       <ul class="submenuItems">
                         <li><a href="#">Show all dictionaries</a></li>
-                        <li><a href="#">Add a new dictionaries</a></li>
+                        <li><a href="#" class="menu_item dictionaries_page" data-menulink="dictionaries">Add a new dictionary</a></li>
                       </ul>
                     </li>
                     <li>

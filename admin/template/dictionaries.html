@@ -1,3 +1,650 @@
-<div class="adm_home_container">
+<div class="adm_dictionary_container">
     Welcome dictionaries panel
+    
+    <div class="dico_main_container">
+        <div class="dico_step1">
+            <div class="title">Choose dictionary reference model</div>
+            <div class="dico_form step1">
+                <div class="line_dico_form"><span>New dictionary ID: </span><input type="text" class="new_id_dico_input" /></div>
+                <div class="line_dico_form"><span>Description: </span><input type="text" class="new_description_dico_input" /></div>
+                <div class="line_dico_form"><span>Reference Model: </span>
+                    <select class="model_ref_selector">
+                        <optgroup label="ELEGANCE">
+                            <option value="1" data-family="ELEGANCE" data-model="TSSC" data-type="">Elegance - TSSC</option>
+                            <option value="4" data-family="ELEGANCE" data-model="SMARTBOX" data-type="AGILA">Elegance - SMARTBOX - Agila</option>
+                            <option value="3" data-family="ELEGANCE" data-model="SMARTBOX" data-type="OTHER">Elegance - SMARTBOX - Other</option>
+                        </optgroup>
+                        <optgroup label="OMEGA">
+                            <option value="10" data-family="OMEGA" data-model="TSSC" data-type="">Omega - TSSC</option>
+                            <option value="11" data-family="OMEGA" data-model="SMARTBOX" data-type="">Omega - SMARTBOX</option>
+                            <option value="12" data-family="OMEGA" data-model="SMARTHANDLE" data-type="">Omega - SMARTHANDLE</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="error_form_text"></div>
+                <div class="line_dico_form"><div class="bt_send_dico_form step1">Create new dictionary</div></div>
+            </div>
+        </div>
+        <div class="dico_step2">
+            <div class="title">Modify dictionary reference model to fit with your need..</div>
+            <div class="subtitle">
+                Don't forget to save your work by clicking on 'Create new dictionary' button.<br>
+                If you need help while creating your dictionary, you can click 'Help' button.
+            </div>
+            <div class="global_dico_button">
+                <div class="create_new_dico">Create new dictionary</div>
+                <div class="cancel_new_dico">Cancel</div>
+            </div>
+            <div class="presentation">New Dictionary ID <span class="newID"></span> - <span class="description_new_dico"></span> (Reference model : <span class="ref_model"></span>)</div>
+            
+            <div class="dico_type_selector">
+                <div class="type-entry entry-bt">Buttons & Leds</div>
+                <div class="type-entry entry-joy">Joysticks & Mushrooms</div>
+                <div class="type-entry entry-disp">Displays & Buzzer</div>
+            </div>
+            
+            <div class="dictionary_type_listing bouton-type">
+                <div class="add_new_entry bt">Add new button <img src="../images/add_new.png"></div>
+                <div class="header_new_dico">
+                    <div class="td_head symbol_name">Name</div>
+                    <div class="td_head standard_name">Ref. TST</div>
+                    <div class="td_head description">Description</div>
+                    <div class="td_head photo_link">Photo</div>
+                    <div class="td_head is_safety">Safety</div>
+                    <div class="td_head is_enable">Enable</div>
+                    <div class="td_head is_cdrh">CDRH</div>                    
+                    <div class="td_head is_led">LED</div>
+                    <div class="td_head is_final">Test Final</div>
+                    <div class="td_head can_info">CAN Details</div>
+                    <div class="td_head action">Actions</div>
+                </div>
+                <div class="content_new_dico"></div>
+                <div class="add_new_entry bt" style="margin-top: 24px;">Add new button <img src="../images/add_new.png"></div>
+            </div>
+            <div class="dictionary_type_listing joystick-type">
+                <div class="add_new_entry joy">Add new Joystick/Mushroom <img src="../images/add_new.png"></div>
+                <div class="header_new_dico">
+                    <div class="td_head symbol_name">Name</div>
+                    <div class="td_head standard_name">Ref. TST</div>
+                    <div class="td_head description">Description</div>
+                    <div class="td_head photo_link">Photo</div>
+                    <div class="td_head is_cdrh">CDRH</div> 
+                    <div class="td_head is_final">Test Final</div>
+                    <div class="td_head action">Actions</div>
+                </div>
+                <div class="content_new_dico"></div>
+            </div>
+            <div class="dictionary_type_listing display-type">
+                <div class="add_new_entry disp">Add new Display/Buzzer <img src="../images/add_new.png"></div>
+                <div class="header_new_dico">
+                    <div class="td_head symbol_name">Name</div>
+                    <div class="td_head standard_name">Ref. TST</div>
+                    <div class="td_head description">Description</div>
+                    <div class="td_head photo_link">Photo</div>
+                    <div class="td_head is_cdrh">CDRH</div> 
+                    <div class="td_head is_final">Test Final</div>
+                    <div class="td_head action">Actions</div>
+                </div>
+                <div class="content_new_dico"></div>
+            </div>
+            
+        </div>
+        <div class="overlay_form hidden">
+            
+            <div class="formulaire_update_button">
+                <div class="title">Update Button Entry</div>
+                <div class="form_ctn">
+                    <div class="global_info">
+                        <div class="title_b">Global Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">Name: </span>
+                                <input class="symbol_name" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Designation of the component according to the new names standard.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Photo Link : </span>
+                                <input class="photo_link" type="text" value="" />
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Allows to associate a photo with a component in the interface.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is Safety: </span>
+                                <select class="is_safety">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component has the safety characteristics (safety_loop_freq signal)</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is Enable: </span>
+                                <select class="is_enable ">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component has the enable characteristics (tsui_enable signal and HW validation for joystick types)</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is CDRH: </span>
+                                <select class="is_cdrh">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component has the property CDRH.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">Reference TST: </span>
+                                <input class="standard_name" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Designation of the component according to the generalized names/references.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Description: </span>
+                                <input class="description" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Description of the component.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Area Engineering: </span>
+                                <select class="zone select_large">
+                                    <option value="0" class="zone_left">Button Diagnostic Left</option>
+                                    <option value="1" class="zone_bot">Button Diagnostic Bottom</option>
+                                    <option value="2" class="zone_right">Button Diagnostic Right</option>
+                                    <option value="3" class="zone_sat">Satellite Diagnostic</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">In engineering mode, allows to allocate the components in different areas over the user interface.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is Final: </span>
+                                <select class="is_final">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component shall be tested during Final Test process in Repair mode.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Timer (seconds): </span>
+                                <input class="timer" type="text" value="" />
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the time during which the operator can test a component while executing a final test in Repair Mode.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="can_info">
+                        <div class="title_b">CAN Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">CAN ID: </span>
+                                <input class="can_id" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN identifier of the component. 11 bits for Elegance, 29 bits for Omega. Here, the CAN ID shall not consider the node ID.</span>
+                                </div>
+                            </div>                        
+                        </div>  
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">CAN Data Press: </span>
+                                <input class="pressed_value" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent by the TSUI when a button is pressed.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">CAN Data Release: </span>
+                                <input class="released_value" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent by the TSUI when a button is released.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="led_info">
+                        <div class="title_b">LED Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">Is Led: </span>
+                                <select class="is_led select_large">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="yes">LED</option>
+                                    <option value="2" class="yes">EMERGENCY LED</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the button has a backlight/led to be tested.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">On Signal: </span>
+                                <input class="on_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to switch ON a led/backlight/display/buzzer.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">OFF Signal: </span>
+                                <input class="off_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to switch OFF a led/backlight/display/buzzer.</span>
+                                </div>
+                            </div>                        
+                        </div>    
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">DIM Signal: </span>
+                                <input class="dim_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to DIM a led/backlight/display.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">FLASH Signal: </span>
+                                <input class="flash_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to BLINK a led/backlight/display.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button_ctn">
+                        <div class="update_bt" title="Update this entry in dictionary creation process.">Update Entry</div>
+                        <div class="cancel_bt" title="Cancel and abort all modification on this entry.">Cancel</div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="formulaire_create_button">
+                <div class="title">Create Button Entry</div>
+                <div class="form_ctn">
+                    <div class="global_info">
+                        <div class="title_b">Global Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">Name: </span>
+                                <input class="symbol_name" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Designation of the component according to the new names standard.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Photo Link : </span>
+                                <input class="photo_link" type="text" value="" />
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Allows to associate a photo with a component in the interface.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is Safety: </span>
+                                <select class="is_safety">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component has the safety characteristics (safety_loop_freq signal)</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is Enable: </span>
+                                <select class="is_enable ">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component has the enable characteristics (tsui_enable signal and HW validation for joystick types)</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is CDRH: </span>
+                                <select class="is_cdrh">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component has the property CDRH.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">Reference TST: </span>
+                                <input class="standard_name" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Designation of the component according to the generalized names/references.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Description: </span>
+                                <input class="description" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Description of the component.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Area Engineering: </span>
+                                <select class="zone select_large">
+                                    <option value="0" class="zone_left">Button Diagnostic Left</option>
+                                    <option value="1" class="zone_bot">Button Diagnostic Bottom</option>
+                                    <option value="2" class="zone_right">Button Diagnostic Right</option>
+                                    <option value="3" class="zone_sat">Satellite Diagnostic</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">In engineering mode, allows to allocate the components in different areas over the user interface.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Is Final: </span>
+                                <select class="is_final">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component shall be tested during Final Test process in Repair mode.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Timer (seconds): </span>
+                                <input class="timer" type="text" value="" />
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the time during which the operator can test a component while executing a final test in Repair Mode.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="can_info">
+                        <div class="title_b">CAN Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">CAN ID: </span>
+                                <input class="can_id" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN identifier of the component. 11 bits for Elegance, 29 bits for Omega. Here, the CAN ID shall not consider the node ID.</span>
+                                </div>
+                            </div>                        
+                        </div>  
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">CAN Data Press: </span>
+                                <input class="pressed_value" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent by the TSUI when a button is pressed.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">CAN Data Release: </span>
+                                <input class="released_value" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent by the TSUI when a button is released.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="led_info">
+                        <div class="title_b">LED Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">Is Led: </span>
+                                <select class="is_led select_large">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="yes">LED</option>
+                                    <option value="2" class="yes">EMERGENCY LED</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the button has a backlight/led to be tested.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">On Signal: </span>
+                                <input class="on_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to switch ON a led/backlight/display/buzzer.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">OFF Signal: </span>
+                                <input class="off_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to switch OFF a led/backlight/display/buzzer.</span>
+                                </div>
+                            </div>                        
+                        </div>    
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">DIM Signal: </span>
+                                <input class="dim_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to DIM a led/backlight/display.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">FLASH Signal: </span>
+                                <input class="flash_signal" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN message sent to the TSUI to BLINK a led/backlight/display.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button_ctn">
+                        <div class="create_bt" title="Create this entry in new dictionary.">Update Entry</div>
+                        <div class="cancel_bt" title="Cancel and abort all modification on this entry.">Cancel</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JOYSTICK FORMS--------------------------------------------------------------------------------------------------------->
+            
+            <div class="formulaire_update_joystick">
+                <div class="title">Update Joystick/Mushroom Entry</div>
+                <div class="form_ctn">
+                    <div class="global_info">
+                        <div class="title_b">Global Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">Name: </span>
+                                <input class="symbol_name" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Designation of the component according to the new names standard.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Photo Link : </span>
+                                <input class="photo_link" type="text" value="" />
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Allows to associate a photo with a component in the interface.</span>
+                                </div>
+                            </div>    
+                            <div class="line_form">
+                                <span class="text">Is CDRH: </span>
+                                <select class="is_cdrh">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component has the property CDRH.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">Reference TST: </span>
+                                <input class="standard_name" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Designation of the component according to the generalized names/references.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Description: </span>
+                                <input class="description" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Description of the component.</span>
+                                </div>
+                            </div>                            
+                            <div class="line_form">
+                                <span class="text">Is Final: </span>
+                                <select class="is_final">
+                                    <option value="0" class="no">No</option>
+                                    <option value="1" class="no">Yes</option>
+                                </select>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates if the component shall be tested during Final Test process in Repair mode.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Timer (seconds): </span>
+                                <input class="timer" type="text" value="" />
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the time during which the operator can test a component while executing a final test in Repair Mode.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="can_info">
+                        <div class="title_b">CAN Information</div>
+                        <div class="left">
+                            <div class="line_form">
+                                <span class="text">CAN ID: </span>
+                                <input class="can_id" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Is the CAN identifier of the component. 11 bits for Elegance, 29 bits for Omega. Here, the CAN ID shall not consider the node ID.</span>
+                                </div>
+                            </div>    
+                            <div class="line_form">
+                                <span class="text">X Position: </span>
+                                <input class="x_pos" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the bits associated to the CAN data frame sent by the TSUI for the x-axis movement of the joystick.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Y Position: </span>
+                                <input class="y_pos" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the bits associated to the CAN data frame sent by the TSUI for the y-axis movement of the joystick.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Calibration Subindex X: </span>
+                                <input class="calib_subindex_x" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the sub-index for SDO CAN protocol used for X axis calibration of the joysticks.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Calibration Subindex Y: </span>
+                                <input class="calib_subindex_y" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the sub-index for SDO CAN protocol used for Y axis calibration of the joysticks.</span>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="right">
+                            <div class="line_form">
+                                <span class="text">Threshold Min Axis: </span>
+                                <input class="threshold_min_axis" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the threshold value allowed for minimum axis X/Y raw position calibration.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Threshold Max Axis: </span>
+                                <input class="threshold_max_axis" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the threshold value allowed for maximum axis X/Y raw position calibration.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Threshold Min Zero </span>
+                                <input class="threshold_min_zero" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the minimum threshold value allowed for zero position calibration.</span>
+                                </div>
+                            </div>
+                            <div class="line_form">
+                                <span class="text">Threshold Max Zero </span>
+                                <input class="threshold_max_zero" type="text" value=""/>
+                                <div class="tooltip_form">
+                                    <img src="../images/question_admin.png" />
+                                    <span class="text_explain">Indicates the maximal threshold value allowed for zero position calibration.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="button_ctn">
+                        <div class="update_bt" title="Update this entry in dictionary creation process.">Update Entry</div>
+                        <div class="cancel_bt" title="Cancel and abort all modification on this entry.">Cancel</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
 </div>
