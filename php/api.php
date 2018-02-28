@@ -344,11 +344,10 @@ $saveNewDictionary = function ($connexion) {
     if(isset($_POST['jsonDico'])){ 
         $jsonDico = $_POST['jsonDico']; 
         $data = json_decode($jsonDico, TRUE);
-        //print_r($data);
-        
+        //print_r($data);        
     }else{ $jsonDico = "";};
     
-      $insertDescriptionDico = $connexion->query("INSERT INTO admin_dictionary (family_id, description, family_name, model_name, type_name,  is_reference, date) VALUES ('$newID', '$description', '$refFamily', '$refModel', '$refType', 1, NOW())");
+    $insertDescriptionDico = $connexion->query("INSERT INTO admin_dictionary (family_id, description, family_name, model_name, type_name,  is_reference, date) VALUES ('$newID', '$description', '$refFamily', '$refModel', '$refType', 1, NOW())");
        
     $globalReq = "";
     

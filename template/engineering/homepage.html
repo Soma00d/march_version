@@ -34,6 +34,7 @@
                     <select id="type_input_E">
                         <option selected="selected"></option>
                         <option class="agila_option" >AGILA</option>
+                        <option class="zenith_option" >ZENITH</option>
                         <option>OTHER</option>
                     </select>
                 </span>
@@ -104,16 +105,31 @@ $( "#model_input_E" )
       str += $( this ).text() + " ";
     });
     $( "#model_choice" ).text( str );
-    if(str.trim()== "TSSC" || str.trim()== "SMARTHANDLE"){
+    if(str.trim()== "TSSC"){
         $(".type_select").addClass("hidden");
         $( "#type_choice" ).text("");
+    }
+    if(str.trim()== "SMARTHANDLE"){
+        if($("#family_choice").html().trim() == "OMEGA"){
+            $(".type_select").removeClass("hidden");
+            $(".agila_option").attr('disabled', 'test');
+            $(".zenith_option").removeAttr('disabled');
+        }else{
+            $(".type_select").addClass("hidden");
+            $( "#type_choice" ).text("");
+            $(".agila_option").attr('disabled', 'test');
+            $(".zenith_option").attr('disabled');
+        }
+        
     }
     if(str.trim() == "SMARTBOX" ){
         $(".type_select").removeClass("hidden");
         if($("#family_choice").html().trim() == "OMEGA"){
             $(".agila_option").attr('disabled', 'test');
+            $(".zenith_option").removeAttr('disabled');
         }else{
             $(".agila_option").removeAttr('disabled');
+            $(".zenith_option").attr('disabled', 'test');
         }
     }
   })

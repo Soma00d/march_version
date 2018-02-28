@@ -684,10 +684,16 @@ $(document).ready(function () {
         var refModel = $(".model_ref_selector option:selected").data('model');
         var refType = $(".model_ref_selector option:selected").data('type');        
         
-        if(newID != "" && description != ""){
-            $(".step1 .error_form_text").html("");
-            $(".dico_form.step1").removeClass("error");  
-            checkNewID(newID, description, refID, refFamily, refModel, refType);
+               
+        if(newID != "" && description != "" ){
+            if(Math.floor(newID) == newID && $.isNumeric(newID)){
+                $(".step1 .error_form_text").html("");
+                $(".dico_form.step1").removeClass("error");  
+                checkNewID(newID, description, refID, refFamily, refModel, refType);
+            }else{
+                $(".step1 .error_form_text").html("New dictionary ID must be an Integer.");
+                $(".dico_form.step1").addClass("error");
+            }
         }else{
             $(".step1 .error_form_text").html("Some fields are missing.");
             $(".dico_form.step1").addClass("error");
@@ -906,7 +912,7 @@ $(document).ready(function () {
             
             formBtCtn.find(".is_led option").each(function(){
                 $(this).removeAttr('selected');
-                if($(this).val() == lineArray.is_final){$(this).attr('selected', 'selected')};
+                if($(this).val() == lineArray.is_led){$(this).attr('selected', 'selected')};
             });
             
             formBtCtn.find(".zone option").each(function(){
@@ -1626,7 +1632,7 @@ $(document).ready(function () {
             });
             setTimeout(function(){
                 $(".dico_step2").fadeOut(200); 
-                $(".dico_step3 .title").html("Congratulation, new dictionary ID "+newID+" - "+description+" - is now created and available.");
+                $(".dico_step3 .title").html("Congratulations, new dictionary ID "+newID+" - "+description+" - is now created and available.");
                 $(".dico_step3").fadeIn("200");
             },500);
         }        

@@ -1430,7 +1430,15 @@ $(document).ready(function (){
                     var canId = message.canId;
                     var canData = message.canData;
                     for (var nb = 0; nb < dictionary.length; nb++) {
-                        var trueCanID = addHexVal(dictionary[nb].can_id, nodeID);
+                        
+                        if (globalName === "ELEGANCE") {
+                            var trueCanID = addHexVal(dictionary[nb].can_id, nodeID);
+                        } else {
+                            var trueCanID = dictionary[nb].can_id;
+                            //console.log(trueCanID);
+                        }
+                        
+                        
                         if (trueCanID === canId) {
                             switch (dictionary[nb].type) {
                                 case "button":
@@ -2140,7 +2148,7 @@ $(document).ready(function (){
                         }
                         
                     }else if(message.typeMsg == "T"){
-                        var seuil = 22;
+                        var seuil = 10;
                         var latSwitch = message.latSwitch;
                         var autoposDR = message.autoposDR;
                         var globGantry = message.globGantry;
@@ -2199,7 +2207,7 @@ $(document).ready(function (){
 
                     
                     }else if(message.typeMsg == "S"){  
-                        var seuil = 22;
+                        var seuil = 10;
                         var longEnable = message.longEnable;
                         var TBLtopPan = message.TBLtopPan;
                         var sc1LatDR = message.sc1LatDR;
@@ -2285,7 +2293,6 @@ $(document).ready(function (){
                     }
                     
 
-
                 } else {
                     var canId = message.canId;
                     canId = canId;
@@ -2339,14 +2346,26 @@ $(document).ready(function (){
                         if (trueCanID === canId) {
                             switch (dictionary[nb].type) {
                                 case "button":
-                                    if (dictionary[nb].pressed_val === canData) {
-                                        console.log("green");
-                                        diagInge.find(".diag_component.id" + dictionary[nb].id).addClass("is_pressed");
+                                    if(globalName == "OMEGA" && modelName == "TSSC"){
+                                        if (dictionary[nb].pressed_val === canData || dictionary[nb].pressed_val === canData+"00") {
+                                            console.log("green");
+                                            diagInge.find(".diag_component.id" + dictionary[nb].id).addClass("is_pressed");
+                                        }
+                                        if (dictionary[nb].released_val === canData || dictionary[nb].released_val === canData+"00") {
+                                            console.log("release");
+                                            diagInge.find(".diag_component.id" + dictionary[nb].id).removeClass("is_pressed");
+                                        }
+                                    }else{
+                                        if (dictionary[nb].pressed_val === canData) {
+                                            console.log("green");
+                                            diagInge.find(".diag_component.id" + dictionary[nb].id).addClass("is_pressed");
+                                        }
+                                        if (dictionary[nb].released_val === canData) {
+                                            console.log("release");
+                                            diagInge.find(".diag_component.id" + dictionary[nb].id).removeClass("is_pressed");
+                                        }
                                     }
-                                    if (dictionary[nb].released_val === canData) {
-                                        console.log("release");
-                                        diagInge.find(".diag_component.id" + dictionary[nb].id).removeClass("is_pressed");
-                                    }
+                                    
                                     break;
                                 case "joystick":
                                     var part0 = canData.substring(0, 2);
@@ -5478,8 +5497,12 @@ $(document).ready(function (){
         }
         //sendSignal(Cal_post+Cal_dlc+Cal_canid+"2f511f0100000000");
     });
-    $(".testing_upl .stop_download").on('click', function () {
-        stopDownload(cobID2);
+    $(".testing_upl .stop_download").on('click', function () {        
+        if (globalName == "ELEGANCE") {
+            stopDownload(cobID2);
+        } else {
+            stopDownloadOmega();
+        }        
     });
 
     //début du download
@@ -6391,7 +6414,8 @@ $(document).ready(function (){
             sendSignal("002400806d68d7551407f09b861e3aad000549a844080000000002200102000000000000");
         }else if(globalName == "OMEGA"){
             if(modelName == "TSSC"){
-                
+                sendSignal("002400806d68d7551407f09b861e3aad000549a84408000006222240AAAAAAAAAAAAAA88");
+                sendSignal("002400806d68d7551407f09b861e3aad000549a84405000006622240AAAAA028AA000000");
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006c422500800000000000000");
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006e422500a00000000000000");
@@ -6658,10 +6682,16 @@ $(document).ready(function (){
         }else if(globalName == "OMEGA"){
             if(modelName == "TSSC"){
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440800001fc22f000e00000000000000");
+                $(".loading_inge").removeClass("hidden");
+                setTimeout(function(){                    
+                    $(".loading_inge").addClass("hidden");
+                },10000)
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440800001fc42f000e00000000000000");
+                $(".loading_inge").removeClass("hidden");
                 setTimeout(function(){
                     sendSignal("002400806d68d7551407f09b861e3aad000549a844010000028426401000000000000000");
+                    $(".loading_inge").addClass("hidden");
                 },20000)
             }
         }        
@@ -6766,11 +6796,19 @@ $(document).ready(function (){
             $(this).find("img").attr('src', 'images/switch_off.png');
             sendSignalPic(off_signal);
             sendSignal("002400806d68d7551407f09b861e3aad000549a8440800001fc20f000e00000000000000");
+            $(".loading_inge").removeClass("hidden");
+            setTimeout(function(){                    
+                $(".loading_inge").addClass("hidden");
+            },15000)
         }else{           
             $(this).addClass("activated");
             $(this).find("img").attr('src', 'images/switch_on.png');
             sendSignalPic(on_signal);
             sendSignal("002400806d68d7551407f09b861e3aad000549a8440800001fc22f000e00000000000000");
+            $(".loading_inge").removeClass("hidden");
+            setTimeout(function(){                    
+                $(".loading_inge").addClass("hidden");
+            },15000)
         }
     });
     $(".bt_diag_mode .switch_diag_mod").on('click', function(){        
@@ -6779,10 +6817,16 @@ $(document).ready(function (){
             $(this).find("img").attr('src', 'images/switch_off.png');            
             if(modelName == "TSSC"){
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2226100000000000000000");
-                setTimeout(function(){sendSignal(startSlaveTSSC);},9000);            
+                $(".loading_inge").removeClass("hidden");            
+                setTimeout(function(){sendSignal(startSlaveTSSC);
+                $(".loading_inge").addClass("hidden");
+                },9000);            
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
-                setTimeout(function(){sendSignal(startSlaveSBSH);sendSignal(startSlaveSBSH2);},9000); 
+                $(".loading_inge").removeClass("hidden");       
+                setTimeout(function(){sendSignal(startSlaveSBSH);sendSignal(startSlaveSBSH2);
+                $(".loading_inge").addClass("hidden");
+                },9000); 
             }
         }else{            
             $(this).addClass("activated");
@@ -6795,6 +6839,10 @@ $(document).ready(function (){
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c0426100000000000000000");
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c6426100000000000000000");
             }
+            $(".loading_inge").removeClass("hidden");
+            setTimeout(function(){                    
+                $(".loading_inge").addClass("hidden");
+            },15000)
         }
     });
     
@@ -6818,7 +6866,8 @@ $(document).ready(function (){
             sendSignal("002400806d68d7551407f09b861e3aad000549a844080000000002200100000000000000");
         }else if(globalName == "OMEGA"){
             if(modelName == "TSSC"){
-                
+                sendSignal("002400806d68d7551407f09b861e3aad000549a844080000062222400000000000000000");
+                sendSignal("002400806d68d7551407f09b861e3aad000549a844050000066222400000000000000000");
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006c422500000000000000000");
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006e422500000000000000000");
