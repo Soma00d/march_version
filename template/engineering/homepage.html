@@ -34,7 +34,7 @@
                     <select id="type_input_E">
                         <option selected="selected"></option>
                         <option class="agila_option" >AGILA</option>
-                        <option class="zenith_option" >ZENITH</option>
+                        <option class="biplan_option" >BIPLAN</option>
                         <option>OTHER</option>
                     </select>
                 </span>
@@ -113,12 +113,12 @@ $( "#model_input_E" )
         if($("#family_choice").html().trim() == "OMEGA"){
             $(".type_select").removeClass("hidden");
             $(".agila_option").attr('disabled', 'test');
-            $(".zenith_option").removeAttr('disabled');
+            $(".biplan_option").removeAttr('disabled');
         }else{
             $(".type_select").addClass("hidden");
             $( "#type_choice" ).text("");
             $(".agila_option").attr('disabled', 'test');
-            $(".zenith_option").attr('disabled');
+            $(".biplan_option").attr('disabled');
         }
         
     }
@@ -126,10 +126,10 @@ $( "#model_input_E" )
         $(".type_select").removeClass("hidden");
         if($("#family_choice").html().trim() == "OMEGA"){
             $(".agila_option").attr('disabled', 'test');
-            $(".zenith_option").removeAttr('disabled');
+            $(".biplan_option").attr('disabled', 'test');
         }else{
             $(".agila_option").removeAttr('disabled');
-            $(".zenith_option").attr('disabled', 'test');
+            $(".biplan_option").attr('disabled', 'test');
         }
     }
   })

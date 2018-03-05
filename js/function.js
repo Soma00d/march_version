@@ -333,9 +333,17 @@ $(document).ready(function (){
                                             var onSignal = $(this).data('on');
                                             var offSignal = $(this).data('off');
                                             var functionTest = $(this).data('function');
-                                            var postSignal = "002400806d68d7551407f09b861e3aad000549a844080000";
-                                            var signalStart = postSignal + onSignal;
-                                            var signalStop = postSignal + offSignal;
+                                            var postSignal = "002400806d68d7551407f09b861e3aad000549a844";
+                                            
+                                            if (globalName == "ELEGANCE") {
+                                                var dlcCompletionSignal = "080000";
+                                            } else {
+                                                var dlcCompletionSignal = "0" + (((onSignal.length) - 8) / 2) + "0006";
+
+                                            }
+                                            
+                                            var signalStart = postSignal + dlcCompletionSignal + onSignal;
+                                            var signalStop = postSignal + dlcCompletionSignal + offSignal;
 
                                             var topPos = $(window).scrollTop();
                                             testPoppin.css('top', topPos + 300 + "px");
@@ -2181,10 +2189,10 @@ $(document).ready(function (){
                         tsuiVoltage = (convertHexaPic(tsuiVoltage)+3) / 51 / 0.1375;
                         
                         globv = convertHexaPic(globv) / 51 / 0.138;
-                        tsuiSupply = convertHexaPic(tsuiSupply) / 51 / 0.138;
-                        FRTLgantry = convertHexaPic(FRTLgantry) / 51 / 0.138;
-                        unreg5 = convertHexaPic(unreg5) / 51 / 0.37;
-                        unreg12 = convertHexaPic(unreg12) / 51 / 0.175;
+                        tsuiSupply = (convertHexaPic(tsuiSupply)+5) / 51 / 0.138;
+                        FRTLgantry = (convertHexaPic(FRTLgantry)+5) / 51 / 0.138;
+                        unreg5 = (convertHexaPic(unreg5)+5) / 51 / 0.37;
+                        unreg12 = (convertHexaPic(unreg12)+5) / 51 / 0.175;
                         
                         supplyContainer.html(tsuiVoltage.toFixed(2) + " V");
                         
@@ -2251,11 +2259,11 @@ $(document).ready(function (){
                         latSwitch2 = convertHexaPic(latSwitch2) / 51 / 0.138;
                         tsuiVoltage = (convertHexaPic(tsuiVoltage)+3) / 51 / 0.1375;
                         
-                        globv = convertHexaPic(globv) / 51 / 0.138;
-                        tsuiSupply = convertHexaPic(tsuiSupply) / 51 / 0.138;
-                        FRTLgantry = convertHexaPic(FRTLgantry) / 51 / 0.138;
-                        unreg5 = convertHexaPic(unreg5) / 51 / 0.37;
-                        unreg12 = convertHexaPic(unreg12) / 51 / 0.175;
+                        globv = (convertHexaPic(globv)+7) / 51 / 0.138;
+                        tsuiSupply = (convertHexaPic(tsuiSupply)+5) / 51 / 0.138;
+                        FRTLgantry = (convertHexaPic(FRTLgantry)+5) / 51 / 0.138;
+                        unreg5 = (convertHexaPic(unreg5)+5) / 51 / 0.37;
+                        unreg12 = (convertHexaPic(unreg12)+5) / 51 / 0.175;
                         
                         supplyContainer.html(tsuiVoltage.toFixed(2) + " V");
                         
@@ -2800,7 +2808,7 @@ $(document).ready(function (){
             
         } else if (family === "OMEGA") {
             resetMasterTSSC = "002400806d68d7551407f09b861e3aad000549a8440800001FC20F000E00000000000000";
-            startSlaveTSSC = "002400806d68d7551407f09b861e3aad000549a844010000028226404000000000000000";
+            startSlaveTSSC = "002400806d68d7551407f09b861e3aad000549a844010000028226402800000000000000";
             startSlaveSBSH = "002400806d68d7551407f09b861e3aad000549a844010000028426401000000000000000";
             startSlaveSBSH2 = "002400806d68d7551407f09b861e3aad000549a844010000028426400c00000000000000";
             console.log(modelName);
@@ -2883,6 +2891,9 @@ $(document).ready(function (){
         $(".nodeid_container").addClass("hidden");
         $(".bt_diag_mode").addClass("hidden");   
         
+        $('#fileinput').val(""); 
+        $('#fileinput2').val(""); 
+        $('#fileinput3').val(""); 
         $('#fileinput4').val(""); 
         $('#fileinput5').val(""); 
         
@@ -5479,6 +5490,7 @@ $(document).ready(function (){
         if (arrayOfLines.length > 0) {
             $(".testing_upl .start_download").removeClass("hidden");
             $(".testing_upl .stop_download").removeClass("hidden");
+            console.log(arrayOfLines);
         }
     }
 
@@ -5650,15 +5662,13 @@ $(document).ready(function (){
 
                 sendSignalDownloadOmega(_signalSpe);
                 coreDownloadOmega(startIndex + 1);
-            } else if (arrayOfLines[startIndex].substring(7, 9) == "01") {
+            } else if (arrayOfLines[startIndex].substring(7, 9) == "01" || arrayOfLines[startIndex].substring(7, 9) == "03") {
                 stopDownloadOmega();
             }
         } else {
             setTimeout(function () {
-                console.log("stopDownload End of file");
-                 setTimeout(function(){
-                    getInfoCard(globalName, cobID2);
-                },1000)
+                console.log("stopDownload End of file");                
+                stopDownloadOmega();
             }, 500);
         }
     }
@@ -6334,7 +6344,7 @@ $(document).ready(function (){
     
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////// PING SERVICE BTN           ///////////////////////////////////////////////////////////////
+    /////////////////////////////////////////// PING SERVICE BTN       ///////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     $(".get_bad").on('click', function(){
@@ -6867,7 +6877,7 @@ $(document).ready(function (){
         }else if(globalName == "OMEGA"){
             if(modelName == "TSSC"){
                 sendSignal("002400806d68d7551407f09b861e3aad000549a844080000062222400000000000000000");
-                sendSignal("002400806d68d7551407f09b861e3aad000549a844050000066222400000000000000000");
+                sendSignal("002400806d68d7551407f09b861e3aad000549a844050000066222400000000A00000000");
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006c422500000000000000000");
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006e422500000000000000000");
