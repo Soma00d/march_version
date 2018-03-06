@@ -5691,7 +5691,12 @@ $(document).ready(function (){
         sendSignal(Cal_post + Cal_dlc + canId + "2f511f0101000000");
          setTimeout(function(){
             getInfoCard(globalName, cobID2);
-        },5000)
+            
+        },5000);
+         setTimeout(function(){
+            sendSignal(startNodeMsg);
+            
+        },12000);
         //sendSignal("002400806d68d7551407f09b861e3aad000549a8440800000000072d2f511f0101000000");
     }
     //fin du download Omega
