@@ -319,6 +319,14 @@ $getAllUser = function ($connexion) {
     return json_encode($result);
 };
 
+//recupère toutes les entrées de la table admin_dictionary
+$getAllDictionaries = function ($connexion) {
+    $resultats = $connexion->query("SELECT * FROM admin_dictionary ORDER BY family_id ASC");
+    $resultats->execute();
+    $result = $resultats->fetchAll();
+    return json_encode($result);
+};
+
 //check if id exist in database
 $checkNewID = function ($connexion) {
     
@@ -411,6 +419,9 @@ if (isset($_GET["function"])) {
             break;
         case "get_all_user":
             echo $getAllUser($connexion);
+            break;
+        case "get_all_dictionaries":
+            echo $getAllDictionaries($connexion);
             break;
         case "check_new_id":
             echo $checkNewID($connexion);

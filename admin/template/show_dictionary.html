@@ -1,99 +1,92 @@
-<div class="adm_dictionary_container">
-    Welcome to dictionaries panel.
+<div class="adm_show_dictionary_container">
+    <div class="title">Show all dictionaries</div>
     
-    <div class="dico_main_container">
-        <div class="dico_step1">
-            <div class="title">Choose dictionary reference model</div>
-            <div class="dico_form step1">
-                <div class="line_dico_form"><span>New dictionary ID: </span><input type="text" class="new_id_dico_input" /></div>
-                <div class="line_dico_form"><span>Description: </span><input type="text" class="new_description_dico_input" /></div>
-                <div class="line_dico_form"><span>Reference Model: </span>
-                    <select class="model_ref_selector">
-                        <optgroup label="ELEGANCE">
-                            <option value="1" data-family="ELEGANCE" data-model="TSSC" data-type="">Elegance - TSSC</option>
-                            <option value="4" data-family="ELEGANCE" data-model="SMARTBOX" data-type="AGILA">Elegance - SMARTBOX - Agila</option>
-                            <option value="3" data-family="ELEGANCE" data-model="SMARTBOX" data-type="OTHER">Elegance - SMARTBOX - Other</option>
-                        </optgroup>
-                        <optgroup label="OMEGA">
-                            <option value="10" data-family="OMEGA" data-model="TSSC" data-type="">Omega - TSSC</option>
-                            <option value="11" data-family="OMEGA" data-model="SMARTBOX" data-type="">Omega - SMARTBOX</option>
-                            <option value="12" data-family="OMEGA" data-model="SMARTHANDLE" data-type="">Omega - SMARTHANDLE</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="error_form_text"></div>
-                <div class="line_dico_form"><div class="bt_send_dico_form step1">Create new dictionary</div></div>
+    <div class="step_one">   
+        <div class="result_description">There are currently <span></span> dictionaries in database.</div>  
+        <div class="show_dictionary_type_listing">
+            <div class="header_show_dico">
+                <div class="td_head family_id">Family ID</div>
+                <div class="td_head description">Description</div>
+                <div class="td_head family_name">Family</div>
+                <div class="td_head model_name">Model</div> 
+                <div class="td_head type_name">Type</div>
+                <div class="td_head date">Date</div>
+                <div class="td_head action">Actions</div>
             </div>
+            <div class="content_show_dico"></div>
+        </div>        
+    </div>
+    
+    <div class="step_two">
+        <div class="title">View & Update Dictionary</div>
+        <div class="subtitle">
+            Don't forget to save your work by clicking on 'Update dictionary' button.<br>
+            If you need help while updating your dictionary, you can hover '?' button.
         </div>
-        <div class="dico_step2">
-            <div class="title">Modify dictionary reference model to fit needs..</div>
-            <div class="subtitle">
-                Don't forget to save your work by clicking on 'Create new dictionary' button.<br>
-                If you need help while creating your dictionary, you can hover '?' button.
-            </div>
-            <div class="global_dico_button">
-                <div class="create_new_dico">Create new dictionary</div>
-                <div class="cancel_new_dico">Cancel</div>
-            </div>
-            <div class="presentation">New Dictionary ID <span class="newID"></span> - <span class="description_new_dico"></span> (Reference model : <span class="ref_model"></span>)</div>
-            
-            <div class="dico_type_selector">
-                <div class="type-entry entry-bt create">Buttons & Leds</div>
-                <div class="type-entry entry-joy create">Joysticks & Mushrooms</div>
-                <div class="type-entry entry-disp create">Displays & Buzzer</div>
-            </div>
-            
-            <div class="dictionary_type_listing bouton-type">
-                <div class="add_new_entry bt">Add new button <img src="../images/add_new.png"></div>
-                <div class="header_new_dico">
-                    <div class="td_head symbol_name">Name</div>
-                    <div class="td_head standard_name">Ref. TST</div>
-                    <div class="td_head description">Description</div>
-                    <div class="td_head photo_link">Photo</div>
-                    <div class="td_head is_safety">Safety</div>
-                    <div class="td_head is_enable">Enable</div>
-                    <div class="td_head is_cdrh">CDRH</div>                    
-                    <div class="td_head is_led">LED</div>
-                    <div class="td_head is_final">Test Final</div>
-                    <div class="td_head can_info">CAN Details</div>
-                    <div class="td_head action">Actions</div>
-                </div>
-                <div class="content_new_dico"></div>
-                <div class="add_new_entry bt" style="margin-top: 24px;">Add new button <img src="../images/add_new.png"></div>
-            </div>
-            <div class="dictionary_type_listing joystick-type">
-                <div class="add_new_entry joy">Add new Joystick/Mushroom <img src="../images/add_new.png"></div>
-                <div class="header_new_dico">
-                    <div class="td_head symbol_name">Name</div>
-                    <div class="td_head standard_name">Ref. TST</div>
-                    <div class="td_head description">Description</div>
-                    <div class="td_head photo_link">Photo</div>
-                    <div class="td_head is_cdrh">CDRH</div> 
-                    <div class="td_head is_final">Test Final</div>
-                    <div class="td_head action">Actions</div>
-                </div>
-                <div class="content_new_dico"></div>
-            </div>
-            <div class="dictionary_type_listing display-type">
-                <div class="add_new_entry disp">Add new Display/Buzzer <img src="../images/add_new.png"></div>
-                <div class="header_new_dico">
-                    <div class="td_head symbol_name">Name</div>
-                    <div class="td_head standard_name">Ref. TST</div>
-                    <div class="td_head description">Description</div>
-                    <div class="td_head photo_link">Photo</div>
-                    <div class="td_head is_cdrh">CDRH</div> 
-                    <div class="td_head is_final">Test Final</div>
-                    <div class="td_head action">Actions</div>
-                </div>
-                <div class="content_new_dico"></div>
-            </div>
-            
+        <div class="global_dico_button">
+            <div class="update_new_dico">Update dictionary</div>
+            <div class="cancel_new_dico">Cancel</div>
         </div>
-        <div class="dico_step3">
-            <div class="title"></div>
-            <div class="okay">OK</div>
+        <div class="presentation">Dictionary ID <span class="newID"></span> - <span class="description_new_dico"></span> (Reference model : <span class="ref_model"></span>)</div>
+
+        <div class="dico_type_selector">
+            <div class="type-entry entry-bt show">Buttons & Leds</div>
+            <div class="type-entry entry-joy show">Joysticks & Mushrooms</div>
+            <div class="type-entry entry-disp show">Displays & Buzzer</div>
         </div>
-        <div class="overlay_form hidden">
+
+        <div class="dictionary_type_listing bouton-type">
+            <div class="add_new_entry_show bt">Add new button <img src="../images/add_new.png"></div>
+            <div class="header_new_dico">
+                <div class="td_head symbol_name">Name</div>
+                <div class="td_head standard_name">Ref. TST</div>
+                <div class="td_head description">Description</div>
+                <div class="td_head photo_link">Photo</div>
+                <div class="td_head is_safety">Safety</div>
+                <div class="td_head is_enable">Enable</div>
+                <div class="td_head is_cdrh">CDRH</div>                    
+                <div class="td_head is_led">LED</div>
+                <div class="td_head is_final">Test Final</div>
+                <div class="td_head can_info">CAN Details</div>
+                <div class="td_head action">Actions</div>
+            </div>
+            <div class="content_new_dico"></div>
+            <div class="add_new_entry_show bt" style="margin-top: 24px;">Add new button <img src="../images/add_new.png"></div>
+        </div>
+        <div class="dictionary_type_listing joystick-type">
+            <div class="add_new_entry_show joy">Add new Joystick/Mushroom <img src="../images/add_new.png"></div>
+            <div class="header_new_dico">
+                <div class="td_head symbol_name">Name</div>
+                <div class="td_head standard_name">Ref. TST</div>
+                <div class="td_head description">Description</div>
+                <div class="td_head photo_link">Photo</div>
+                <div class="td_head is_cdrh">CDRH</div> 
+                <div class="td_head is_final">Test Final</div>
+                <div class="td_head action">Actions</div>
+            </div>
+            <div class="content_new_dico"></div>
+        </div>
+        <div class="dictionary_type_listing display-type">
+            <div class="add_new_entry_show disp">Add new Display/Buzzer <img src="../images/add_new.png"></div>
+            <div class="header_new_dico">
+                <div class="td_head symbol_name">Name</div>
+                <div class="td_head standard_name">Ref. TST</div>
+                <div class="td_head description">Description</div>
+                <div class="td_head photo_link">Photo</div>
+                <div class="td_head is_cdrh">CDRH</div> 
+                <div class="td_head is_final">Test Final</div>
+                <div class="td_head action">Actions</div>
+            </div>
+            <div class="content_new_dico"></div>
+        </div>
+    </div>
+    
+    <div class="step_three">
+        <div class="title"></div>
+        <div class="okay">OK</div>
+    </div>
+    
+    <div class="overlay_form hidden">
             <!-- FORMS BUTTON ----------------------------------------------------------------------------------------------------------------------------------------->
             <div class="formulaire_update_button">
                 <div class="title">Update Button Entry</div>
@@ -1095,6 +1088,4 @@
             
             
         </div>
-    </div>
-    
 </div>

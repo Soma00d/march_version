@@ -149,7 +149,7 @@
 
 
 }
-#adm_content_user, #adm_content_log, #adm_content_serial{
+#adm_content_user, #adm_content_log, #adm_content_serial, #adm_content_show_dictionary{
     position: relative;
     .add_user_description, .export_user_description{
         margin-top: 20px;
@@ -261,10 +261,10 @@
             }
         }
     }
-    .array_all_user, .array_all_logs, .array_all_sn{
+    .array_all_user, .array_all_logs, .array_all_sn, .array_all_dictionary{
         margin-top: 25px;
         width: 100%;
-        .header_array_user, .header_array_logs, .header_array_sn{
+        .header_array_user, .header_array_logs, .header_array_sn, .header_array_dictionary{
             .head_item{
                 background: #3b73b9;
                 display: inline-block;
@@ -286,7 +286,7 @@
                 width: 12%;  
             }                  
         }
-        .content_array_user, .content_array_logs, .content_array_sn{
+        .content_array_user, .content_array_logs, .content_array_sn, .content_array_dictionary{
             .line_user, .line_logs, .line_sn{
                 .user_item, .logs_item, .sn_item{
                     display: inline-block;
@@ -358,8 +358,8 @@
     }
 }
 
-#adm_content_dictionaries{
-    .dico_main_container{
+#adm_content_dictionaries, #adm_content_show_dictionary{
+    .dico_main_container, .adm_show_dictionary_container{
         position: relative;
         .dico_step1{
             .dico_form{
@@ -411,7 +411,7 @@
                 }
             }
         }
-        .dico_step2{
+        .dico_step2, .step_two{
             display:none;
             .title{}
             .subtitle{
@@ -420,7 +420,7 @@
                 font-size: 14px;
                 font-style: italic;
             }
-            .create_new_dico{
+            .create_new_dico, .update_new_dico{
                  text-align: center;
                 width: 180px;
                 background: #3bb985;
@@ -548,7 +548,7 @@
                         }
                     }
                 }
-                .add_new_entry{
+                .add_new_entry, .add_new_entry_show{
                     text-align: center;
                     width: 180px;
                     background: #3bb985;
@@ -712,5 +712,91 @@
                 padding: 5px;
             }
         }
+    
+    
+    
+    }
+}
+.adm_show_dictionary_container{
+    .result_description{
+        font-style: italic;
+        span{
+            font-weight: bold;
+            font-size: 18px;
+            color: #3b73b9;
+        }
+    }
+}
+
+.step_one{
+    .show_dictionary_type_listing{
+        margin-top: 30px;
+        .header_show_dico{
+            .td_head{
+                background: #5b6f88;
+                display: inline-block;
+                vertical-align: top;
+                width: 90px;
+                text-align: center;
+                border-right: 1px solid white;
+                color: white;
+                padding: 1px;
+                margin-right: -3px;
+                font-size: 14px;
+                &.description{
+                    width: 400px;
+                }                        
+                &.date{
+                    width: 150px;
+                }                        
+                &.model_name{
+                    width: 100px;
+                }                        
+            }
+        }
+        .content_show_dico{
+            .line_show_dico{
+                width: 1017px;
+                height: 31px;
+                overflow: hidden;
+
+                &:nth-child(even) {
+                    background-color:#cde1f0;
+                }
+                &.updated_state{
+                    background:#fff70040;
+                }
+                &.created_state{
+                    background:#52fd5269;
+                }
+                .td_dico{
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 90px;
+                    text-align: center;
+                    border-right: 1px solid white;
+                    padding: 1px;
+                    margin-right: 1px;
+                    font-size: 14px;
+                    padding-top: 8px;
+                    img{
+                        width: 22px;
+                        margin-top: -3px;
+                    }                        
+                    &.description{
+                        width: 400px;
+                    }                    
+                    &.action{
+                        cursor:pointer;
+                    }
+                    &.date{
+                        width: 150px;
+                    }
+                    &.model_name{
+                        width: 100px;
+                    }    
+                }
+            }
+        }        
     }
 }

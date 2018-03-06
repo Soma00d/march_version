@@ -40,6 +40,7 @@ $(document).ready(function (){
     var hasSRTL;
     var counterDisplayFreqTens = 0;
     
+    var outCtStopCtn = $("#content_toolbox .outCtStop");
     var latSwitchCtn = $("#content_toolbox .latSwitch");
     var autoposDRCtn = $("#content_toolbox .autoposDR");
     var globGantryCtn = $("#content_toolbox .globGantry");
@@ -1055,6 +1056,7 @@ $(document).ready(function (){
                                     globalName = data[0].family_name;
                                     modelName = data[0].model;
                                     typeChoice = data[0].type;
+                                    
                                     setInitialDisplayByModel(globalName, modelName, typeChoice);
                                     
                                     $("#content_toolbox .title_main").html("Toolbox - "+globalName+" "+modelName);
@@ -2156,7 +2158,7 @@ $(document).ready(function (){
                         }
                         
                     }else if(message.typeMsg == "T"){
-                        var seuil = 10;
+                        var seuil = 4;
                         var latSwitch = message.latSwitch;
                         var autoposDR = message.autoposDR;
                         var globGantry = message.globGantry;
@@ -2187,6 +2189,7 @@ $(document).ready(function (){
                         sciFRTL = convertHexaPic(sciFRTL) / 51 / 0.138;
                         sciLAT = convertHexaPic(sciLAT) / 51 / 0.138;
                         tsuiVoltage = (convertHexaPic(tsuiVoltage)+3) / 51 / 0.1375;
+                        outCtStop = (convertHexaPic(outCtStop)+3) / 51 / 0.66;
                         
                         globv = convertHexaPic(globv) / 51 / 0.138;
                         tsuiSupply = (convertHexaPic(tsuiSupply)+5) / 51 / 0.138;
@@ -2197,6 +2200,8 @@ $(document).ready(function (){
                         supplyContainer.html(tsuiVoltage.toFixed(2) + " V");
                         
                         
+                        outCtStopCtn.find(".value").html(outCtStop.toFixed(2)+ " V");
+                        if(outCtStop > seuil){outCtStopCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{outCtStopCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
                         latSwitchCtn.find(".value").html(latSwitch.toFixed(2)+ " V");
                         if(latSwitch > seuil){latSwitchCtn.find(".voyant img").attr('src', 'images/voyant_on.png')}else{latSwitchCtn.find(".voyant img").attr('src', 'images/voyant_off.png')};
                         autoposDRCtn.find(".value").html(autoposDR.toFixed(2)+ " V");
@@ -2822,11 +2827,13 @@ $(document).ready(function (){
                     sendSignalPic("C");
                     sendSignal(startSlaveSBSH);
                     sendSignal(startSlaveSBSH2);
+                    stopAllLED(globalName, modelName, typeChoice);
                     break;
                 case "SMARTHANDLE" :
                     sendSignalPic("C");
                     sendSignal(startSlaveSBSH);
                     sendSignal(startSlaveSBSH2);
+                    stopAllLED(globalName, modelName, typeChoice);
                     break;
                 default:
                     break;
@@ -6428,6 +6435,7 @@ $(document).ready(function (){
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84405000006622240AAAAA028AA000000");
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006c422500800000000000000");
+                sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006c422502a00000000000000");
                 sendSignal("002400806d68d7551407f09b861e3aad000549a84401000006e422500a00000000000000");
             }
         }
@@ -6809,7 +6817,8 @@ $(document).ready(function (){
             $(".loading_inge").removeClass("hidden");
             setTimeout(function(){                    
                 $(".loading_inge").addClass("hidden");
-            },15000)
+                sendSignal(startSlaveTSSC);
+            },20000)
         }else{           
             $(this).addClass("activated");
             $(this).find("img").attr('src', 'images/switch_on.png');
@@ -6830,13 +6839,13 @@ $(document).ready(function (){
                 $(".loading_inge").removeClass("hidden");            
                 setTimeout(function(){sendSignal(startSlaveTSSC);
                 $(".loading_inge").addClass("hidden");
-                },9000);            
+                },20000);            
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c2426100000000000000000");
                 $(".loading_inge").removeClass("hidden");       
                 setTimeout(function(){sendSignal(startSlaveSBSH);sendSignal(startSlaveSBSH2);
                 $(".loading_inge").addClass("hidden");
-                },9000); 
+                },20000); 
             }
         }else{            
             $(this).addClass("activated");
@@ -6848,11 +6857,7 @@ $(document).ready(function (){
             }else{
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c0426100000000000000000");
                 sendSignal("002400806d68d7551407f09b861e3aad000549a8440000000c6426100000000000000000");
-            }
-            $(".loading_inge").removeClass("hidden");
-            setTimeout(function(){                    
-                $(".loading_inge").addClass("hidden");
-            },15000)
+            }            
         }
     });
     

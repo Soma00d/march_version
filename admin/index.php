@@ -40,7 +40,7 @@
                       <div class="dropdownlink"><img src="../images/admin/3d-dictionary.png"> Dictionaries
                       </div>
                       <ul class="submenuItems">
-                        <li><a href="#">Show all dictionaries</a></li>
+                        <li><a href="#" class="menu_item show_dictionary_page" data-menulink="show_dictionary">Show all dictionaries</a></li>
                         <li><a href="#" class="menu_item dictionaries_page" data-menulink="dictionaries">Add a new dictionary</a></li>
                       </ul>
                     </li>
@@ -78,6 +78,9 @@
                 </div>
                 <div id="adm_content_dictionaries" class="page_content">
                     <?php include('template/dictionaries.html'); ?>
+                </div>
+                <div id="adm_content_show_dictionary" class="page_content">
+                    <?php include('template/show_dictionary.html'); ?>
                 </div>
                 <div id="adm_content_log" class="page_content">
                     <?php include('template/log.html'); ?>

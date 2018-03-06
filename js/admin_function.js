@@ -11,9 +11,13 @@ $(document).ready(function () {
     var contentArrayAlllogs = $(".adm_logs_container .array_all_logs .content_array_logs");
     var contentArrayAllSerial = $(".adm_serial_container .array_all_sn .content_array_sn");
     
-    var contentArrayDicoButton = $(".dictionary_type_listing.bouton-type .content_new_dico");
-    var contentArrayDicoJoystick = $(".dictionary_type_listing.joystick-type .content_new_dico");
-    var contentArrayDicoDisplay = $(".dictionary_type_listing.display-type .content_new_dico");
+    var contentArrayDicoButton = $(".adm_dictionary_container .dictionary_type_listing.bouton-type .content_new_dico");
+    var contentArrayDicoJoystick = $(".adm_dictionary_container .dictionary_type_listing.joystick-type .content_new_dico");
+    var contentArrayDicoDisplay = $(".adm_dictionary_container .dictionary_type_listing.display-type .content_new_dico");
+    
+    var contentArrayDicoButtonShow = $(".adm_show_dictionary_container .dictionary_type_listing.bouton-type .content_new_dico");
+    var contentArrayDicoJoystickShow = $(".adm_show_dictionary_container .dictionary_type_listing.joystick-type .content_new_dico");
+    var contentArrayDicoDisplayShow = $(".adm_show_dictionary_container .dictionary_type_listing.display-type .content_new_dico");
     
     var updateUserBox = $(".adm_all_user_container .overlay_udpdate .update_user_box");
     var createUserBox = $(".adm_all_user_container .overlay_create .create_user_box");
@@ -652,7 +656,8 @@ $(document).ready(function () {
     //                              DICTIONARIES ADMIN                            //
     //============================================================================//
 
-    $(".type-entry").on('click', function(){
+    $(".type-entry.create").on('click', function(){
+        
         var _this = $(this);
         $(".dico_step2 .dictionary_type_listing").fadeOut(300);
         $(".dico_step2 .type-entry").each(function(){
@@ -670,6 +675,29 @@ $(document).ready(function () {
             else{
                 _this.addClass("selected");
                 $(".dico_step2 .dictionary_type_listing.display-type").fadeIn(300);
+            }
+        },300)
+        
+    });
+    $(".type-entry.show").on('click', function(){
+        
+        var _this = $(this);
+        $(".step_two .dictionary_type_listing").fadeOut(300);
+        $(".step_two .type-entry").each(function(){
+            $(this).removeClass("selected");
+        });
+        setTimeout(function(){
+            if(_this.hasClass("entry-bt")){
+                _this.addClass("selected");
+                $(".step_two .dictionary_type_listing.bouton-type").fadeIn(300);
+            }
+            else if(_this.hasClass("entry-joy")){
+                _this.addClass("selected");
+                $(".step_two .dictionary_type_listing.joystick-type").fadeIn(300);
+            }
+            else{
+                _this.addClass("selected");
+                $(".step_two .dictionary_type_listing.display-type").fadeIn(300);
             }
         },300)
         
@@ -721,7 +749,7 @@ $(document).ready(function () {
         $(".dico_step1").fadeOut(500);
         $(".dico_step2 .presentation .newID").html(newID);
         $(".dico_step2 .presentation .description_new_dico").html(description);
-        $(".dico_step2 .presentation .ref_model").html(refFamily+ " "+refModel+" "+refType);        
+        $(".dico_step2 .presentation .ref_model").html(refFamily+ " "+refModel+" "+refType);      
         $.ajax({
             url: '../php/api.php?function=get_dictionaries_by_id&param1='+refID,
             type: 'GET',
@@ -732,6 +760,10 @@ $(document).ready(function () {
                     alert("error");
                 }else {
                     console.log(data);
+                    contentArrayDicoButton.empty();
+                    contentArrayDicoDisplay.empty();
+                    contentArrayDicoDisplay.empty();
+                    
                     for(var i=0; i< data.length; i++){
                         if(data[i].is_safety == 1){var isSafety = "<img src='../images/check_admin.png' title='This component is safety.'>"}else{var isSafety = "-"}
                         if(data[i].is_enable == 1){var isEnable = "<img src='../images/check_admin.png' title='This component is enable.'>"}else{var isEnable = "-"}
@@ -1285,7 +1317,28 @@ $(document).ready(function () {
             $(".overlay_form").removeClass("hidden");
             formBtCtn.fadeIn("200");
             
-            formBtCtn.find(".create_button").off();
+            formBtCtn.find(".symbol_name").val("");
+            formBtCtn.find(".standard_name").val(""); 
+            formBtCtn.find(".description").val("");
+            
+            formBtCtn.find(".is_led option").removeAttr('selected'); 
+            formBtCtn.find(".is_safety option").removeAttr('selected');;
+            formBtCtn.find(".is_enable option").removeAttr('selected');
+            formBtCtn.find(".is_cdrh option").removeAttr('selected');
+            formBtCtn.find(".is_final option").removeAttr('selected');
+            formBtCtn.find(".zone option").removeAttr('selected');
+            
+            formBtCtn.find(".timer").val("");
+            formBtCtn.find(".photo_link").val("");
+            formBtCtn.find(".can_id").val("");
+            formBtCtn.find(".pressed_value").val("");
+            formBtCtn.find(".released_value").val("");
+            formBtCtn.find(".on_signal").val("");
+            formBtCtn.find(".off_signal").val("");
+            formBtCtn.find(".flash_signal").val("");
+            formBtCtn.find(".dim_signal").val("");
+            
+            formBtCtn.find(".create_bt").off();
             formBtCtn.find(".tooltip_form").hover(
                 function() {
                   $(this).find(".text_explain").fadeIn(100);
@@ -1324,7 +1377,7 @@ $(document).ready(function () {
                 if(newLineArrayBt.is_led == 1 || newLineArrayBt.is_led == 2){var isLED = "<img src='../images/check_admin.png' title='This component is LED.'>"}else{var isLED = "-"}
                 if(newLineArrayBt.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
                 
-                var count = ($(".dictionary_type_listing.bouton-type .line_new_dico").length)+1;;
+                var count = ($(".dico_step2 .dictionary_type_listing.bouton-type .line_new_dico").length)+50;;
                 
                 var newEntry = "<div class='line_new_dico bt_"+count+" created_state' data-index='bt_"+count+"' data-calibsubindexx='' data-calibsubindexy='' data-canid='"+newLineArrayBt.can_id+"' data-description='"+newLineArrayBt.description+"' data-dimsignal='"+newLineArrayBt.dim_signal+"' data-familyid='' data-flashsignal='"+newLineArrayBt.flash_signal+"' data-id='' data-iscdrh='"+newLineArrayBt.is_cdrh+"' data-isenable='"+newLineArrayBt.is_enable+"' data-isfinal='"+newLineArrayBt.is_final+"' data-isled='"+newLineArrayBt.is_led+"' data-issafety='"+newLineArrayBt.is_safety+"' data-offsignal='"+newLineArrayBt.off_signal+"' data-onsignal='"+newLineArrayBt.on_signal+"' data-photolink='"+newLineArrayBt.photo_link+"' data-pressedval='"+newLineArrayBt.pressed_val+"' data-releasedval='"+newLineArrayBt.released_val+"' data-standardname='"+newLineArrayBt.standard_name+"' data-symbolname='"+newLineArrayBt.symbol_name+"' data-thresholdmaxaxis='0' data-threshold_max_zero='0' data-thresholdminaxis='0' data-thresholdminzero='0' data-timer='"+newLineArrayBt.timer+"' data-type='button' data-value='' data-xpos='' data-ypos='' data-zone='"+newLineArrayBt.zone+"'>"
                     +"<div class='td_dico symbol_name'>"+newLineArrayBt.symbol_name+"</div>"
@@ -1413,7 +1466,7 @@ $(document).ready(function () {
                 if(newLineArrayJoy.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
                 if(newLineArrayJoy.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
                 
-                var count = ($(".dictionary_type_listing.joystick-type .line_new_dico").length)+1;;
+                var count = ($(".dico_step2 dictionary_type_listing.joystick-type .line_new_dico").length)+50;;
                                        
                 var newEntry = "<div class='line_new_dico joy_"+count+" created_state' data-index='joy_"+count+"' data-calibsubindexx='"+newLineArrayJoy.calib_subindex_x+"' data-calibsubindexy='"+newLineArrayJoy.calib_subindex_y+"' data-canid='"+newLineArrayJoy.can_id+"' data-description='"+newLineArrayJoy.description+"' data-dimsignal='' data-familyid='' data-flashsignal='' data-id='' data-iscdrh='"+newLineArrayJoy.is_cdrh+"' data-isenable='0' data-isfinal='"+newLineArrayJoy.is_final+"' data-isled='0' data-issafety='0' data-offsignal='' data-onsignal='' data-photolink='"+newLineArrayJoy.photo_link+"' data-pressedval='' data-releasedval='' data-standardname='"+newLineArrayJoy.standard_name+"' data-symbolname='"+newLineArrayJoy.symbol_name+"' data-thresholdmaxaxis='"+newLineArrayJoy.threshold_max_axis+"' data-threshold_max_zero='"+newLineArrayJoy.threshold_max_zero+"' data-thresholdminaxis='"+newLineArrayJoy.threshold_min_axis+"' data-thresholdminzero='"+newLineArrayJoy.threshold_min_zero+"' data-timer='"+newLineArrayJoy.timer+"' data-type='"+newLineArrayJoy.type+"' data-value='' data-xpos='"+newLineArrayJoy.x_pos+"' data-ypos='"+newLineArrayJoy.y_pos+"' data-zone='50'>"
                     +"<div class='td_dico symbol_name'>"+newLineArrayJoy.symbol_name+"</div>"
@@ -1461,7 +1514,7 @@ $(document).ready(function () {
             $(".overlay_form").removeClass("hidden");
             formDispCtn.fadeIn("200");
             
-            formDispCtn.find(".create_button").off();
+            formDispCtn.find(".create_bt").off();
             formDispCtn.find(".tooltip_form").hover(
                 function() {
                   $(this).find(".text_explain").fadeIn(100);
@@ -1491,7 +1544,7 @@ $(document).ready(function () {
                 if(newLineArrayDisp.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
                 if(newLineArrayDisp.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
                 
-                var count = ($(".dictionary_type_listing.display-type .line_new_dico").length)+1;
+                var count = ($(".dico_step2 .dictionary_type_listing.display-type .line_new_dico").length)+1;
                 
                 var newEntry = "<div class='line_new_dico disp_"+count+" created_state'data-index='disp_"+count+"' data-calibsubindexx='' data-calibsubindexy='' data-canid='' data-description='"+newLineArrayDisp.description+"' data-dimsignal='"+newLineArrayDisp.dim_signal+"' data-familyid='' data-flashsignal='"+newLineArrayDisp.flash_signal+"' data-id='' data-iscdrh='"+newLineArrayDisp.is_cdrh+"' data-isenable='0' data-isfinal='"+newLineArrayDisp.is_final+"' data-isled='0' data-issafety='0' data-offsignal='"+newLineArrayDisp.off_signal+"' data-onsignal='"+newLineArrayDisp.on_signal+"' data-photolink='"+newLineArrayDisp.photo_link+"' data-pressedval='' data-releasedval='' data-standardname='"+newLineArrayDisp.standard_name+"' data-symbolname='"+newLineArrayDisp.symbol_name+"' data-thresholdmaxaxis='' data-threshold_max_zero='' data-thresholdminaxis='' data-thresholdminzero='' data-timer='"+newLineArrayDisp.timer+"' data-type='"+newLineArrayDisp.type+"' data-value='' data-xpos='' data-ypos='' data-zone='50'>"
                     +"<div class='td_dico symbol_name'>"+newLineArrayDisp.symbol_name+"</div>"
@@ -1638,6 +1691,898 @@ $(document).ready(function () {
         }        
         
     }
+    
+    
+    
+    //================================================ SHOW =====================
+    
+    $(".show_dictionary_page").on('click', function(){
+        console.log("testttt")
+        getDictionaryAdmin();
+    });
+    
+    function getDictionaryAdmin(){
+        $.ajax({
+            url: '../php/api.php?function=get_all_dictionaries',
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data, statut) {
+                fillDictionariesTable(data);
+            }
+        });
+    }
+    
+    function fillDictionariesTable(data){
+        var dictionaryTable = $(".content_show_dico");        
+        dictionaryTable.empty();
+        
+        console.log(data);
+        if(data.length > 0){
+            $(".adm_show_dictionary_container .result_description span").html(data.length);
+            for(var i=0; i < data.length; i++){
+                dictionaryTable.append(
+                    "<div class='line_show_dico'>"
+                        +"<div class='td_dico family_id'>"+data[i].family_id+"</div>"
+                        +"<div class='td_dico description'>"+data[i].description+"</div>"
+                        +"<div class='td_dico family_name'>"+data[i].family_name+"</div>"
+                        +"<div class='td_dico model_name'>"+data[i].model_name+"</div>"   
+                        +"<div class='td_dico type_name'>"+data[i].type_name+"</div>"
+                        +"<div class='td_dico date'>"+data[i].date+"</div>"
+                        +"<div class='td_dico action'><img class='next_adm' src='../images/next_adm.png' data-family='"+data[i].family_id+"' data-description='"+data[i].description+"' data-familyname='"+data[i].family_name+"' data-modelname='"+data[i].model_name+"' data-typename='"+data[i].type_name+"'></div>"
+                    +"</div>"
+                )
+            }
+        }else{
+            $(".adm_show_dictionary_container .result_description span").html("0 ");
+        }
+        
+        dictionaryTable.find(".next_adm").on('click', function(){
+            var familyID = $(this).data('family');
+            var description = $(this).data('description');
+            var familyName = $(this).data('familyname');
+            var modelName = $(this).data('modelname');
+            var typeName = $(this).data('typename');
+            openDictionary(familyID, description, familyID, familyName, modelName, typeName);
+        });
+    
+    }
+    
+    function openDictionary(newID, description, refID, refFamily, refModel, refType){
+        $(".step_two").fadeOut(500);
+        $(".step_one").fadeOut(500);
+        $(".step_two .presentation .newID").html(newID);
+        $(".step_two .presentation .description_new_dico").html(description);
+        $(".step_two .presentation .ref_model").html(refFamily+ " "+refModel+" "+refType);      
+        $.ajax({
+            url: '../php/api.php?function=get_dictionaries_by_id&param1='+refID,
+            type: 'GET',
+            dataType: 'JSON',
+            data:{},
+            success: function (data, statut) {
+                if (data.length == 0) {
+                    alert("error");
+                }else {
+                    console.log(data);
+                    contentArrayDicoButtonShow.empty();
+                    contentArrayDicoJoystickShow.empty();
+                    contentArrayDicoDisplayShow.empty();
+                    
+                    for(var i=0; i< data.length; i++){
+                        if(data[i].is_safety == 1){var isSafety = "<img src='../images/check_admin.png' title='This component is safety.'>"}else{var isSafety = "-"}
+                        if(data[i].is_enable == 1){var isEnable = "<img src='../images/check_admin.png' title='This component is enable.'>"}else{var isEnable = "-"}
+                        if(data[i].is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                        if(data[i].is_led == 1 || data[i].is_led == 2){var isLED = "<img src='../images/check_admin.png' title='This component is LED.'>"}else{var isLED = "-"}
+                        if(data[i].is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}
+                        
+                        if(data[i].type == "button"){
+                            contentArrayDicoButtonShow.append("<div class='line_new_dico bt_"+i+"' data-index='bt_"+i+"' data-calibsubindexx='"+data[i].calib_subindex_x+"' data-calibsubindexy='"+data[i].calib_subindex_y+"' data-canid='"+data[i].can_id+"' data-description='"+data[i].description+"' data-dimsignal='"+data[i].dim_signal+"' data-familyid='"+data[i].family_id+"' data-flashsignal='"+data[i].flash_signal+"' data-id='"+data[i].id+"' data-iscdrh='"+data[i].is_cdrh+"' data-isenable='"+data[i].is_enable+"' data-isfinal='"+data[i].is_final+"' data-isled='"+data[i].is_led+"' data-issafety='"+data[i].is_safety+"' data-offsignal='"+data[i].off_signal+"' data-onsignal='"+data[i].on_signal+"' data-photolink='"+data[i].photo_link+"' data-pressedval='"+data[i].pressed_val+"' data-releasedval='"+data[i].released_val+"' data-standardname='"+data[i].standard_name+"' data-symbolname='"+data[i].symbol_name+"' data-thresholdmaxaxis='"+data[i].threshold_max_axis+"' data-threshold_max_zero='"+data[i].threshold_max_zero+"' data-thresholdminaxis='"+data[i].threshold_min_axis+"' data-thresholdminzero='"+data[i].threshold_min_zero+"' data-timer='"+data[i].timer+"' data-type='"+data[i].type+"' data-value='"+data[i].value+"' data-xpos='"+data[i].x_pos+"' data-ypos='"+data[i].y_pos+"' data-zone='"+data[i].zone+"'>"
+                                    +"<div class='td_dico symbol_name'>"+data[i].symbol_name+"</div>"
+                                    +"<div class='td_dico standard_name'>"+data[i].standard_name+"</div>"
+                                    +"<div class='td_dico description'>"+data[i].description+"</div>"
+                                    +"<div class='td_dico photo_link'><img src='../images/"+data[i].photo_link+"'></div>"
+                                    +"<div class='td_dico is_safety'>"+isSafety+"</div>"
+                                    +"<div class='td_dico is_enable'>"+isEnable+"</div>"
+                                    +"<div class='td_dico is_cdrh'>"+isCDRH+"</div>"      
+                                    +"<div class='td_dico is_led'>"+isLED+"</div>"
+                                    +"<div class='td_dico is_final'>"+isFinal+"</div>"
+                                    +"<div class='td_dico can_info' title='CAN ID : "+data[i].can_id+"\nCAN Data Press : "+data[i].pressed_val+"\nCAN Data Release : "+data[i].released_val+"'><img src='../images/search.png' ></div>"
+                                    +"<div class='td_dico action'><img class='update_line' src='../images/update_admin.png' title='Modify this entry.' style='margin-right: 17px;'><img class='delete_line' src='../images/delete.png' title='Delete this entry.'></div>"
+                                +"</div>");
+                        }else if(data[i].type == "joystick" || data[i].type == "mushroom"){
+                            contentArrayDicoJoystickShow.append("<div class='line_new_dico joy_"+i+"' data-index='joy_"+i+"' data-calibsubindexx='"+data[i].calib_subindex_x+"' data-calibsubindexy='"+data[i].calib_subindex_y+"' data-canid='"+data[i].can_id+"' data-description='"+data[i].description+"' data-dimsignal='"+data[i].dim_signal+"' data-familyid='"+data[i].family_id+"' data-flashsignal='"+data[i].flash_signal+"' data-id='"+data[i].id+"' data-iscdrh='"+data[i].is_cdrh+"' data-isenable='"+data[i].is_enable+"' data-isfinal='"+data[i].is_final+"' data-isled='"+data[i].is_led+"' data-issafety='"+data[i].is_safety+"' data-offsignal='"+data[i].off_signal+"' data-onsignal='"+data[i].on_signal+"' data-photolink='"+data[i].photo_link+"' data-pressedval='"+data[i].pressed_val+"' data-releasedval='"+data[i].released_val+"' data-standardname='"+data[i].standard_name+"' data-symbolname='"+data[i].symbol_name+"' data-thresholdmaxaxis='"+data[i].threshold_max_axis+"' data-threshold_max_zero='"+data[i].threshold_max_zero+"' data-thresholdminaxis='"+data[i].threshold_min_axis+"' data-thresholdminzero='"+data[i].threshold_min_zero+"' data-timer='"+data[i].timer+"' data-type='"+data[i].type+"' data-value='"+data[i].value+"' data-xpos='"+data[i].x_pos+"' data-ypos='"+data[i].y_pos+"' data-zone='"+data[i].zone+"'>"
+                                    +"<div class='td_dico symbol_name'>"+data[i].symbol_name+"</div>"
+                                    +"<div class='td_dico standard_name'>"+data[i].standard_name+"</div>"
+                                    +"<div class='td_dico description'>"+data[i].description+"</div>"
+                                    +"<div class='td_dico photo_link'><img src='../images/"+data[i].photo_link+"'></div>"
+                                    +"<div class='td_dico is_cdrh'>"+isCDRH+"</div>"   
+                                    +"<div class='td_dico is_final'>"+isFinal+"</div>"
+                                    +"<div class='td_dico action'><img class='update_line' src='../images/update_admin.png' title='Modify this entry.' style='margin-right: 17px;'><img class='delete_line' src='../images/delete.png' title='Delete this entry.'></div>"
+                                +"</div>");
+                        }else if(data[i].type == "display" || data[i].type == "buzzer"){
+                            contentArrayDicoDisplayShow.append("<div class='line_new_dico disp_"+i+"'data-index='disp_"+i+"' data-calibsubindexx='"+data[i].calib_subindex_x+"' data-calibsubindexy='"+data[i].calib_subindex_y+"' data-canid='"+data[i].can_id+"' data-description='"+data[i].description+"' data-dimsignal='"+data[i].dim_signal+"' data-familyid='"+data[i].family_id+"' data-flashsignal='"+data[i].flash_signal+"' data-id='"+data[i].id+"' data-iscdrh='"+data[i].is_cdrh+"' data-isenable='"+data[i].is_enable+"' data-isfinal='"+data[i].is_final+"' data-isled='"+data[i].is_led+"' data-issafety='"+data[i].is_safety+"' data-offsignal='"+data[i].off_signal+"' data-onsignal='"+data[i].on_signal+"' data-photolink='"+data[i].photo_link+"' data-pressedval='"+data[i].pressed_val+"' data-releasedval='"+data[i].released_val+"' data-standardname='"+data[i].standard_name+"' data-symbolname='"+data[i].symbol_name+"' data-thresholdmaxaxis='"+data[i].threshold_max_axis+"' data-threshold_max_zero='"+data[i].threshold_max_zero+"' data-thresholdminaxis='"+data[i].threshold_min_axis+"' data-thresholdminzero='"+data[i].threshold_min_zero+"' data-timer='"+data[i].timer+"' data-type='"+data[i].type+"' data-value='"+data[i].value+"' data-xpos='"+data[i].x_pos+"' data-ypos='"+data[i].y_pos+"' data-zone='"+data[i].zone+"'>"
+                                    +"<div class='td_dico symbol_name'>"+data[i].symbol_name+"</div>"
+                                    +"<div class='td_dico standard_name'>"+data[i].standard_name+"</div>"
+                                    +"<div class='td_dico description'>"+data[i].description+"</div>"
+                                    +"<div class='td_dico photo_link'><img src='../images/"+data[i].photo_link+"'></div>"
+                                    +"<div class='td_dico is_cdrh'>"+isCDRH+"</div>"   
+                                    +"<div class='td_dico is_final'>"+isFinal+"</div>"
+                                    +"<div class='td_dico action'><img class='update_line' src='../images/update_admin.png' title='Modify this entry.' style='margin-right: 17px;'><img class='delete_line' src='../images/delete.png' title='Delete this entry.'></div>"
+                                +"</div>");
+                        }
+                    }
+                    
+                    $(".delete_line").on('click', function(){
+                        var name = $(this).parents(".line_new_dico").data('standard_name');
+                        if (confirm('Confirm the deletion of entry '+name+'. This action is irreversible.')) {
+                            $(this).parents(".line_new_dico").remove();
+                        }                        
+                    });
+                    
+                    $(".update_line").on('click', function(){
+                        var id = $(this).parents(".line_new_dico").data('index');
+                        var type = $(this).parents(".line_new_dico").data('type');
+                        updateDictionaryLineShow(id, type); 
+                        console.log("update");
+                    });
+                    
+                    
+                    setTimeout(function(){
+                        $(".step_two .entry-bt").addClass("selected");
+                        $(".step_two .dictionary_type_listing.bouton-type").fadeIn(300);
+                        $(".step_two").fadeIn(300);
+                    },500);
+                }
+            }
+        });
+        
+        function updateDictionaryLineShow(id, type){  
+            var stepTwo = $(".adm_show_dictionary_container");
+            console.log(id);
+            
+            var calib_subindex_x = stepTwo.find("."+id).data("calibsubindexx");
+            var calib_subindex_y = stepTwo.find("."+id).data("calibsubindexy");
+            var can_id = stepTwo.find("."+id).data("canid");
+            var description = stepTwo.find("."+id).data("description");
+            var dim_signal = stepTwo.find("."+id).data("dimsignal");
+            var family_id = stepTwo.find("."+id).data("calibsubindexx");
+            var flash_signal = stepTwo.find("."+id).data("flashsignal");
+            var is_cdrh = stepTwo.find("."+id).data("iscdrh");
+            var is_enable = stepTwo.find("."+id).data("isenable");
+            var is_final = stepTwo.find("."+id).data("isfinal");
+            var is_led = stepTwo.find("."+id).data("isled");
+            var is_safety = stepTwo.find("."+id).data("issafety");
+            var off_signal = stepTwo.find("."+id).data("offsignal");
+            var on_signal = stepTwo.find("."+id).data("onsignal");
+            var photo_link = stepTwo.find("."+id).data("photolink");
+            var pressed_val = stepTwo.find("."+id).data("pressedval");
+            var released_val = stepTwo.find("."+id).data("releasedval");
+            var standard_name = stepTwo.find("."+id).data("standardname");
+            var symbol_name = stepTwo.find("."+id).data("symbolname");
+            var threshold_max_axis = stepTwo.find("."+id).data("thresholdmaxaxis");
+            var threshold_max_zero = stepTwo.find("."+id).data("threshold_max_zero");
+            var threshold_min_axis = stepTwo.find("."+id).data("thresholdminaxis");
+            var threshold_min_zero = stepTwo.find("."+id).data("thresholdminzero");
+            var timer = stepTwo.find("."+id).data("timer");
+            var type_t = stepTwo.find("."+id).data("type");
+            var value = stepTwo.find("."+id).data("value");
+            var x_pos = stepTwo.find("."+id).data("xpos");
+            var y_pos = stepTwo.find("."+id).data("ypos");
+            var zone = stepTwo.find("."+id).data("zone");
+            
+            var lineArray = {
+                symbol_name:symbol_name, standard_name: standard_name, description:description,
+                is_led:is_led, is_safety:is_safety, is_enable:is_enable,
+                is_cdrh:is_cdrh, is_final:is_final, zone:zone, timer:timer,
+                photo_link:photo_link, can_id:can_id, pressed_val:pressed_val, released_val:released_val,
+                on_signal:on_signal, off_signal:off_signal, flash_signal:flash_signal, dim_signal:dim_signal,
+                x_pos:x_pos,y_pos:y_pos,threshold_max_axis:threshold_max_axis, threshold_max_zero:threshold_max_zero,
+                threshold_min_axis:threshold_min_axis,threshold_min_zero:threshold_min_zero,
+                calib_subindex_x:calib_subindex_x, calib_subindex_y:calib_subindex_y, type:type_t
+            };
+            if(type == "button"){
+                updateFormButtonShow(id, lineArray);
+            }else if(type == "joystick" || type == "mushroom"){
+                console.log(lineArray);
+                updateFormJoystickShow(id, lineArray);
+            }else if(type == "display" || type == "buzzer"){
+                updateFormDisplayShow(id, lineArray);
+            }
+        }
+        
+        function updateFormButtonShow(id, lineArray){            
+            var formBtCtn = $(".adm_show_dictionary_container .formulaire_update_button");
+            
+            formBtCtn.find(".update_bt").off();
+            formBtCtn.find(".cancel_bt").off();
+            
+            formBtCtn.find(".cancel_bt").on('click', function(){
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formBtCtn.fadeOut("200");
+            });
+            
+            formBtCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+            
+            console.log(lineArray);
+            formBtCtn.find(".title").html("Update Button <b>"+lineArray.symbol_name+"</b> <img src='../images/"+lineArray.photo_link+"'>");
+            formBtCtn.find(".symbol_name").val(lineArray.symbol_name);
+            formBtCtn.find(".photo_link").val(lineArray.photo_link);
+            formBtCtn.find(".standard_name").val(lineArray.standard_name);
+            formBtCtn.find(".timer").val(lineArray.timer);
+            formBtCtn.find(".description").val(lineArray.description);
+            
+            formBtCtn.find(".can_id").val(lineArray.can_id);
+            formBtCtn.find(".pressed_value").val(lineArray.pressed_val);
+            formBtCtn.find(".released_value").val(lineArray.released_val);
+            
+            formBtCtn.find(".on_signal").val(lineArray.on_signal);
+            formBtCtn.find(".off_signal").val(lineArray.off_signal);
+            formBtCtn.find(".dim_signal").val(lineArray.dim_signal);
+            formBtCtn.find(".flash_signal").val(lineArray.flash_signal);
+            
+            formBtCtn.find(".is_safety option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_safety){$(this).attr('selected', 'selected')};
+            });
+            
+            formBtCtn.find(".is_enable option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_enable){$(this).attr('selected', 'selected')};
+            });
+            
+            formBtCtn.find(".is_cdrh option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_cdrh){$(this).attr('selected', 'selected')};
+            });
+            
+            formBtCtn.find(".is_final option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_final){$(this).attr('selected', 'selected')};
+            });
+            
+            formBtCtn.find(".is_led option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_led){$(this).attr('selected', 'selected')};
+            });
+            
+            formBtCtn.find(".zone option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.zone){$(this).attr('selected', 'selected')};
+            });
+            
+            $(".step_two").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formBtCtn.fadeIn("200");
+            
+            
+            
+            formBtCtn.find(".update_bt").on('click', function(){
+                
+                var newLineArrayBt = {
+                    type_array:"bt",
+                    symbol_name:formBtCtn.find(".symbol_name").val(),
+                    standard_name: formBtCtn.find(".standard_name").val(), 
+                    description:formBtCtn.find(".description").val(),
+                    is_led:formBtCtn.find(".is_led option:selected").val(), 
+                    is_safety:formBtCtn.find(".is_safety option:selected").val(), 
+                    is_enable:formBtCtn.find(".is_enable option:selected").val(),
+                    is_cdrh:formBtCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formBtCtn.find(".is_final option:selected").val(), 
+                    zone:formBtCtn.find(".zone option:selected").val(), 
+                    timer:formBtCtn.find(".timer").val(),
+                    photo_link:formBtCtn.find(".photo_link").val(),
+                    can_id:formBtCtn.find(".can_id").val(),
+                    pressed_val:formBtCtn.find(".pressed_value").val(),
+                    released_val:formBtCtn.find(".released_value").val(),
+                    on_signal:formBtCtn.find(".on_signal").val(),
+                    off_signal:formBtCtn.find(".off_signal").val(),
+                    flash_signal:formBtCtn.find(".flash_signal").val(),
+                    dim_signal:formBtCtn.find(".dim_signal").val()
+                }
+                
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formBtCtn.fadeOut("200");
+                
+                updateLineNewInfoShow(id, newLineArrayBt)
+            });
+        }
+        
+        function updateFormJoystickShow(id, lineArray){
+            
+            var formBtCtn = $(".adm_show_dictionary_container .formulaire_update_joystick");
+            formBtCtn.find(".update_bt").off();
+            formBtCtn.find(".cancel_bt").off();
+            
+            
+            formBtCtn.find(".cancel_bt").on('click', function(){
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formBtCtn.fadeOut("200");
+            });
+            
+            formBtCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+            
+            console.log(lineArray);
+            formBtCtn.find(".title").html("Update Joystick <b>"+lineArray.symbol_name+"</b> <img src='../images/"+lineArray.photo_link+"'>");
+            
+            formBtCtn.find(".symbol_name").val(lineArray.symbol_name);
+            
+            formBtCtn.find(".photo_link").val(lineArray.photo_link);
+            formBtCtn.find(".standard_name").val(lineArray.standard_name);
+            formBtCtn.find(".timer").val(lineArray.timer);
+            formBtCtn.find(".description").val(lineArray.description);
+            
+            formBtCtn.find(".x_pos").val(lineArray.x_pos);
+            formBtCtn.find(".y_pos").val(lineArray.y_pos);
+            formBtCtn.find(".calib_subindex_x").val(lineArray.calib_subindex_x);
+            formBtCtn.find(".calib_subindex_y").val(lineArray.calib_subindex_y);
+            formBtCtn.find(".threshold_max_zero").val(lineArray.threshold_max_zero);
+            formBtCtn.find(".threshold_max_axis").val(lineArray.threshold_max_axis);
+            formBtCtn.find(".threshold_min_axis").val(lineArray.threshold_min_axis);
+            formBtCtn.find(".threshold_min_zero").val(lineArray.threshold_min_zero);
+            formBtCtn.find(".calib_subindex_x").val(lineArray.calib_subindex_x);
+            formBtCtn.find(".calib_subindex_y").val(lineArray.calib_subindex_y);
+            
+            formBtCtn.find(".can_id").val(lineArray.can_id);
+            formBtCtn.find(".pressed_value").val(lineArray.pressed_val);
+            formBtCtn.find(".released_value").val(lineArray.released_val);
+                                   
+                        
+            formBtCtn.find(".is_cdrh option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_cdrh){$(this).attr('selected', 'selected')};
+            });
+            
+            formBtCtn.find(".is_final option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_final){$(this).attr('selected', 'selected')};
+            });
+            
+            formBtCtn.find(".type option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.type){$(this).attr('selected', 'selected')};
+            });
+            
+            
+            
+            $(".step_two").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formBtCtn.fadeIn("200");
+            
+            formBtCtn.find(".update_bt").on('click', function(){
+                
+                var newLineArrayBt = {
+                    type_array:"joy",
+                    symbol_name:formBtCtn.find(".symbol_name").val(),
+                    standard_name: formBtCtn.find(".standard_name").val(), 
+                    description:formBtCtn.find(".description").val(),
+                    is_cdrh:formBtCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formBtCtn.find(".is_final option:selected").val(),
+                    timer:formBtCtn.find(".timer").val(),
+                    photo_link:formBtCtn.find(".photo_link").val(),
+                    can_id:formBtCtn.find(".can_id").val(),
+                    x_pos:formBtCtn.find(".x_pos").val(),
+                    y_pos:formBtCtn.find(".y_pos").val(),
+                    threshold_max_axis:formBtCtn.find(".threshold_max_axis").val(), 
+                    threshold_max_zero:formBtCtn.find(".threshold_max_zero").val(),
+                    threshold_min_axis:formBtCtn.find(".threshold_min_axis").val(),
+                    threshold_min_zero:formBtCtn.find(".threshold_min_zero").val(),
+                    calib_subindex_x:formBtCtn.find(".calib_subindex_x").val(),
+                    calib_subindex_y:formBtCtn.find(".calib_subindex_y").val(),
+                    type:formBtCtn.find(".type option:selected").val()
+                }
+                
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formBtCtn.fadeOut("200");
+                
+                updateLineNewInfoShow(id, newLineArrayBt)
+            });
+        }
+        
+        function updateFormDisplayShow(id, lineArray){
+            
+            var formDispCtn = $(".adm_show_dictionary_container .formulaire_update_display");
+            
+            formDispCtn.find(".update_bt").off();
+            formDispCtn.find(".cancel_bt").off();
+            
+            formDispCtn.find(".cancel_bt").on('click', function(){
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
+            });
+            
+            formDispCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+            
+            console.log(lineArray);
+            formDispCtn.find(".title").html("Update Display/Buzzer <b>"+lineArray.symbol_name+"</b> <img src='../images/"+lineArray.photo_link+"'>");
+            formDispCtn.find(".symbol_name").val(lineArray.symbol_name);
+            formDispCtn.find(".photo_link").val(lineArray.photo_link);
+            formDispCtn.find(".standard_name").val(lineArray.standard_name);
+            formDispCtn.find(".timer").val(lineArray.timer);
+            formDispCtn.find(".description").val(lineArray.description);
+            formDispCtn.find(".on_signal").val(lineArray.on_signal);
+            formDispCtn.find(".off_signal").val(lineArray.off_signal);
+            formDispCtn.find(".dim_signal").val(lineArray.dim_signal);
+            formDispCtn.find(".flash_signal").val(lineArray.flash_signal);
+            
+            
+            formDispCtn.find(".is_cdrh option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_cdrh){$(this).attr('selected', 'selected')};
+            });
+            
+            formDispCtn.find(".is_final option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.is_final){$(this).attr('selected', 'selected')};
+            }); 
+            
+            formDispCtn.find(".type option").each(function(){
+                $(this).removeAttr('selected');
+                if($(this).val() == lineArray.type){$(this).attr('selected', 'selected')};
+            });      
+            
+            $(".step_two").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formDispCtn.fadeIn("200");
+            
+            formDispCtn.find(".update_bt").on('click', function(){
+                
+                var newLineArrayBt = {
+                    type_array:"disp",
+                    symbol_name:formDispCtn.find(".symbol_name").val(),
+                    standard_name: formDispCtn.find(".standard_name").val(), 
+                    description:formDispCtn.find(".description").val(),                                         
+                    is_cdrh:formDispCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formDispCtn.find(".is_final option:selected").val(),
+                    timer:formDispCtn.find(".timer").val(),
+                    photo_link:formDispCtn.find(".photo_link").val(),          
+                    on_signal:formDispCtn.find(".on_signal").val(),
+                    off_signal:formDispCtn.find(".off_signal").val(),
+                    flash_signal:formDispCtn.find(".flash_signal").val(),
+                    dim_signal:formDispCtn.find(".dim_signal").val(),
+                    type:formDispCtn.find(".type option:selected").val()
+                }
+                
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
+                
+                updateLineNewInfoShow(id, newLineArrayBt)
+            });
+        }
+        
+        function updateLineNewInfoShow(id, newLineArrayBt){
+            console.log(id);
+            console.log(newLineArrayBt);
+            
+            
+            if(newLineArrayBt.type_array == "bt"){
+                var formBtCtn = $(".adm_show_dictionary_container .formulaire_update_button");
+                
+                if(newLineArrayBt.is_safety == 1){var isSafety = "<img src='../images/check_admin.png' title='This component is safety.'>"}else{var isSafety = "-"}
+                if(newLineArrayBt.is_enable == 1){var isEnable = "<img src='../images/check_admin.png' title='This component is enable.'>"}else{var isEnable = "-"}
+                if(newLineArrayBt.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                if(newLineArrayBt.is_led == 1 || newLineArrayBt.is_led == 2){var isLED = "<img src='../images/check_admin.png' title='This component is LED.'>"}else{var isLED = "-"}
+                if(newLineArrayBt.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}         
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('symbolname', newLineArrayBt.symbol_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('standardname', newLineArrayBt.standard_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('description', newLineArrayBt.description);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('isled', newLineArrayBt.is_led);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('issafety', newLineArrayBt.is_safety);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('isenable', newLineArrayBt.is_enable);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('iscdrh', newLineArrayBt.is_cdrh);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('isfinal', newLineArrayBt.is_final);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('zone', newLineArrayBt.zone);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('timer', newLineArrayBt.timer);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('photolink', newLineArrayBt.photo_link);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('canid', newLineArrayBt.can_id);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('pressedval', newLineArrayBt.pressed_val);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('releasedval', newLineArrayBt.released_val);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('onsignal', newLineArrayBt.on_signal);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('offsignal', newLineArrayBt.off_signal);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('flashsignal', newLineArrayBt.flash_signal);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('dimsignal', newLineArrayBt.dim_signal);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .symbol_name").html(newLineArrayBt.symbol_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .standard_name").html(newLineArrayBt.standard_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .description").html(newLineArrayBt.description);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .photo_link").html("<img src='../images/"+newLineArrayBt.photo_link+"'>");
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .can_info").attr('title', "CAN ID : "+newLineArrayBt.can_id+"\nCAN Data Press : "+newLineArrayBt.pressed_val+"\nCAN Data Release : "+newLineArrayBt.released_val);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_safety").html(isSafety);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_enable").html(isEnable);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_cdrh").html(isCDRH);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_led").html(isLED);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_final").html(isFinal);
+                
+                formBtCtn.find(".update_bt").off();
+                formBtCtn.find(".cancel_bt").off();
+                
+            }else if(newLineArrayBt.type_array == "joy"){
+                var formBtCtn = $(".adm_show_dictionary_container .formulaire_update_button");
+                
+                if(newLineArrayBt.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}                
+                if(newLineArrayBt.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}                
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('symbolname', newLineArrayBt.symbol_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('standardname', newLineArrayBt.standard_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('description', newLineArrayBt.description);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('isenable', newLineArrayBt.is_enable);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('iscdrh', newLineArrayBt.is_cdrh);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('isfinal', newLineArrayBt.is_final);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('timer', newLineArrayBt.timer);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('photolink', newLineArrayBt.photo_link);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('canid', newLineArrayBt.can_id);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('type', newLineArrayBt.type);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('xpos', newLineArrayBt.x_pos);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('ypos', newLineArrayBt.y_pos);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('calibsubindexx', newLineArrayBt.calib_subindex_x);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('calibsubindexy', newLineArrayBt.calib_subindex_y);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('thresholdmaxaxis', newLineArrayBt.threshold_max_axis);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('thresholdminaxis', newLineArrayBt.threshold_min_axis);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('thresholdminzero', newLineArrayBt.threshold_min_zero);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('threshold_max_zero', newLineArrayBt.threshold_max_zero);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .symbol_name").html(newLineArrayBt.symbol_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .standard_name").html(newLineArrayBt.standard_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .description").html(newLineArrayBt.description);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .photo_link").html("<img src='../images/"+newLineArrayBt.photo_link+"'>");
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_cdrh").html(isCDRH);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_final").html(isFinal);
+                
+                formBtCtn.find(".update_bt").off();
+                formBtCtn.find(".cancel_bt").off();
+                
+            }else if(newLineArrayBt.type_array == "disp"){
+                var formBtCtn = $(".adm_show_dictionary_container .formulaire_update_button");
+                
+                if(newLineArrayBt.is_safety == 1){var isSafety = "<img src='../images/check_admin.png' title='This component is safety.'>"}else{var isSafety = "-"}
+                if(newLineArrayBt.is_enable == 1){var isEnable = "<img src='../images/check_admin.png' title='This component is enable.'>"}else{var isEnable = "-"}
+                if(newLineArrayBt.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                if(newLineArrayBt.is_led == 1 || newLineArrayBt.is_led == 2){var isLED = "<img src='../images/check_admin.png' title='This component is LED.'>"}else{var isLED = "-"}
+                if(newLineArrayBt.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}                
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('symbolname', newLineArrayBt.symbol_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('standardname', newLineArrayBt.standard_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('description', newLineArrayBt.description);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('iscdrh', newLineArrayBt.is_cdrh);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('isfinal', newLineArrayBt.is_final);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('timer', newLineArrayBt.timer);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('photolink', newLineArrayBt.photo_link);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('canid', newLineArrayBt.can_id);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('onsignal', newLineArrayBt.on_signal);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('offsignal', newLineArrayBt.off_signal);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('flashsignal', newLineArrayBt.flash_signal);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('dimsignal', newLineArrayBt.dim_signal);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('type', newLineArrayBt.type);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .symbol_name").html(newLineArrayBt.symbol_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .standard_name").html(newLineArrayBt.standard_name);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .description").html(newLineArrayBt.description);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .photo_link").html("<img src='../images/"+newLineArrayBt.photo_link+"'>");
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .can_info").attr('title', "CAN ID : "+newLineArrayBt.can_id+"\nCAN Data Press : "+newLineArrayBt.pressed_val+"\nCAN Data Release : "+newLineArrayBt.released_val);
+                
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_cdrh").html(isCDRH);
+                $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id+" .is_final").html(isFinal);
+                
+                formBtCtn.find(".update_bt").off();
+                formBtCtn.find(".cancel_bt").off();
+            }
+            
+            $(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).addClass("updated_state");
+            
+            console.log($(".adm_show_dictionary_container .dictionary_type_listing").find("."+id).data('symbolname'));
+            
+            
+        }
+        
+        $(".adm_show_dictionary_container .add_new_entry_show").off();
+        $(".adm_show_dictionary_container .add_new_entry_show").on('click', function(){
+            if($(this).hasClass("bt")){
+                createNewButtonShow();
+            }else if($(this).hasClass("joy")){
+                createNewJoystickShow();
+            }else if($(this).hasClass("disp")){
+                createNewDisplayShow();
+            }
+        })
+        
+        function createNewButtonShow(){
+            var formBtCtn = $(".adm_show_dictionary_container .formulaire_create_button");
+            
+            $(".step_two").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formBtCtn.fadeIn("200");
+            
+            formBtCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+            formBtCtn.find(".create_bt").off();
+            formBtCtn.find(".create_bt").on('click', function(){
+                
+                var newLineArrayBt = {
+                    type_array: "bt",
+                    symbol_name:formBtCtn.find(".symbol_name").val(),
+                    standard_name: formBtCtn.find(".standard_name").val(), 
+                    description:formBtCtn.find(".description").val(),
+                    is_led:formBtCtn.find(".is_led option:selected").val(), 
+                    is_safety:formBtCtn.find(".is_safety option:selected").val(), 
+                    is_enable:formBtCtn.find(".is_enable option:selected").val(),
+                    is_cdrh:formBtCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formBtCtn.find(".is_final option:selected").val(), 
+                    zone:formBtCtn.find(".zone option:selected").val(), 
+                    timer:formBtCtn.find(".timer").val(),
+                    photo_link:formBtCtn.find(".photo_link").val(),
+                    can_id:formBtCtn.find(".can_id").val(),
+                    pressed_val:formBtCtn.find(".pressed_value").val(),
+                    released_val:formBtCtn.find(".released_value").val(),
+                    on_signal:formBtCtn.find(".on_signal").val(),
+                    off_signal:formBtCtn.find(".off_signal").val(),
+                    flash_signal:formBtCtn.find(".flash_signal").val(),
+                    dim_signal:formBtCtn.find(".dim_signal").val()
+                }
+                
+                if(newLineArrayBt.is_safety == 1){var isSafety = "<img src='../images/check_admin.png' title='This component is safety.'>"}else{var isSafety = "-"}
+                if(newLineArrayBt.is_enable == 1){var isEnable = "<img src='../images/check_admin.png' title='This component is enable.'>"}else{var isEnable = "-"}
+                if(newLineArrayBt.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                if(newLineArrayBt.is_led == 1 || newLineArrayBt.is_led == 2){var isLED = "<img src='../images/check_admin.png' title='This component is LED.'>"}else{var isLED = "-"}
+                if(newLineArrayBt.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
+                
+                var count = ($(".adm_show_dictionary_container .dictionary_type_listing.bouton-type .line_new_dico").length)+50;;
+                
+                
+                var newEntry = "<div class='line_new_dico bt_"+count+" created_state' data-index='bt_"+count+"' data-calibsubindexx='' data-calibsubindexy='' data-canid='"+newLineArrayBt.can_id+"' data-description='"+newLineArrayBt.description+"' data-dimsignal='"+newLineArrayBt.dim_signal+"' data-familyid='' data-flashsignal='"+newLineArrayBt.flash_signal+"' data-id='' data-iscdrh='"+newLineArrayBt.is_cdrh+"' data-isenable='"+newLineArrayBt.is_enable+"' data-isfinal='"+newLineArrayBt.is_final+"' data-isled='"+newLineArrayBt.is_led+"' data-issafety='"+newLineArrayBt.is_safety+"' data-offsignal='"+newLineArrayBt.off_signal+"' data-onsignal='"+newLineArrayBt.on_signal+"' data-photolink='"+newLineArrayBt.photo_link+"' data-pressedval='"+newLineArrayBt.pressed_val+"' data-releasedval='"+newLineArrayBt.released_val+"' data-standardname='"+newLineArrayBt.standard_name+"' data-symbolname='"+newLineArrayBt.symbol_name+"' data-thresholdmaxaxis='0' data-threshold_max_zero='0' data-thresholdminaxis='0' data-thresholdminzero='0' data-timer='"+newLineArrayBt.timer+"' data-type='button' data-value='' data-xpos='' data-ypos='' data-zone='"+newLineArrayBt.zone+"'>"
+                    +"<div class='td_dico symbol_name'>"+newLineArrayBt.symbol_name+"</div>"
+                    +"<div class='td_dico standard_name'>"+newLineArrayBt.standard_name+"</div>"
+                    +"<div class='td_dico description'>"+newLineArrayBt.description+"</div>"
+                    +"<div class='td_dico photo_link'><img src='../images/"+newLineArrayBt.photo_link+"'></div>"
+                    +"<div class='td_dico is_safety'>"+isSafety+"</div>"
+                    +"<div class='td_dico is_enable'>"+isEnable+"</div>"
+                    +"<div class='td_dico is_cdrh'>"+isCDRH+"</div>"      
+                    +"<div class='td_dico is_led'>"+isLED+"</div>"
+                    +"<div class='td_dico is_final'>"+isFinal+"</div>"
+                    +"<div class='td_dico can_info' title='CAN ID : "+newLineArrayBt.can_id+"\nCAN Data Press : "+newLineArrayBt.pressed_val+"\nCAN Data Release : "+newLineArrayBt.released_val+"'><img src='../images/search.png' ></div>"
+                    +"<div class='td_dico action'><img class='update_line' src='../images/update_admin.png' title='Modify this entry.' style='margin-right: 17px;'><img class='delete_line' src='../images/delete.png' title='Delete this entry.'></div>"
+                +"</div>";
+        
+                $(".adm_show_dictionary_container .dictionary_type_listing.bouton-type .content_new_dico").append(newEntry);
+                
+                
+                $(".adm_show_dictionary_container .bt_"+count+" .delete_line").on('click', function(){
+                        var name = $(this).parents(".line_new_dico").data('standard_name');
+                        if (confirm('Confirm the deletion of entry '+name+'. This action is irreversible.')) {
+                            $(this).parents(".line_new_dico").remove();
+                        }                        
+                });
 
+                $(".adm_show_dictionary_container .bt_"+count+" .update_line").on('click', function(){
+                    var id = $(this).parents(".line_new_dico").data('index');
+                    var type = $(this).parents(".line_new_dico").data('type');
+                    updateDictionaryLineShow(id, type); 
+                });
+                
+                
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formBtCtn.fadeOut("200");
+                
+            });
+        
+            formBtCtn.find(".cancel_bt").on('click', function(){
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formBtCtn.fadeOut("200");
+            });
+        
+        }
+        
+        function createNewJoystickShow(){
+            var formJoyCtn = $(".adm_show_dictionary_container .formulaire_create_joystick");
+            formJoyCtn.find(".create_bt").off();
+            $(".step_two").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formJoyCtn.fadeIn("200");
+            formJoyCtn.find("input").val("");
+            formJoyCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+    
+            formJoyCtn.find(".create_bt").on('click', function(){
+                
+                var newLineArrayJoy = {
+                    type_array:"joy",
+                    symbol_name:formJoyCtn.find(".symbol_name").val(),
+                    standard_name: formJoyCtn.find(".standard_name").val(), 
+                    description:formJoyCtn.find(".description").val(),
+                    is_cdrh:formJoyCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formJoyCtn.find(".is_final option:selected").val(),
+                    type:formJoyCtn.find(".type option:selected").val(),
+                    timer:formJoyCtn.find(".timer").val(),
+                    photo_link:formJoyCtn.find(".photo_link").val(),
+                    can_id:formJoyCtn.find(".can_id").val(),
+                    x_pos:formJoyCtn.find(".x_pos").val(),
+                    y_pos:formJoyCtn.find(".y_pos").val(),
+                    threshold_max_axis:formJoyCtn.find(".threshold_max_axis").val(), 
+                    threshold_max_zero:formJoyCtn.find(".threshold_max_zero").val(),
+                    threshold_min_axis:formJoyCtn.find(".threshold_min_axis").val(),
+                    threshold_min_zero:formJoyCtn.find(".threshold_min_zero").val(),
+                    calib_subindex_x:formJoyCtn.find(".calib_subindex_x").val(),
+                    calib_subindex_y:formJoyCtn.find(".calib_subindex_y").val()
+                }
+                               
+                if(newLineArrayJoy.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                if(newLineArrayJoy.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
+                
+                var count = ($(".adm_show_dictionary_container .dictionary_type_listing.joystick-type .line_new_dico").length)+50;;
+                                       
+                var newEntry = "<div class='line_new_dico joy_"+count+" created_state' data-index='joy_"+count+"' data-calibsubindexx='"+newLineArrayJoy.calib_subindex_x+"' data-calibsubindexy='"+newLineArrayJoy.calib_subindex_y+"' data-canid='"+newLineArrayJoy.can_id+"' data-description='"+newLineArrayJoy.description+"' data-dimsignal='' data-familyid='' data-flashsignal='' data-id='' data-iscdrh='"+newLineArrayJoy.is_cdrh+"' data-isenable='0' data-isfinal='"+newLineArrayJoy.is_final+"' data-isled='0' data-issafety='0' data-offsignal='' data-onsignal='' data-photolink='"+newLineArrayJoy.photo_link+"' data-pressedval='' data-releasedval='' data-standardname='"+newLineArrayJoy.standard_name+"' data-symbolname='"+newLineArrayJoy.symbol_name+"' data-thresholdmaxaxis='"+newLineArrayJoy.threshold_max_axis+"' data-threshold_max_zero='"+newLineArrayJoy.threshold_max_zero+"' data-thresholdminaxis='"+newLineArrayJoy.threshold_min_axis+"' data-thresholdminzero='"+newLineArrayJoy.threshold_min_zero+"' data-timer='"+newLineArrayJoy.timer+"' data-type='"+newLineArrayJoy.type+"' data-value='' data-xpos='"+newLineArrayJoy.x_pos+"' data-ypos='"+newLineArrayJoy.y_pos+"' data-zone='50'>"
+                    +"<div class='td_dico symbol_name'>"+newLineArrayJoy.symbol_name+"</div>"
+                    +"<div class='td_dico standard_name'>"+newLineArrayJoy.standard_name+"</div>"
+                    +"<div class='td_dico description'>"+newLineArrayJoy.description+"</div>"
+                    +"<div class='td_dico photo_link'><img src='../images/"+newLineArrayJoy.photo_link+"'></div>"
+                    +"<div class='td_dico is_cdrh'>"+isCDRH+"</div>"   
+                    +"<div class='td_dico is_final'>"+isFinal+"</div>"
+                    +"<div class='td_dico action'><img class='update_line' src='../images/update_admin.png' title='Modify this entry.' style='margin-right: 17px;'><img class='delete_line' src='../images/delete.png' title='Delete this entry.'></div>"
+                +"</div>";
+        
+                $(".adm_show_dictionary_container .dictionary_type_listing.joystick-type .content_new_dico").append(newEntry);
+                                
+                $(".adm_show_dictionary_container .joy_"+count+" .delete_line").on('click', function(){
+                        var name = $(this).parents(".line_new_dico").data('standard_name');
+                        if (confirm('Confirm the deletion of entry '+name+'. This action is irreversible.')) {
+                            $(this).parents(".line_new_dico").remove();
+                        }                        
+                });
+
+                $(".adm_show_dictionary_container .joy_"+count+" .update_line").on('click', function(){
+                    var id = $(this).parents(".line_new_dico").data('index');
+                    var type = $(this).parents(".line_new_dico").data('type');
+                    updateDictionaryLineShow(id, type); 
+                });                
+                
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formJoyCtn.fadeOut("200");
+                
+            });
+            
+            formJoyCtn.find(".cancel_bt").on('click', function(){
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formJoyCtn.fadeOut("200");
+            });
+        }
+        
+        function createNewDisplayShow(){
+            var formDispCtn = $(".adm_show_dictionary_container .formulaire_create_display");
+            formDispCtn.find(".title").html("Create new Display/Buzzer");
+            
+            $(".step_two").fadeOut(200);            
+            $(".overlay_form").removeClass("hidden");
+            formDispCtn.fadeIn("200");
+            
+            formDispCtn.find(".create_bt").off();
+            formDispCtn.find(".tooltip_form").hover(
+                function() {
+                  $(this).find(".text_explain").fadeIn(100);
+                }, function() {
+                  $(this).find(".text_explain").fadeOut(100);
+                }
+            );
+    
+            formDispCtn.find(".create_bt").on('click', function(){
+                
+                var newLineArrayDisp = {
+                    type_array: "bt",
+                    symbol_name:formDispCtn.find(".symbol_name").val(),
+                    standard_name: formDispCtn.find(".standard_name").val(), 
+                    description:formDispCtn.find(".description").val(),
+                    is_cdrh:formDispCtn.find(".is_cdrh option:selected").val(), 
+                    is_final:formDispCtn.find(".is_final option:selected").val(), 
+                    timer:formDispCtn.find(".timer").val(),
+                    photo_link:formDispCtn.find(".photo_link").val(),
+                    on_signal:formDispCtn.find(".on_signal").val(),
+                    off_signal:formDispCtn.find(".off_signal").val(),
+                    flash_signal:formDispCtn.find(".flash_signal").val(),
+                    dim_signal:formDispCtn.find(".dim_signal").val(),
+                    type:formDispCtn.find(".type option:selected").val()
+                }
+                
+                if(newLineArrayDisp.is_cdrh == 1){var isCDRH = "<img src='../images/check_admin.png' title='This component is CDRH.'>"}else{var isCDRH = "-"}
+                if(newLineArrayDisp.is_final == 1){var isFinal = "<img src='../images/check_admin.png' title='This component is in final test.'>"}else{var isFinal = "-"}   
+                
+                var count = ($(".adm_show_dictionary_container .dictionary_type_listing.display-type .line_new_dico").length)+50;
+                
+                var newEntry = "<div class='line_new_dico disp_"+count+" created_state'data-index='disp_"+count+"' data-calibsubindexx='' data-calibsubindexy='' data-canid='' data-description='"+newLineArrayDisp.description+"' data-dimsignal='"+newLineArrayDisp.dim_signal+"' data-familyid='' data-flashsignal='"+newLineArrayDisp.flash_signal+"' data-id='' data-iscdrh='"+newLineArrayDisp.is_cdrh+"' data-isenable='0' data-isfinal='"+newLineArrayDisp.is_final+"' data-isled='0' data-issafety='0' data-offsignal='"+newLineArrayDisp.off_signal+"' data-onsignal='"+newLineArrayDisp.on_signal+"' data-photolink='"+newLineArrayDisp.photo_link+"' data-pressedval='' data-releasedval='' data-standardname='"+newLineArrayDisp.standard_name+"' data-symbolname='"+newLineArrayDisp.symbol_name+"' data-thresholdmaxaxis='' data-threshold_max_zero='' data-thresholdminaxis='' data-thresholdminzero='' data-timer='"+newLineArrayDisp.timer+"' data-type='"+newLineArrayDisp.type+"' data-value='' data-xpos='' data-ypos='' data-zone='50'>"
+                    +"<div class='td_dico symbol_name'>"+newLineArrayDisp.symbol_name+"</div>"
+                    +"<div class='td_dico standard_name'>"+newLineArrayDisp.standard_name+"</div>"
+                    +"<div class='td_dico description'>"+newLineArrayDisp.description+"</div>"
+                    +"<div class='td_dico photo_link'><img src='../images/"+newLineArrayDisp.photo_link+"'></div>"
+                    +"<div class='td_dico is_cdrh'>"+isCDRH+"</div>"   
+                    +"<div class='td_dico is_final'>"+isFinal+"</div>"
+                    +"<div class='td_dico action'><img class='update_line' src='../images/update_admin.png' title='Modify this entry.' style='margin-right: 17px;'><img class='delete_line' src='../images/delete.png' title='Delete this entry.'></div>"
+                +"</div>";
+                
+        
+                $(".adm_show_dictionary_container .dictionary_type_listing.display-type .content_new_dico").append(newEntry);
+                
+                
+                $(".adm_show_dictionary_container .disp_"+count+" .delete_line").on('click', function(){
+                        var name = $(this).parents(".line_new_dico").data('standard_name');
+                        if (confirm('Confirm the deletion of entry '+name+'. This action is irreversible.')) {
+                            $(this).parents(".line_new_dico").remove();
+                        }                        
+                });
+
+                $(".adm_show_dictionary_container .disp_"+count+" .update_line").on('click', function(){
+                    var id = $(this).parents(".line_new_dico").data('index');
+                    var type = $(this).parents(".line_new_dico").data('type');
+                    updateDictionaryLineShow(id, type); 
+                });
+                
+                
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
+                
+            });
+            
+            formDispCtn.find(".cancel_bt").on('click', function(){
+                $(".step_two").fadeIn(200);            
+                $(".overlay_form").addClass("hidden");
+                formDispCtn.fadeOut("200");
+            });
+        }
+        
+        $(".adm_show_dictionary_container .update_new_dico").off();
+        $(".adm_show_dictionary_container .update_new_dico").on('click', function(){
+            updateDictionaryInDatabase(newID, description, refID, refFamily, refModel, refType);
+        });
+        
+        $(".adm_show_dictionary_container .cancel_new_dico").off();
+        $(".adm_show_dictionary_container .cancel_new_dico").on('click',function(){
+            $(".step_two").fadeOut(200);
+            setTimeout(function(){
+                $(".step_one").fadeIn(200);
+            },200)            
+        });
+        
+    }
+    
 });
 
