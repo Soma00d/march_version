@@ -48,8 +48,7 @@
                       <div class="dropdownlink"><img src="../images/admin/tsui.png"> TSUI
                       </div>
                       <ul class="submenuItems">
-                        <li><a href="#">Show all TSUI</a></li>
-                        <li><a href="#">Add a new TSUI</a></li>
+                        <li><a href="#" class="menu_item tsui_page" data-menulink="tsui">Show all TSUI</a></li>
                       </ul>
                     </li>
                     <li>
@@ -81,6 +80,9 @@
                 </div>
                 <div id="adm_content_show_dictionary" class="page_content">
                     <?php include('template/show_dictionary.html'); ?>
+                </div>
+                <div id="adm_content_tsui" class="page_content">
+                    <?php include('template/tsui.html'); ?>
                 </div>
                 <div id="adm_content_log" class="page_content">
                     <?php include('template/log.html'); ?>

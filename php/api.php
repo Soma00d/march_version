@@ -64,6 +64,17 @@ $getTsuiRepair = function ($part_number, $connexion) {
     return json_encode($result);
 };
 
+//retourne la table TSUI
+$getAllTsui = function ($connexion) {
+
+    $resultats = $connexion->query("SELECT * FROM tsui");
+
+    $resultats->execute();
+    $result = $resultats->fetchAll();
+
+    return json_encode($result);
+};
+
 //retourne un dictionnaire complet en fonction d'une family id
 $getDictionariesById = function ($id, $connexion) {
     $resultats = $connexion->query("SELECT * FROM dictionaries WHERE family_id = $id ORDER BY id");
@@ -377,6 +388,9 @@ if (isset($_GET["function"])) {
             break;
         case "get_tsui_repair":
             echo $getTsuiRepair($param1, $connexion);
+            break;
+        case "get_all_tsui":
+            echo $getAllTsui($connexion);
             break;
         case "get_dictionaries_by_id":
             echo $getDictionariesById($param1, $connexion);

@@ -1,0 +1,138 @@
+<div class="adm_tsui_container">
+    <div class="title">TSUI Management panel</div>
+    <div class="result_description">There are currently <span></span> TSUIs in database.</div>  
+    
+    <div class="array_all_tsui">
+        <div class="header_array_tsui">
+            <div class="head_item tsui_part_number">Part Number</div>
+            <div class="head_item tsui_name">UI Name</div>
+            <div class="head_item tsui_photo_link">Photo</div>
+            <div class="head_item tsui_family">Family ID</div>            
+            <div class="head_item tsui_family_name">Family Name</div>            
+            <div class="head_item tsui_model">Model Name</div>            
+            <div class="head_item tsui_type">Type</div>            
+            <div class="head_item tsui_switch_pos_number">Switch Pos. Nb.</div>            
+            <div class="head_item tsui_has_service_bt">Service Bt.</div>            
+            <div class="head_item tsui_has_SRTL">SRTL</div>            
+            <div class="head_item tsui_actions">Actions</div>
+        </div>
+        <div class="content_array_tsui"></div>
+    </div>
+    
+     <!-- UPDATE TSUI ____________________________________________________________________-->
+    
+    <div class="overlay_udpdate">
+        <div class="update_tsui_box">
+            <div class="title">Update Tsui ID <span class="id_tsui_span"></span></div>
+            <div class="form_update_tsui">
+                <div class="left">
+                    <div class="tsui_update_sct">
+                        <div class="description_form">Part Number</div>
+                        <input type="text" class="update_tsui_part_number" value="">
+                    </div>
+                    <div class="tsui_update_sct">
+                        <div class="description_form">UI Name</div>
+                        <input type="text" class="update_tsui_name" value="">
+                    </div>
+                    <div class="tsui_update_sct">
+                        <div class="description_form">Photo Link</div>
+                        <input type="text" class="update_tsui_photo_link" value="">
+                    </div>
+                    <div class="tsui_update_sct">
+                        <div class="description_form">Family ID</div>
+                        <input type="text" class="update_tsui_family" value="">
+                    </div>
+                    <div class="tsui_update_sct">
+                        <div class="description_form">Family Name</div>
+                        <input type="text" class="update_tsui_family_name" value="">
+                    </div>
+                    <div class="tsui_update_sct">
+                        <div class="description_form">Model Name</div>
+                        <input type="text" class="update_tsui_model" value="">
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="tsui_update_sct">
+                        <div class="description_form">type Name</div>
+                        <input type="text" class="update_tsui_type" value="">
+                    </div>
+                    <div class="tsui_update_sct">
+                        <div class="description_form">Switch Position Number</div>
+                        <input type="text" class="update_tsui_switch_pos_number" value="">
+                    </div>
+                    <div class="tsui_update_sct">
+                        <div class="description_form">COC file link (.pdf)</div>
+                        <input type="text" class="update_tsui_tst_name" value="">
+                    </div>
+
+                    <div class="tsui_update_sct">
+                        <div class="description_form">This TSUI has Service Button ?</div>
+                        <select class="update_tsui_has_service_bt">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="tsui_update_sct">
+                        <div class="description_form">This TSUI has SRTL ?</div>
+                        <select class="update_tsui_has_SRTL">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                
+                
+                <div class="tsui_update_sct sct_btn">
+                    <div class="update_tsui_btn">Update</div>
+                    <div class="cancel_tsui_btn">Cancel</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CREATE NEW TSUI _____________________________________________________________-->
+    
+    <div class="overlay_create">
+        <div class="create_tsui_box">
+            <div class="title">Create New User</div>
+            <div class="form_create_tsui">
+                <div class="tsui_create_sct">
+                    <div class="description_form">User Name</div>
+                    <input type="text" class="create_tsui_name" value="">
+                </div>
+                <div class="tsui_create_sct">
+                    <div class="description_form">User SSO</div>
+                    <input type="text" class="create_tsui_sso" value="">
+                </div>
+                <div class="tsui_create_sct">
+                    <div class="description_form">User Description</div>
+                    <select class="create_tsui_description">
+                        <option value="Engineering">Engineering</option>
+                        <option value="Repair">Repair</option>
+                    </select>
+                </div>
+                <div class="tsui_create_sct">
+                    <div class="description_form">User Role (Access Permission)</div>
+                    <select class="create_tsui_role">
+                        <option value="INGE">Engineering</option>
+                        <option value="REPAIR_ALL">Repair All Section </option> 
+                        <option value="REPAIR_FINAL">Repair Test Final Section Only</option>
+                        <option value="REPAIR_DIAG">Repair Diagnostic Section Only</option>
+                    </select>
+                </div>
+                <div class="tsui_create_sct">
+                    <div class="description_form">User is Administrator ?</div>
+                    <select class="create_tsui_admin">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="tsui_create_sct sct_btn">
+                    <div class="create_tsui_btn">Create</div>
+                    <div class="create_cancel_tsui_btn">Cancel</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

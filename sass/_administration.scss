@@ -149,7 +149,7 @@
 
 
 }
-#adm_content_user, #adm_content_log, #adm_content_serial, #adm_content_show_dictionary{
+#adm_content_user, #adm_content_log, #adm_content_serial, #adm_content_show_dictionary , #adm_content_tsui{
     position: relative;
     .add_user_description, .export_user_description{
         margin-top: 20px;
@@ -188,7 +188,7 @@
         min-height: 700px;
         z-index: 0;
         display:none;
-        .update_user_box, .create_user_box{
+        .update_user_box, .create_user_box, .update_tsui_box, .create_tsui_box{
             width: 400px;
             background: #f5f5f5;
             padding: 15px;
@@ -198,8 +198,20 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: 75px;
-            .form_update_user, .form_create_user{
-                .user_update_sct, .user_create_sct{
+            
+            .form_update_user, .form_create_user, .form_update_tsui, .form_create_tsui{
+                .left{
+                    display:inline-block;
+                    vertical-align:top;
+                    border-right:1px solid black;
+                    width: 49.3%;
+                }
+                .right{
+                    display:inline-block;
+                    vertical-align:top;
+                    width: 49.3%;
+                }
+                .user_update_sct, .user_create_sct, .tsui_update_sct, .tsui_create_sct{
                     margin-top: 15px;
                     margin-left: auto;
                     margin-right: auto;
@@ -224,7 +236,7 @@
                     text-align: center;
                     margin-top: 25px;
                     margin-bottom: 15px;
-                    .update_user_btn, .create_user_btn{
+                    .update_user_btn, .create_user_btn, .update_tsui_btn, .create_tsui_btn{
                         width: 90px;
                         background: #3b73b9;
                         color: white;
@@ -235,7 +247,7 @@
                         display: inline-block;
                         vertical-align: top;
                     }
-                    .cancel_user_btn, .create_cancel_user_btn{
+                    .cancel_user_btn, .create_cancel_user_btn, .cancel_tsui_btn, .create_cancel_tsui_btn{
                         width: 90px;
                         background: #c7ccd2;
                         color: black;
@@ -249,6 +261,9 @@
                     }
                 }
             }
+        }
+        .update_tsui_box, .create_tsui_box{
+            width:600px;
         }
     }
     .adm_all_user_container, .adm_logs_container, .adm_serial_container{
@@ -799,4 +814,74 @@
             }
         }        
     }
+}
+
+.array_all_tsui{
+    margin-top: 35px;
+    .header_array_tsui{
+        .head_item{
+            background: #5b6f88;
+            display: inline-block;
+            vertical-align: top;
+            width: 100px;
+            text-align: center;
+            border-right: 1px solid white;
+            color: white;
+            padding: 1px;
+            margin-right: -3px;
+            font-size: 14px;
+        }
+    }
+    .content_array_tsui{
+        .line_tsui{
+            width: 1111px;
+            height: 31px;
+            overflow: hidden;
+
+            &:nth-child(even) {
+                background-color:#cde1f0;
+            }
+            &.updated_state{
+                background:#fff70040;
+            }
+            &.created_state{
+                background:#52fd5269;
+            }
+            .td_tsui{
+                display: inline-block;
+                vertical-align: top;
+                width: 100px;
+                text-align: center;
+                border-right: 1px solid white;
+                padding: 1px;
+                margin-right: 1px;
+                font-size: 14px;
+                padding-top: 8px;
+                img{
+                    width: 22px;
+                    margin-top: -3px;
+                }                        
+                &.photo_link{
+                    img{
+                        width: 62px;
+                        margin-top: -9px;
+                    }
+                }                    
+                &.action{
+                    cursor:pointer;
+                }
+                &.part_number{
+                    font-weight:bold;
+                }
+                &.name{
+                    font-size: 10px;
+                    padding-top: 10px;
+                    font-style: italic;
+                }
+                &.model_name{
+                    width: 100px;
+                }    
+            }
+        }
+    }        
 }
