@@ -215,6 +215,7 @@ $(document).ready(function () {
         });
         $(".adm_all_user_container .overlay_udpdate").fadeIn(300);
         
+        updateUserBox.find(".update_tsui_btn").off();
         updateUserBox.find(".update_user_btn").on('click', function(){
             var nameLine = updateUserBox.find(".update_user_name").val();
             var ssoLine = updateUserBox.find(".update_user_sso").val();
@@ -254,6 +255,7 @@ $(document).ready(function () {
         
         $(".adm_all_user_container .overlay_create").fadeIn(300);
         
+        createUserBox.find(".create_user_btn").off();
         createUserBox.find(".create_user_btn").on('click', function(){
             var nameLine = createUserBox.find(".create_user_name").val();
             var ssoLine = createUserBox.find(".create_user_sso").val();
@@ -261,6 +263,11 @@ $(document).ready(function () {
             var roleLine = createUserBox.find(".create_user_role option:selected").val();
             var adminLine = createUserBox.find(".create_user_admin option:selected").val();
             createUser(nameLine, ssoLine, descriptionLine, roleLine, adminLine);
+        });
+        
+        createUserBox.find(".cancel_tsui_btn").off();
+        createUserBox.find(".cancel_tsui_btn").on('click', function(){
+            closeUserCreateBox();
         });
         
     }
@@ -2605,8 +2612,11 @@ $(document).ready(function () {
         });
     }
     
-    function fillTsuiTable(data){
-        var tsuiTable = $(".content_array_tsui");        
+    function fillTsuiTable(data){        
+        var tsuiTable = $(".content_array_tsui"); 
+        tsuiTable.find(".delete_line").off();
+        tsuiTable.find(".update_line").off();
+        
         tsuiTable.empty();
         
         console.log(data);
@@ -2635,7 +2645,8 @@ $(document).ready(function () {
                     +"</div>"
                 )
             }
-        
+            
+            
             tsuiTable.find(".delete_line").on('click', function(){
                 var idLine = $(this).parent().data("id");
                 var part_number = $(this).parent().data("part_number");
@@ -2646,6 +2657,7 @@ $(document).ready(function () {
                     },250);
                 }
             });
+            
             tsuiTable.find(".update_line").on('click', function(){
                 var idLine_ = $(this).parent().data("id");
                 var partNumber_ = $(this).parent().data("part_number");
@@ -2671,25 +2683,50 @@ $(document).ready(function () {
     
     }
     
-        //Ouverture de la fenetre d'update user
+    //Ouverture de la fenetre d'update user
     function openTsuiUpdateBox(idLine, partNumber, name, photoLink, family, familyName, model, type, switchPosNumber, hasServiceBt, hasSRTL, tstName){
         var updateTsuiBox = $(".adm_tsui_container .update_tsui_box");
+        updateTsuiBox.find(".update_tsui_btn").off();
         
         updateTsuiBox.find("select option").each(function(){
             $(this).removeAttr('selected');
         });
+        
+        updateTsuiBox.find(".update_tsui_family").empty();        
+        $.ajax({
+            url: '../php/api.php?function=get_all_dictionaries',
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data, statut) {
+                console.log(data);
+                for(var i =0; i<data.length;i++){
+                    console.log(data[i].family_id);
+                    updateTsuiBox.find(".update_tsui_family").append("<option value='"+data[i].family_id+"'>"+data[i].family_id+" - <i>"+data[i].description+"</i></option>")
+                }
+            }
+        });
+        
         updateTsuiBox.find(".id_tsui_span").html(idLine);
         updateTsuiBox.find(".update_tsui_part_number").val(partNumber);
         updateTsuiBox.find(".update_tsui_name").val(name);
         updateTsuiBox.find(".update_tsui_photo_link").val(photoLink);
-        updateTsuiBox.find(".update_tsui_family").val(family);
         updateTsuiBox.find(".update_tsui_family_name").val(familyName);
         updateTsuiBox.find(".update_tsui_model").val(model);
         updateTsuiBox.find(".update_tsui_type").val(type);
-        updateTsuiBox.find(".update_tsui_switch_pos_number").val(switchPosNumber);
         updateTsuiBox.find(".update_tsui_tst_name").val(tstName);
        
         console.log(hasServiceBt);
+        updateTsuiBox.find(".update_tsui_family option").each(function(){
+            if($(this).val()== family){
+                $(this).attr("selected","selected");
+            }
+        });
+        updateTsuiBox.find(".update_tsui_switch_pos_number option").each(function(){
+            if($(this).val()== switchPosNumber){
+                $(this).attr("selected","selected");
+            }
+        });
+        
         updateTsuiBox.find(".update_tsui_has_service_bt option").each(function(){
             if($(this).val()== hasServiceBt){
                 $(this).attr("selected","selected");
@@ -2724,9 +2761,101 @@ $(document).ready(function () {
         });
         
     }
+    
+     //Appel ajax pour modifier un TSUI
+    function updateTsuiByID(idLine, partNumber, name, photoLink, family, familyName, model, type, switchPosNumber, hasServiceBt, hasSRTL, tstName){        
+        $.ajax({
+            url: '../php/api.php?function=update_tsui_by_id',
+            type: 'POST',
+            dataType: 'JSON',
+            data:{id:idLine,partNumber:partNumber, name:name, photoLink:photoLink, family:family, familyName:familyName,model:model,switchPosNumber:switchPosNumber,
+                hasServiceBt:hasServiceBt,hasSRTL:hasSRTL,tstName:tstName, type:type}
+        });
+        setTimeout(function(){
+            getTsuiAdmin();
+            closeTsuiUpdateBox();
+        },200);
+    }
+    
     //Fermeture de la fenetre d'update user
     function closeTsuiUpdateBox(){        
         $(".adm_tsui_container .overlay_udpdate").fadeOut(300);
+    }  
+    
+    $(".add_tsui_description").on('click', function(){
+        openCreateTsuiBox();
+    });
+    
+    //Ouverture de la fenetre de creation user
+    function openCreateTsuiBox(){
+        var createTsuiBox = $('.adm_tsui_container .create_tsui_box');
+        createTsuiBox.find("select option").each(function(){
+            $(this).removeAttr('selected');
+        });        
+        createTsuiBox.find("input").each(function(){
+            $(this).val('');
+        });
+        createTsuiBox.find(".create_tsui_family").empty();
+        
+        
+        $.ajax({
+            url: '../php/api.php?function=get_all_dictionaries',
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data, statut) {
+                console.log(data);
+                for(var i =0; i<data.length;i++){
+                    console.log(data[i].family_id);
+                    createTsuiBox.find(".create_tsui_family").append("<option value='"+data[i].family_id+"'>"+data[i].family_id+" - <i>"+data[i].description+"</i></option>")
+                }
+            }
+        });
+        
+        
+        $(".adm_tsui_container .overlay_create").fadeIn(300);
+        
+        createTsuiBox.find(".create_tsui_btn").off();
+        createTsuiBox.find(".create_tsui_btn").on('click', function(){
+            var _partNumber = createTsuiBox.find(".create_tsui_part_number").val();
+            var _name = createTsuiBox.find(".create_tsui_name").val();
+            var _photoLink = createTsuiBox.find(".create_tsui_photo_link").val();
+            var _family = createTsuiBox.find(".create_tsui_family").val();
+            var _familyName = createTsuiBox.find(".create_tsui_family_name").val();
+            var _model = createTsuiBox.find(".create_tsui_model").val();
+            var _type = createTsuiBox.find(".create_tsui_type").val();
+            var _switchPosNumber = createTsuiBox.find(".create_tsui_switch_pos_number").val();
+            var _hasServiceBt = createTsuiBox.find(".create_tsui_has_service_bt").val();
+            var _hasSRTL = createTsuiBox.find(".create_tsui_has_SRTL").val();
+            var _tstName = createTsuiBox.find(".create_tsui_tst_name").val();
+            
+            createTsui(_partNumber, _name, _photoLink, _family, _familyName, _model, _type, _switchPosNumber, _hasServiceBt, _hasSRTL, _tstName);
+        });
+        
+        createTsuiBox.find(".cancel_tsui_btn").off();
+        createTsuiBox.find(".cancel_tsui_btn").on('click', function(){
+            closeTsuiCreateBox();
+        });
+    }
+    //Appel ajax pour creer un utilisateur
+    function createTsui(partNumber, name, photoLink, family, familyName, model, type, switchPosNumber, hasServiceBt, hasSRTL, tstName){        
+        $.ajax({
+            url: '../php/api.php?function=create_tsui',
+            type: 'POST',
+            dataType: 'JSON',
+            data:{partNumber:partNumber, name:name, photoLink:photoLink, family:family, familyName:familyName, model:model, type:type, switchPosNumber:switchPosNumber,
+                hasServiceBt:hasServiceBt, hasSRTL:hasSRTL, tstName:tstName}
+        });
+        setTimeout(function(){
+            getTsuiAdmin();
+            closeTsuiCreateBox();
+        },200);
+    }   
+    
+    $()
+    
+    //Fermeture de la fenetre de creation user
+    function closeTsuiCreateBox(){        
+        $(".adm_tsui_container .overlay_create").fadeOut(300);
     }
     
     

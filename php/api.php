@@ -279,6 +279,26 @@ $createUser = function ($connexion) {
     $stmt->execute();
 };
 
+//add new TSUI in database
+$createTsui = function ($connexion) {
+    if(isset($_POST['partNumber'])){$partNumber = $_POST['partNumber'];}else{$partNumber = "";}
+    if(isset($_POST['name'])){$name = $_POST['name'];}else{$name = "";}
+    if(isset($_POST['photoLink'])){$photoLink = $_POST['photoLink'];}else{$photoLink = "";}
+    if(isset($_POST['family'])){$family = $_POST['family'];}else{$family = "";}
+    if(isset($_POST['familyName'])){$familyName = $_POST['familyName'];}else{$familyName = "";}
+    if(isset($_POST['model'])){$model = $_POST['model'];}else{$model = "";}
+    if(isset($_POST['type'])){$type = $_POST['type'];}else{$type = "";}
+    if(isset($_POST['switchPosNumber'])){$switchPosNumber = $_POST['switchPosNumber'];}else{$switchPosNumber = "";}
+    if(isset($_POST['hasServiceBt'])){$hasServiceBt = $_POST['hasServiceBt'];}else{$hasServiceBt = "";}
+    if(isset($_POST['hasSRTL'])){$hasSRTL = $_POST['hasSRTL'];}else{$hasSRTL = "";}
+    if(isset($_POST['tstName'])){$tstName = $_POST['tstName'];}else{$tstName = "";}
+    
+    $sql = "INSERT INTO tsui (part_number, name, photo_link, family, tst_name, family_name, model, type, switch_pos_number, has_service_bt, has_SRTL, linked_sequence) VALUES ('$partNumber', '$name', '$photoLink', '$family', '$tstName', '$familyName', '$model', '$type', '$switchPosNumber', '$hasServiceBt', '$hasSRTL', '1')";
+    echo $sql;
+    $resultats = $connexion->query($sql);
+    
+};
+
 //update SN in database
 $updateSN = function ($serialNumber, $connexion) {
     $serialNumber = $serialNumber;
@@ -300,6 +320,28 @@ $updateUserById = function ($connexion) {
     $isAdmin = $_POST['isadmin'];
 
     $sql = "UPDATE user SET user_name = '$name', user_sso = '$sso', user_description = '$description', user_role = '$permission', user_is_admin = '$isAdmin', user_date = NOW() WHERE id = '$id'";
+    $stmt = $connexion->prepare($sql);  
+    $stmt->execute();
+};
+
+//update TSUI in database
+$updateTsuiById = function ($connexion) {
+    if(isset($_POST['id'])){$id = $_POST['id'];}else{$id = "";}
+    if(isset($_POST['partNumber'])){$partNumber = $_POST['partNumber'];}else{$partNumber = "";}
+    if(isset($_POST['name'])){$name = $_POST['name'];}else{$name = "";}
+    if(isset($_POST['photoLink'])){$photoLink = $_POST['photoLink'];}else{$photoLink = "";}
+    if(isset($_POST['family'])){$family = $_POST['family'];}else{$family = "";}
+    if(isset($_POST['familyName'])){$familyName = $_POST['familyName'];}else{$familyName = "";}
+    if(isset($_POST['model'])){$model = $_POST['model'];}else{$model = "";}
+    if(isset($_POST['type'])){$type = $_POST['type'];}else{$type = "";}
+    if(isset($_POST['switchPosNumber'])){$switchPosNumber = $_POST['switchPosNumber'];}else{$switchPosNumber = "";}
+    if(isset($_POST['hasServiceBt'])){$hasServiceBt = $_POST['hasServiceBt'];}else{$hasServiceBt = "";}
+    if(isset($_POST['hasSRTL'])){$hasSRTL = $_POST['hasSRTL'];}else{$hasSRTL = "";}
+    if(isset($_POST['tstName'])){$tstName = $_POST['tstName'];}else{$tstName = "";}
+    
+    $sql = "UPDATE tsui SET part_number = '$partNumber', name = '$name', photo_link = '$photoLink', family = '$family', tst_name = '$tstName', family_name = '$familyName', model = '$model', type = '$type', switch_pos_number = '$switchPosNumber', has_service_bt = '$hasServiceBt', has_SRTL = '$hasSRTL' WHERE id = '$id'";
+    
+    echo $sql;
     $stmt = $connexion->prepare($sql);  
     $stmt->execute();
 };
@@ -422,8 +464,14 @@ if (isset($_GET["function"])) {
         case "update_user_by_id":
             $updateUserById($connexion);
             break;
+        case "update_tsui_by_id":
+            $updateTsuiById($connexion);
+            break;
         case "create_user":
             $createUser($connexion);
+            break;
+        case "create_tsui":
+            $createTsui($connexion);
             break;
         case "delete_line_by_id":
             $deleteLineById($connexion);

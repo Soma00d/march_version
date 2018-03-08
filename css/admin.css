@@ -178,7 +178,7 @@
   position: relative;
 }
 /* line 154, ../sass/_administration.scss */
-#adm_content_user .add_user_description, #adm_content_user .export_user_description, #adm_content_log .add_user_description, #adm_content_log .export_user_description, #adm_content_serial .add_user_description, #adm_content_serial .export_user_description, #adm_content_show_dictionary .add_user_description, #adm_content_show_dictionary .export_user_description, #adm_content_tsui .add_user_description, #adm_content_tsui .export_user_description {
+#adm_content_user .add_user_description, #adm_content_user .export_user_description, #adm_content_user .add_tsui_description, #adm_content_log .add_user_description, #adm_content_log .export_user_description, #adm_content_log .add_tsui_description, #adm_content_serial .add_user_description, #adm_content_serial .export_user_description, #adm_content_serial .add_tsui_description, #adm_content_show_dictionary .add_user_description, #adm_content_show_dictionary .export_user_description, #adm_content_show_dictionary .add_tsui_description, #adm_content_tsui .add_user_description, #adm_content_tsui .export_user_description, #adm_content_tsui .add_tsui_description {
   margin-top: 20px;
   cursor: pointer;
   padding: 5px;
@@ -193,16 +193,16 @@
   margin-right: 15px;
 }
 /* line 167, ../sass/_administration.scss */
-#adm_content_user .add_user_description a, #adm_content_user .export_user_description a, #adm_content_log .add_user_description a, #adm_content_log .export_user_description a, #adm_content_serial .add_user_description a, #adm_content_serial .export_user_description a, #adm_content_show_dictionary .add_user_description a, #adm_content_show_dictionary .export_user_description a, #adm_content_tsui .add_user_description a, #adm_content_tsui .export_user_description a {
+#adm_content_user .add_user_description a, #adm_content_user .export_user_description a, #adm_content_user .add_tsui_description a, #adm_content_log .add_user_description a, #adm_content_log .export_user_description a, #adm_content_log .add_tsui_description a, #adm_content_serial .add_user_description a, #adm_content_serial .export_user_description a, #adm_content_serial .add_tsui_description a, #adm_content_show_dictionary .add_user_description a, #adm_content_show_dictionary .export_user_description a, #adm_content_show_dictionary .add_tsui_description a, #adm_content_tsui .add_user_description a, #adm_content_tsui .export_user_description a, #adm_content_tsui .add_tsui_description a {
   text-decoration: none;
   color: black;
 }
 /* line 171, ../sass/_administration.scss */
-#adm_content_user .add_user_description:hover, #adm_content_user .export_user_description:hover, #adm_content_log .add_user_description:hover, #adm_content_log .export_user_description:hover, #adm_content_serial .add_user_description:hover, #adm_content_serial .export_user_description:hover, #adm_content_show_dictionary .add_user_description:hover, #adm_content_show_dictionary .export_user_description:hover, #adm_content_tsui .add_user_description:hover, #adm_content_tsui .export_user_description:hover {
+#adm_content_user .add_user_description:hover, #adm_content_user .export_user_description:hover, #adm_content_user .add_tsui_description:hover, #adm_content_log .add_user_description:hover, #adm_content_log .export_user_description:hover, #adm_content_log .add_tsui_description:hover, #adm_content_serial .add_user_description:hover, #adm_content_serial .export_user_description:hover, #adm_content_serial .add_tsui_description:hover, #adm_content_show_dictionary .add_user_description:hover, #adm_content_show_dictionary .export_user_description:hover, #adm_content_show_dictionary .add_tsui_description:hover, #adm_content_tsui .add_user_description:hover, #adm_content_tsui .export_user_description:hover, #adm_content_tsui .add_tsui_description:hover {
   background: #d7efff;
 }
 /* line 174, ../sass/_administration.scss */
-#adm_content_user .add_user_description img, #adm_content_user .export_user_description img, #adm_content_log .add_user_description img, #adm_content_log .export_user_description img, #adm_content_serial .add_user_description img, #adm_content_serial .export_user_description img, #adm_content_show_dictionary .add_user_description img, #adm_content_show_dictionary .export_user_description img, #adm_content_tsui .add_user_description img, #adm_content_tsui .export_user_description img {
+#adm_content_user .add_user_description img, #adm_content_user .export_user_description img, #adm_content_user .add_tsui_description img, #adm_content_log .add_user_description img, #adm_content_log .export_user_description img, #adm_content_log .add_tsui_description img, #adm_content_serial .add_user_description img, #adm_content_serial .export_user_description img, #adm_content_serial .add_tsui_description img, #adm_content_show_dictionary .add_user_description img, #adm_content_show_dictionary .export_user_description img, #adm_content_show_dictionary .add_tsui_description img, #adm_content_tsui .add_user_description img, #adm_content_tsui .export_user_description img, #adm_content_tsui .add_tsui_description img {
   width: 12px;
   display: inline-block;
   vertical-align: middle;
