@@ -1604,7 +1604,7 @@ $(document).ready(function () {
         
         var newDictionaryData = [];
         
-        $(".dictionary_type_listing .line_new_dico").each(function(){
+        $("#adm_content_dictionaries .dictionary_type_listing .line_new_dico").each(function(){
             
             var calib_subindex_x = $(this).data("calibsubindexx");
             var calib_subindex_y = $(this).data("calibsubindexy");
