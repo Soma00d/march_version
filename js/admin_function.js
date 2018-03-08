@@ -2700,9 +2700,15 @@ $(document).ready(function () {
             success: function (data, statut) {
                 console.log(data);
                 for(var i =0; i<data.length;i++){
-                    console.log(data[i].family_id);
                     updateTsuiBox.find(".update_tsui_family").append("<option value='"+data[i].family_id+"'>"+data[i].family_id+" - <i>"+data[i].description+"</i></option>")
                 }
+                
+                updateTsuiBox.find(".update_tsui_family option").each(function(){
+                    console.log($(this).val());
+                    if($(this).val()== family){
+                        $(this).attr("selected","selected");
+                    }
+                });
             }
         });
         
@@ -2715,12 +2721,7 @@ $(document).ready(function () {
         updateTsuiBox.find(".update_tsui_type").val(type);
         updateTsuiBox.find(".update_tsui_tst_name").val(tstName);
        
-        console.log(hasServiceBt);
-        updateTsuiBox.find(".update_tsui_family option").each(function(){
-            if($(this).val()== family){
-                $(this).attr("selected","selected");
-            }
-        });
+        
         updateTsuiBox.find(".update_tsui_switch_pos_number option").each(function(){
             if($(this).val()== switchPosNumber){
                 $(this).attr("selected","selected");
@@ -2733,7 +2734,6 @@ $(document).ready(function () {
             }
         });
         
-        console.log(hasSRTL);
         updateTsuiBox.find(".update_tsui_has_SRTL option").each(function(){
             if($(this).val()== hasSRTL){
                 $(this).attr("selected","selected");
@@ -2741,7 +2741,7 @@ $(document).ready(function () {
         });
 
         $(".adm_tsui_container .overlay_udpdate").fadeIn(300);
-        
+        updateTsuiBox.find(".update_tsui_btn").off();
         updateTsuiBox.find(".update_tsui_btn").on('click', function(){            
             var _partNumber = updateTsuiBox.find(".update_tsui_part_number").val();
             var _name = updateTsuiBox.find(".update_tsui_name").val();
@@ -2759,7 +2759,10 @@ $(document).ready(function () {
             //var adminLine = updateTsuiBox.find(".update_user_admin option:selected").val();
             updateTsuiByID(idLine, _partNumber, _name, _photoLink, _family, _familyName, _model, _type, _switchPosNumber, _hasServiceBt, _hasSRTL, _tstName);
         });
-        
+        updateTsuiBox.find(".cancel_tsui_btn").off();
+        updateTsuiBox.find(".cancel_tsui_btn").on('click', function(){  
+            closeTsuiUpdateBox();
+        });
     }
     
      //Appel ajax pour modifier un TSUI
